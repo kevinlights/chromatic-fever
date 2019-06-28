@@ -1,12 +1,20 @@
 extends KinematicBody2D
 
+signal player_hit()
+signal player_die()
+
 export var acceleration : int = 300
 export var deceleration : int = 300
 export var top_speed : int = 200
+export var max_health : int = 1
 
+#Movement
 var accel_direction : Vector2 
 var decel_direction : Vector2
 var velocity : Vector2 = Vector2()
+
+#Attributes
+var health : int = max_health
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -39,3 +47,13 @@ func _physics_process(delta):
 	
 	move_and_slide(velocity,Vector2.UP)
 	look_at(get_global_mouse_position())
+	
+func hit():
+	health -= 1
+	if health <= 0:
+		die()
+	emit_signal("player_hit")
+	
+func die():
+	get_parent().remove_child(self)
+	emit_signal("player_die")
