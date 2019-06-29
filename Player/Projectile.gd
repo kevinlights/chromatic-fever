@@ -10,7 +10,7 @@ var direction : Vector2
 var veloctity : Vector2
 
 func _physics_process(delta):
-	veloctity = direction*speed*delta
+	veloctity = direction.normalized()*speed*delta
 	global_position += veloctity*delta
 
 func _ready():
