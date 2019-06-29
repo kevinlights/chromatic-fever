@@ -35,6 +35,7 @@ func _ready():
 	projectile_timer.set_one_shot(true)
 	projectile_timer.set_wait_time(firing_rate)
 	projectile_timer.connect("timeout",self,"_on_firing_rate_timeout")
+	
 	add_child(projectile_timer)
 
 func _physics_process(delta):

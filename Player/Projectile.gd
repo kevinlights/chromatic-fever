@@ -18,5 +18,5 @@ func _ready():
 		connect("area_entered",enemy.get_node("HitBox"),"_on_projectile_hit")
 	connect("area_entered",self,"_on_projectile_hit")
 
-func _on_projectile_hit():
+func _on_projectile_hit(area : Area2D):
 	get_parent().remove_child(self)
