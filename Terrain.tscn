@@ -13,5 +13,5 @@ texture = ExtResource( 1 )
 centered = false
 
 [node name="feuille" type="Sprite" parent="."]
-position = Vector2( 441.737, 289.31 )
 texture = ExtResource( 2 )
+centered = false

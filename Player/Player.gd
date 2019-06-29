@@ -3,6 +3,8 @@ extends KinematicBody2D
 signal player_hit()
 signal player_die()
 
+const INVICIBLE : bool = true
+
 onready var projectiles : Node2D = get_node("/root/Game/Projectiles")
 
 onready var projectile_ressource : Resource = load("res://Player/Projectile.tscn")
@@ -86,10 +88,11 @@ func _on_firing_rate_timeout():
 	can_shoot = true
 
 func hit():
-	health -= 1
-	if health <= 0:
-		die()
-	emit_signal("player_hit")
+	if not INVICIBLE:
+		health -= 1
+		if health <= 0:
+			die()
+		emit_signal("player_hit")
 	
 func die():
 	get_parent().remove_child(self)

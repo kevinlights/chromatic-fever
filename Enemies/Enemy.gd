@@ -40,7 +40,7 @@ func _physics_process(delta):
 	velocity.x = clamp(velocity.x,0 if decel_direction.x < 0 else -abs(top_directional_speed.x),0 if decel_direction.x > 0 else abs(top_directional_speed.x))
 	velocity.y = clamp(velocity.y,0 if decel_direction.y < 0 else -abs(top_directional_speed.y),0 if decel_direction.y > 0 else abs(top_directional_speed.y))
 	
-	#move_and_slide(velocity,Vector2.UP)
+	move_and_slide(velocity,Vector2.UP)
 	look_at(player.global_position)
 
 func movement_oracle() -> Vector2:
