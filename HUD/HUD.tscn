@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Sounds/tainted.wav" type="AudioStream" id=1]
 [ext_resource path="res://Sounds/pigmented.wav" type="AudioStream" id=2]
@@ -6,6 +6,10 @@
 [ext_resource path="res://Sounds/chromatic.wav" type="AudioStream" id=4]
 [ext_resource path="res://HUD/font/riffic.otf" type="DynamicFontData" id=5]
 [ext_resource path="res://HUD/ColorMessage.gd" type="Script" id=6]
+[ext_resource path="res://HUD/DefeatMessage.gd" type="Script" id=7]
+[ext_resource path="res://HUD/LifeBar.gd" type="Script" id=8]
+[ext_resource path="res://HUD/Images/heart_full.png" type="Texture" id=9]
+[ext_resource path="res://HUD/Heart.gd" type="Script" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -14,6 +18,7 @@ font_data = ExtResource( 5 )
 [node name="HUD" type="CanvasLayer"]
 
 [node name="Sounds" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="TAINTED" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 1 )
@@ -41,3 +46,29 @@ custom_colors/font_color = Color( 0.0588235, 0.176471, 0.627451, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "COLORFUL"
 script = ExtResource( 6 )
+
+[node name="DefeatMessage" type="Label" parent="CenterContainer"]
+margin_left = 395.0
+margin_top = 268.0
+margin_right = 629.0
+margin_bottom = 332.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "DEFEAT"
+script = ExtResource( 7 )
+
+[node name="LifeBar" type="HBoxContainer" parent="."]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 178.0
+margin_bottom = 40.0
+rect_scale = Vector2( 0.2, 0.2 )
+custom_constants/separation = 20
+script = ExtResource( 8 )
+
+[node name="Heart" type="TextureRect" parent="LifeBar"]
+margin_right = 200.0
+margin_bottom = 200.0
+texture = ExtResource( 9 )
+script = ExtResource( 10 )

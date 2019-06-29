@@ -13,7 +13,7 @@ var scale_lower_limit = 1
 func _ready():
 	sounds_node = get_parent().get_parent().get_node("Sounds");
 	hide()
-	show_message("PIGMENTED")
+	#show_message("PIGMENTED")
 
 func _process(delta):
 	#Hue

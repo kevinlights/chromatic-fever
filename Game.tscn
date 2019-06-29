@@ -20,3 +20,5 @@ script = ExtResource( 4 )
 [node name="Projectiles" type="Node2D" parent="."]
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
+[connection signal="player_die" from="Player" to="HUD" method="_on_Player_die"]
+[connection signal="player_hit" from="Player" to="HUD" method="_on_Player_hit"]
