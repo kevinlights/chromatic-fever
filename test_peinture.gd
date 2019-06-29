@@ -13,9 +13,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if(Input.is_action_pressed("poser_peinture")):
+	if(Input.is_action_pressed("clic_gauche")):
 		spawn_peinture(get_global_mouse_position(),Color(1,0,0))
-	if(Input.is_action_pressed("poser_effacement")):
+	if(Input.is_action_pressed("clic_droit")):
 		spawn_effacement(get_global_mouse_position())
 	
 func spawn_peinture(position,couleur):
