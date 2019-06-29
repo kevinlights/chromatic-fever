@@ -49,7 +49,6 @@ position = Vector2( 305, 335 )
 texture = ExtResource( 1 )
 
 [node name="Viewport_effacements" type="Viewport" parent="."]
-editor/display_folded = true
 size = Vector2( 1024, 600 )
 transparent_bg = true
 usage = 0
