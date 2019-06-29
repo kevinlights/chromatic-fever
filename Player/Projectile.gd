@@ -5,7 +5,7 @@ class_name Projectile
 onready var enemies : Node2D = get_node("/root/Game/Enemies")
 onready var terrain = get_node("/root/Game/Terrain/Feuille")
 
-export var speed : int = 300
+export var speed : int = 1500
 
 var direction : Vector2
 var veloctity : Vector2

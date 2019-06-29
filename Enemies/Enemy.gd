@@ -7,7 +7,9 @@ signal screen_shake(duration)
 
 export var acceleration : int = 300
 export var deceleration : int = 300
-export var top_speed : int = 100
+export var top_speed : int = 50
+export var on_hit_speed : int = 200
+export var on_hit_deceleration : int = 5
 export var max_health : int = 3
 
 onready var player : KinematicBody2D = get_node("/root/Game/Player")
@@ -16,6 +18,7 @@ onready var health : int = max_health
 #Movement
 var direction : Vector2 
 var velocity : Vector2 = Vector2()
+var hit : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,18 +30,38 @@ func _physics_process(delta):
 	
 	direction = movement_oracle()
 	
-	velocity = top_speed*direction
+	# Movements
+	"""
+	if direction.x == 0:
+		decel_direction.x = (velocity.normalized()*-1).x
+	if direction.y == 0:
+		decel_direction.y = (velocity.normalized()*-1).y
+	"""
 	
+	if hit:
+		velocity = lerp(velocity,Vector2.ZERO,on_hit_deceleration*delta)
+		if velocity.length() < 2 :
+			velocity = Vector2.ZERO
+			hit = false
+	else:
+		velocity += acceleration*direction.normalized()*delta
+		
+		var top_directional_speed : Vector2 = velocity.normalized()*top_speed
+		velocity.x = clamp(velocity.x,-abs(top_directional_speed.x),abs(top_directional_speed.x))
+		velocity.y = clamp(velocity.y,-abs(top_directional_speed.y),abs(top_directional_speed.y))
+	
+	print(velocity) 
 	move_and_slide(velocity,Vector2.UP)
-	#look_at(player.global_position)
 
 func movement_oracle() -> Vector2:
 	return (player.global_position - global_position).normalized()
 	
-func hit():
+func hit(collision_normal):
 	health -= 1
 	if health <= 0:
 		die()
+	velocity = collision_normal.normalized()*on_hit_speed
+	hit = true
 	emit_signal("screen_freeze",1)
 	emit_signal("screen_shake",0.8)
 

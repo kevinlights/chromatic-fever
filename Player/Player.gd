@@ -10,14 +10,14 @@ onready var projectiles : Node2D = get_node("/root/Game/Projectiles")
 onready var projectile_ressource : Resource = load("res://Player/Projectile.tscn")
 
 # Movement parameters
-export var acceleration : int = 300
-export var deceleration : int = 300
-export var top_speed : int = 200
-export var on_hit_speed : int = 200
+export var acceleration : int = 1200
+export var deceleration : int = 1200
+export var top_speed : int = 400
+export var on_hit_speed : int = 800
 
 # Attributes vars
 export var max_health : int = 3
-export var firing_rate : float = 1
+export var firing_rate : float = 0.25
 
 # Movement vars
 var accel_direction : Vector2 
@@ -93,7 +93,6 @@ func hit(collision_normal : Vector2):
 		health -= 1
 		if health <= 0:
 			die()
-		print(collision_normal.normalized())
 		velocity = collision_normal.normalized()*on_hit_speed
 		emit_signal("player_hit")
 	
