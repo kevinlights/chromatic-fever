@@ -13,12 +13,14 @@
 [node name="test_peinture" parent="." instance=ExtResource( 2 )]
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 165.861, 424.877 )
 
 [node name="Enemies" type="Node2D" parent="."]
-editor/display_folded = true
 
 [node name="Enemy" parent="Enemies" instance=ExtResource( 4 )]
 position = Vector2( 472.679, 276.241 )
+
+[node name="Projectiles" type="Node2D" parent="."]
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
 margin_top = 3.0

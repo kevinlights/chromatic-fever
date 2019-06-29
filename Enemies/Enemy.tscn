@@ -10,7 +10,10 @@ extents = Vector2( 32, 32 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 32, 32 )
 
-[node name="Enemy" type="KinematicBody2D"]
+[node name="Enemy" type="KinematicBody2D" groups=[
+"screen_freezers",
+"screen_shakers",
+]]
 script = ExtResource( 1 )
 
 [node name="BoundingBox" type="CollisionShape2D" parent="."]
