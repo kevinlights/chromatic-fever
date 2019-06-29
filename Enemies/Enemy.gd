@@ -19,6 +19,7 @@ var velocity : Vector2 = Vector2()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$LesSprites/AnimationPlayer.play("marche")
 	pass # Replace with function body.
 
 func _physics_process(delta):
@@ -29,7 +30,7 @@ func _physics_process(delta):
 	velocity = top_speed*direction
 	
 	move_and_slide(velocity,Vector2.UP)
-	look_at(player.global_position)
+	#look_at(player.global_position)
 
 func movement_oracle() -> Vector2:
 	return (player.global_position - global_position).normalized()
