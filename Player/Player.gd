@@ -88,6 +88,7 @@ func shoot():
 	projectile.position = $ProjectilesSpawnPosition.get_global_position()
 	projectile.direction = (get_global_mouse_position() - global_position).normalized()
 	projectiles.add_child(projectile)
+	projectile.make_connections()
 	can_shoot = false
 	projectile_timer.start()
 

@@ -31,13 +31,15 @@ var can_erase : bool = true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$LesSprites/AnimationPlayer.play("marche")
-	connect("screen_shake",camera,"_camera_shake")
-	connect("screen_freeze",camera,"_camera_freeze")
-	
 	erase_timer.set_one_shot(true)
 	erase_timer.set_wait_time(erase_delay)
-	erase_timer.connect("timeout",self,"_on_erase_delay_timeout")
 	add_child(erase_timer)
+
+func make_connections():
+	connect("screen_shake",camera,"_camera_shake")
+	connect("screen_freeze",camera,"_camera_freeze")
+	erase_timer.connect("timeout",self,"_on_erase_delay_timeout")
+	$HitBox.make_connections()
 
 func _physics_process(delta):
 	direction = Vector2()

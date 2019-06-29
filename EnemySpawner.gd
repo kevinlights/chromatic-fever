@@ -30,3 +30,4 @@ func spawn():
 	
 	new_enemy.global_position = pos
 	add_child(new_enemy)
+	new_enemy.make_connections()
