@@ -2,11 +2,16 @@ extends KinematicBody2D
 
 class_name Enemy
 
+signal screen_freeze(duration)
+signal screen_shake(duration)
+
 export var acceleration : int = 300
 export var deceleration : int = 300
 export var top_speed : int = 200
+export var max_health : int = 3
 
 onready var player : KinematicBody2D = get_node("/root/Game/Player")
+onready var health : int = max_health
 
 #Movement
 var accel_direction : Vector2 
@@ -40,3 +45,13 @@ func _physics_process(delta):
 
 func movement_oracle() -> Vector2:
 	return (player.global_position - global_position).normalized()
+	
+func hit():
+	health -= 1
+	if health <= 0:
+		die()
+	emit_signal("screen_freeze",1)
+	emit_signal("screen_shake",0.8)
+
+func die():
+	get_parent().remove_child(self)

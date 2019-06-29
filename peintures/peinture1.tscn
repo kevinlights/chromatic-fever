@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/peinture1.png" type="Texture" id=1]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 4
+
+[node name="peinture1" type="Sprite"]
+material = SubResource( 1 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 1 )

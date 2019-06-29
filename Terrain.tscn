@@ -6,12 +6,10 @@
 [node name="Terrain" type="Node2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
-visible = false
-modulate = Color( 0.137255, 0.721569, 0.14902, 1 )
-scale = Vector2( 15.9803, 9.31025 )
+modulate = Color( 0.317647, 0.164706, 0.0156863, 1 )
+scale = Vector2( 1000, 1000 )
 texture = ExtResource( 1 )
-centered = false
 
 [node name="feuille" type="Sprite" parent="."]
-position = Vector2( 441.737, 289.31 )
 texture = ExtResource( 2 )
+centered = false
