@@ -51,5 +51,6 @@ func show_message(message):
 	show()
 	sounds_node.get_node(message).play();
 	set_text(message);
-	yield(get_tree().create_timer(3.0), "timeout")
+	yield(get_tree().create_timer(2.5), "timeout")
+	hide()
 	
