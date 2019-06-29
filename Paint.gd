@@ -13,6 +13,7 @@ func _ready():
 	$Viewport_couleurs.size = feuille.texture.get_size()
 	$Viewport_effacements.size = feuille.texture.get_size()
 	$Sprite.position = feuille.texture.get_size()/2
+	set_process(false)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

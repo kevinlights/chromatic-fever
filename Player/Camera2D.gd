@@ -15,12 +15,6 @@ func _ready():
 	shake_timer.set_wait_time(shake_duration)
 	shake_timer.connect("timeout",self,"_on_shake_timeout")
 	add_child(shake_timer)
-	
-	for screen_shaker in get_tree().get_nodes_in_group("screen_shakers"):
-		screen_shaker.connect("screen_shake",self,"_camera_shake")
-	
-	for screen_freezer in get_tree().get_nodes_in_group("screen_freezers"):
-		screen_freezer.connect("screen_freeze",self,"_camera_freeze")
 
 func _process(delta):
 	if shake:

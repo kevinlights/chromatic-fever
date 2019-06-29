@@ -11,19 +11,23 @@ export var top_speed : int = 50
 export var on_hit_speed : int = 200
 export var on_hit_deceleration : int = 5
 export var max_health : int = 3
+export var color : Color = Color(0,0,1)
 
 onready var player : KinematicBody2D = get_node("/root/Game/Player")
-onready var health : int = max_health
+onready var paint_canvas : Node2D = get_node("/root/Game/Paint")
+onready var camera : Camera2D = get_node("/root/Game/Player/Camera2D")
 
 #Movement
 var direction : Vector2 
 var velocity : Vector2 = Vector2()
 var hit : bool = false
+var health : int = max_health
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$LesSprites/AnimationPlayer.play("marche")
-	pass # Replace with function body.
+	connect("screen_shake",camera,"_camera_shake")
+	connect("screen_freeze",camera,"_camera_freeze")
 
 func _physics_process(delta):
 	direction = Vector2()
@@ -31,12 +35,6 @@ func _physics_process(delta):
 	direction = movement_oracle()
 	
 	# Movements
-	"""
-	if direction.x == 0:
-		decel_direction.x = (velocity.normalized()*-1).x
-	if direction.y == 0:
-		decel_direction.y = (velocity.normalized()*-1).y
-	"""
 	
 	if hit:
 		velocity = lerp(velocity,Vector2.ZERO,on_hit_deceleration*delta)
@@ -50,7 +48,6 @@ func _physics_process(delta):
 		velocity.x = clamp(velocity.x,-abs(top_directional_speed.x),abs(top_directional_speed.x))
 		velocity.y = clamp(velocity.y,-abs(top_directional_speed.y),abs(top_directional_speed.y))
 	
-	print(velocity) 
 	move_and_slide(velocity,Vector2.UP)
 
 func movement_oracle() -> Vector2:
@@ -66,4 +63,5 @@ func hit(collision_normal):
 	emit_signal("screen_shake",0.8)
 
 func die():
+	paint_canvas.spawn_peinture(global_position,color)
 	get_parent().remove_child(self)
