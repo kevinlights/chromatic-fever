@@ -3,7 +3,7 @@ extends KinematicBody2D
 signal player_hit()
 signal player_die()
 
-const INVICIBLE : bool = true
+const INVICIBLE : bool = false
 
 onready var projectiles : Node2D = get_node("/root/Game/Projectiles")
 
@@ -13,9 +13,10 @@ onready var projectile_ressource : Resource = load("res://Player/Projectile.tscn
 export var acceleration : int = 300
 export var deceleration : int = 300
 export var top_speed : int = 200
+export var on_hit_speed : int = 200
 
 # Attributes vars
-export var max_health : int = 1
+export var max_health : int = 3
 export var firing_rate : float = 1
 
 # Movement vars
@@ -79,7 +80,7 @@ func _physics_process(delta):
 func shoot():
 	var projectile : Projectile = projectile_ressource.instance()
 	projectile.position = $ProjectilesSpawnPosition.get_global_position()
-	projectile.direction = get_global_mouse_position() - global_position
+	projectile.direction = (get_global_mouse_position() - global_position).normalized()
 	projectiles.add_child(projectile)
 	can_shoot = false
 	projectile_timer.start()
@@ -87,11 +88,13 @@ func shoot():
 func _on_firing_rate_timeout():
 	can_shoot = true
 
-func hit():
+func hit(collision_normal : Vector2):
 	if not INVICIBLE:
 		health -= 1
 		if health <= 0:
 			die()
+		print(collision_normal.normalized())
+		velocity = collision_normal.normalized()*on_hit_speed
 		emit_signal("player_hit")
 	
 func die():

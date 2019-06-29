@@ -11,7 +11,8 @@ export var player_safe_range : int = 50
 func _ready():
 	randomize()
 	
-	spawn()
+	for i in 1:
+		spawn()
 
 func spawn():
 	var pos : Vector2 = Vector2()
