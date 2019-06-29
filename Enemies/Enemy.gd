@@ -5,8 +5,10 @@ class_name Enemy
 export var acceleration : int = 300
 export var deceleration : int = 300
 export var top_speed : int = 200
+export var max_health : int = 3
 
 onready var player : KinematicBody2D = get_node("/root/Game/Player")
+onready var health : int = max_health
 
 #Movement
 var accel_direction : Vector2 
@@ -35,8 +37,16 @@ func _physics_process(delta):
 	velocity.x = clamp(velocity.x,0 if decel_direction.x < 0 else -abs(top_directional_speed.x),0 if decel_direction.x > 0 else abs(top_directional_speed.x))
 	velocity.y = clamp(velocity.y,0 if decel_direction.y < 0 else -abs(top_directional_speed.y),0 if decel_direction.y > 0 else abs(top_directional_speed.y))
 	
-	move_and_slide(velocity,Vector2.UP)
+	#move_and_slide(velocity,Vector2.UP)
 	look_at(player.global_position)
 
 func movement_oracle() -> Vector2:
 	return (player.global_position - global_position).normalized()
+	
+func hit():
+	health -= 1
+	if health <= 0:
+		die()
+	
+func die():
+	get_parent().remove_child(self)
