@@ -6,7 +6,7 @@ extends Node2D
 onready var tache = load("res://peintures/peinture1.tscn")
 onready var vp_c : Viewport = get_node("Viewport_couleurs")
 onready var vp_e = get_node("Viewport_effacements")
-onready var feuille = get_node("/root/Game/Terrain/feuille")
+onready var feuille = get_node("/root/Game/Terrain/Feuille")
 
 # Called when the node enters the scene tree for the first time.
 func _ready(): 

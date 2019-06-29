@@ -1,7 +1,7 @@
 extends Node2D
 
 onready var camera : Camera2D = get_node("/root/Game/Player/Camera2D") 
-onready var terrain : Node2D = get_node("/root/Game/Terrain/feuille")
+onready var terrain : Node2D = get_node("/root/Game/Terrain/Feuille")
 onready var player : KinematicBody2D = get_node("/root/Game/Player")
 
 onready var enemy_resource : Resource = load("res://Enemies/Enemy.tscn")
