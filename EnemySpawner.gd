@@ -8,10 +8,12 @@ onready var enemy_resource : Resource = load("res://Enemies/Enemy.tscn")
 
 export var player_safe_range : int = 50
 
+var colors : Array = [Color(1,0,0),Color(0,1,0),Color(0,0,1)]
+
 func _ready():
 	randomize()
 	
-	for i in 1:
+	for i in 5:
 		spawn()
 
 func spawn():
@@ -23,6 +25,8 @@ func spawn():
 	while pos.distance_to(player.global_position) < player_safe_range:
 		pos.x = rand_range(0,terrain.texture.get_size().x*terrain.scale.x)
 		pos.y = rand_range(0,terrain.texture.get_size().y*terrain.scale.y)
+	
+	new_enemy.color = colors[randi()%3]
 	
 	new_enemy.global_position = pos
 	add_child(new_enemy)

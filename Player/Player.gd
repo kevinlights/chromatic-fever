@@ -3,8 +3,6 @@ extends KinematicBody2D
 signal player_hit()
 signal player_die()
 
-const INVICIBLE : bool = false
-
 onready var projectiles : Node2D = get_node("/root/Game/Projectiles")
 
 onready var projectile_ressource : Resource = load("res://Player/Projectile.tscn")
@@ -18,6 +16,7 @@ export var on_hit_speed : int = 800
 # Attributes vars
 export var max_health : int = 3
 export var firing_rate : float = 0.25
+export var invincibility_duration : float = 1.5
 
 # Movement vars
 var accel_direction : Vector2 
@@ -29,17 +28,24 @@ var health : int = max_health
 
 # State vars
 var can_shoot : bool = true
+var invincible : bool = false
 
 # Timers
 var projectile_timer : Timer = Timer.new()
+var invincibility_timer : Timer = Timer.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	projectile_timer.set_one_shot(true)
 	projectile_timer.set_wait_time(firing_rate)
 	projectile_timer.connect("timeout",self,"_on_firing_rate_timeout")
-	
 	add_child(projectile_timer)
+	
+	invincibility_timer.set_one_shot(true)
+	invincibility_timer.set_wait_time(invincibility_duration)
+	invincibility_timer.connect("timeout",self,"_on_invincibility_timeout")
+	add_child(invincibility_timer)
+	
 
 func _physics_process(delta):
 	accel_direction = Vector2()
@@ -88,12 +94,17 @@ func shoot():
 func _on_firing_rate_timeout():
 	can_shoot = true
 
+func _on_invincibility_timeout():
+	invincible = false
+
 func hit(collision_normal : Vector2):
-	if not INVICIBLE:
+	if not invincible:
 		health -= 1
 		if health <= 0:
 			die()
 		velocity = collision_normal.normalized()*on_hit_speed
+		invincible = true
+		invincibility_timer.start()
 		emit_signal("player_hit")
 	
 func die():

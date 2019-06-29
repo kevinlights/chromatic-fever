@@ -7,5 +7,5 @@ blend_mode = 4
 
 [node name="peinture1" type="Sprite"]
 material = SubResource( 1 )
-scale = Vector2( 0.2, 0.2 )
+scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 1 )
