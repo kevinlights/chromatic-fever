@@ -6,10 +6,14 @@ extends Node2D
 onready var tache = load("res://peintures/peinture1.tscn")
 onready var vp_c : Viewport = get_node("Viewport_couleurs")
 onready var vp_e = get_node("Viewport_effacements")
+onready var feuille = get_node("/root/Game/Terrain/feuille")
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func _ready(): 
+	$Viewport_couleurs.size = feuille.texture.get_size()
+	$Viewport_effacements.size = feuille.texture.get_size()
+	$Sprite.position = feuille.texture.get_size()/2
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
