@@ -39,7 +39,6 @@ z_index = 1
 texture = ExtResource( 4 )
 
 [node name="Hand" type="Sprite" parent="."]
-rotation = -7.79988
 z_index = 2
 texture = ExtResource( 5 )
 offset = Vector2( 200, 0 )
