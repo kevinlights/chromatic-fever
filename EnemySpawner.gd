@@ -13,7 +13,7 @@ var colors : Array = [Color(1,0,0),Color(0,1,0),Color(0,0,1)]
 func _ready():
 	randomize()
 	
-	for i in 0:
+	for i in 5:
 		spawn()
 
 func spawn():
