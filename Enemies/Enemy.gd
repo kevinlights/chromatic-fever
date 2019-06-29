@@ -23,11 +23,21 @@ var velocity : Vector2 = Vector2()
 var hit : bool = false
 var health : int = max_health
 
+#Timer
+export var erase_delay : float = 1
+var erase_timer : Timer = Timer.new()
+var can_erase : bool = true
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$LesSprites/AnimationPlayer.play("marche")
 	connect("screen_shake",camera,"_camera_shake")
 	connect("screen_freeze",camera,"_camera_freeze")
+	
+	erase_timer.set_one_shot(true)
+	erase_timer.set_wait_time(erase_delay)
+	erase_timer.connect("timeout",self,"_on_erase_delay_timeout")
+	add_child(erase_timer)
 
 func _physics_process(delta):
 	direction = Vector2()
@@ -48,11 +58,19 @@ func _physics_process(delta):
 		velocity.x = clamp(velocity.x,-abs(top_directional_speed.x),abs(top_directional_speed.x))
 		velocity.y = clamp(velocity.y,-abs(top_directional_speed.y),abs(top_directional_speed.y))
 	
+	if can_erase :
+		paint_canvas.spawn_effacement(global_position)
+		can_erase = false
+		erase_timer.start()
+	
 	move_and_slide(velocity,Vector2.UP)
 
 func movement_oracle() -> Vector2:
 	return (player.global_position - global_position).normalized()
-	
+
+func _on_erase_delay_timeout():
+	can_erase = true
+
 func hit(collision_normal):
 	health -= 1
 	if health <= 0:
