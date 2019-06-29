@@ -3,6 +3,7 @@ extends Area2D
 class_name Projectile
 
 onready var enemies : Node2D = get_node("/root/Game/Enemies")
+onready var terrain = get_node("/root/Game/Terrain/Feuille")
 
 export var speed : int = 300
 
@@ -12,6 +13,11 @@ var veloctity : Vector2
 func _physics_process(delta):
 	veloctity = direction*speed
 	global_position += veloctity*delta
+	
+	if global_position.x<0 or global_position.y<0:
+		get_parent().remove_child(self)
+	if global_position.x>terrain.texture.get_size().x*terrain.scale.x or global_position.y>terrain.texture.get_size().y*terrain.scale.y:
+		get_parent().remove_child(self)
 
 func _ready():
 	for enemy in enemies.get_children():
