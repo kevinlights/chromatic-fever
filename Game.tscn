@@ -16,6 +16,7 @@
 position = Vector2( 165.861, 424.877 )
 
 [node name="Enemies" type="Node2D" parent="."]
+editor/display_folded = true
 script = ExtResource( 4 )
 
 [node name="Projectiles" type="Node2D" parent="."]
