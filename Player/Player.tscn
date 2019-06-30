@@ -1,61 +1,66 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/particule2.png" type="Texture" id=2]
 [ext_resource path="res://Assets/square.png" type="Texture" id=3]
 [ext_resource path="res://Player/Camera2D.gd" type="Script" id=4]
-[ext_resource path="res://Assets/heros.png" type="Texture" id=5]
-[ext_resource path="res://Player/Hand.gd" type="Script" id=6]
-[ext_resource path="res://Player/Explosion.gd" type="Script" id=7]
-[ext_resource path="res://Assets/particule1.png" type="Texture" id=8]
-[ext_resource path="res://Assets/hand.png" type="Texture" id=9]
-[ext_resource path="res://Player/PlayerHitBox.gd" type="Script" id=10]
+[ext_resource path="res://Player/Hand.gd" type="Script" id=5]
+[ext_resource path="res://Player/Explosion.gd" type="Script" id=6]
+[ext_resource path="res://Assets/particule1.png" type="Texture" id=7]
+[ext_resource path="res://Assets/hand.png" type="Texture" id=8]
+[ext_resource path="res://Player/PlayerHitBox.gd" type="Script" id=9]
+[ext_resource path="res://Assets/heros_couleur.png" type="Texture" id=10]
+[ext_resource path="res://Assets/heros_corps.png" type="Texture" id=11]
+[ext_resource path="res://Assets/heros_face.png" type="Texture" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=2]
 colors = PoolColorArray( 1, 0.539063, 0, 1, 1, 0.820313, 0, 1 )
 
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
-[sub_resource type="ParticlesMaterial" id=5]
+[sub_resource type="ParticlesMaterial" id=4]
 flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
+angular_velocity = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 720.0
 angle_random = 1.0
 scale = 0.25
-color_ramp = SubResource( 4 )
+color_ramp = SubResource( 3 )
 
-[sub_resource type="Gradient" id=7]
+[sub_resource type="Gradient" id=5]
 offsets = PoolRealArray( 0, 0.956044, 1 )
 colors = PoolColorArray( 1, 0.234375, 0, 1, 1, 0.808594, 0, 1, 1, 1, 1, 1 )
 
-[sub_resource type="GradientTexture" id=8]
-gradient = SubResource( 7 )
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
 
-[sub_resource type="ParticlesMaterial" id=9]
+[sub_resource type="ParticlesMaterial" id=7]
 flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 50.0
+angular_velocity = 1.05
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 720.0
 angle_random = 1.0
 scale = 0.07
 scale_random = 0.1
-color_ramp = SubResource( 8 )
+color_ramp = SubResource( 6 )
 
-[sub_resource type="ParticlesMaterial" id=6]
+[sub_resource type="ParticlesMaterial" id=8]
 flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 1000.0
+angular_velocity = 9.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 720.0
@@ -64,7 +69,7 @@ scale = 0.02
 scale_random = 0.1
 color = Color( 0, 0.619608, 1, 1 )
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 resource_name = "shoot"
 length = 0.3
 tracks/0/type = "value"
@@ -80,7 +85,7 @@ tracks/0/keys = {
 "values": [ 0.0, -65.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=10]
 resource_name = "shoot_rev"
 length = 0.3
 tracks/0/type = "value"
@@ -96,7 +101,7 @@ tracks/0/keys = {
 "values": [ 0.0, 65.0, 0.0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 32, 160.526 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -122,17 +127,13 @@ current = true
 zoom = Vector2( 1.5, 1.5 )
 script = ExtResource( 4 )
 
-[node name="Heros" type="Sprite" parent="."]
-z_index = 1
-texture = ExtResource( 5 )
-
 [node name="Hand" type="Node2D" parent="."]
 editor/display_folded = true
-script = ExtResource( 6 )
+script = ExtResource( 5 )
 
 [node name="Explosion" type="Node2D" parent="Hand"]
 editor/display_folded = true
-script = ExtResource( 7 )
+script = ExtResource( 6 )
 
 [node name="Particles2D2" type="Particles2D" parent="Hand/Explosion"]
 position = Vector2( 323.439, -2.45031 )
@@ -141,8 +142,8 @@ amount = 1
 lifetime = 0.1
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 5 )
-texture = ExtResource( 8 )
+process_material = SubResource( 4 )
+texture = ExtResource( 7 )
 
 [node name="Particles2D" type="Particles2D" parent="Hand/Explosion"]
 position = Vector2( 323.439, -2.45031 )
@@ -151,8 +152,8 @@ amount = 4
 lifetime = 0.1
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 9 )
-texture = ExtResource( 8 )
+process_material = SubResource( 7 )
+texture = ExtResource( 7 )
 
 [node name="Particles2D3" type="Particles2D" parent="Hand/Explosion"]
 position = Vector2( 323.439, -2.45031 )
@@ -161,29 +162,43 @@ amount = 10
 lifetime = 0.1
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 6 )
-texture = ExtResource( 8 )
+process_material = SubResource( 8 )
+texture = ExtResource( 7 )
 
 [node name="ProjectilesSpawnPosition" type="Node2D" parent="Hand"]
 position = Vector2( 303.271, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Hand"]
 playback_speed = 2.5
-anims/shoot = SubResource( 10 )
-anims/shoot_rev = SubResource( 11 )
+anims/shoot = SubResource( 9 )
+anims/shoot_rev = SubResource( 10 )
 
 [node name="HandSprite" type="Sprite" parent="Hand"]
 position = Vector2( 200, 0 )
 z_index = 2
-texture = ExtResource( 9 )
+texture = ExtResource( 8 )
 flip_h = true
 
 [node name="HitBox" type="Area2D" parent="."]
 editor/display_folded = true
 collision_mask = 2
-script = ExtResource( 10 )
+script = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2( 8.42105, -2.10527 )
 z_index = 2
-shape = SubResource( 2 )
+shape = SubResource( 11 )
+
+[node name="LesSprites" type="Node2D" parent="."]
+position = Vector2( 8.42105, -2.45031 )
+
+[node name="heros_couleur" type="Sprite" parent="LesSprites"]
+position = Vector2( -11.9495, -62.1373 )
+texture = ExtResource( 10 )
+
+[node name="heros_corps" type="Sprite" parent="LesSprites"]
+texture = ExtResource( 11 )
+
+[node name="heros_face" type="Sprite" parent="LesSprites"]
+position = Vector2( -21.3132, -145.732 )
+texture = ExtResource( 12 )

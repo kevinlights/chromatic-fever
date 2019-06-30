@@ -6,7 +6,7 @@ signal player_die()
 onready var projectiles : Node2D = get_node("/root/Game/Projectiles")
 
 onready var projectile_ressource : Resource = load("res://Player/Projectile.tscn")
-onready var peintures= get_node("/root/Game/Paint/Viewport_couleurs")
+onready var peintures : Sprite = get_node("/root/Game/Paint/Sprite")
 
 # Movement parameters
 export var acceleration : int = 1200
@@ -47,11 +47,20 @@ func _ready():
 	invincibility_timer.connect("timeout",self,"_on_invincibility_timeout")
 	add_child(invincibility_timer)
 	
-#func _process(delta):
-	#var c = peintures.get_texture().get_data().get_pixel(10,10)
-	#if(c.r>0.7):
-	#	print("red")
-	#print(c)
+func _process(delta):
+	var img = peintures.get_texture().get_data()
+	img.lock()
+	var c = img.get_pixel(position.x,position.y)
+	img.unlock()
+	if(c.r>0.6 and c.a>0.1):
+		$LesSprites/heros_couleur.modulate = Color(1.0,0.0,0.0)
+	elif(c.g>0.6 and c.a>0.1):
+		$LesSprites/heros_couleur.modulate = Color(0.0,1.0,0.0)
+	elif(c.b>0.6 and c.a>0.1):
+		$LesSprites/heros_couleur.modulate = Color(0.0,0.0,1.0)
+	else:
+		$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)
+	print(c)
 	
 func _physics_process(delta):
 	accel_direction = Vector2()
