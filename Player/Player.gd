@@ -77,7 +77,7 @@ func _physics_process(delta):
 	move_and_slide(velocity,Vector2.UP)
 	
 	# Orientation
-	look_at(get_global_mouse_position())
+	$Hand.look_at(get_global_mouse_position())
 	
 	# Shoot Inputs
 	if Input.is_action_pressed("ui_shoot") and can_shoot:
@@ -88,6 +88,7 @@ func shoot():
 	projectile.position = $ProjectilesSpawnPosition.get_global_position()
 	projectile.direction = (get_global_mouse_position() - global_position).normalized()
 	projectiles.add_child(projectile)
+	projectile.make_connections()
 	can_shoot = false
 	projectile_timer.start()
 

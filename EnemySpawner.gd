@@ -36,3 +36,4 @@ func spawn():
 	
 func _on_enemy_died(position, score_gained):
 	emit_signal("enemy_died", position, score_gained)
+
