@@ -123,6 +123,7 @@ func hit(collision_normal : Vector2):
 		invincible = true
 		invincibility_timer.start()
 		emit_signal("player_hit")
+		$AnimationPlayer.play("hurt")
 	
 func die():
 	get_parent().remove_child(self)
@@ -138,10 +139,10 @@ func _on_color_change():
 	var e = img.get_pixel(position.x+41*0.3,position.y+220*0.3)
 	img.unlock()
 	if(c.r>0.6 and c.a>0.1 and e.r<0.8):
-		$LesSprites/heros_couleur.modulate = global.rouge
+		$LesSprites/heros_couleur.modulate = global.colors[0]
 	elif(c.g>0.6 and c.a>0.1 and e.r<0.8):
-		$LesSprites/heros_couleur.modulate = global.vert
+		$LesSprites/heros_couleur.modulate = global.colors[1]
 	elif(c.b>0.6 and c.a>0.1 and e.r<0.8):
-		$LesSprites/heros_couleur.modulate = global.bleu
+		$LesSprites/heros_couleur.modulate = global.colors[2]
 	else:
 		$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)

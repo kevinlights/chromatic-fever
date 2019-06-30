@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Enemies/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Assets/particule2.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Enemies/LifeBar.gd" type="Script" id=11]
 [ext_resource path="res://HUD/Images/heart_full.png" type="Texture" id=12]
 [ext_resource path="res://HUD/Heart.gd" type="Script" id=13]
+[ext_resource path="res://peintures/Splash.tscn" type="PackedScene" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 142.579, 32 )
@@ -257,8 +258,8 @@ tracks/18/keys = {
 "values": [ SubResource( 1 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "hurt"
+[sub_resource type="Animation" id=8]
+resource_name = "die"
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("LesSprites:material:shader_param/f")
@@ -273,22 +274,51 @@ tracks/0/keys = {
 "values": [ 1.0, 0.0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("LesSprites/tete:modulate")
-tracks/1/interp = 0
+tracks/1/path = NodePath("Splash:emitting")
+tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("LesSprites:material:shader_param/f")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0.392157, 1, 1 ) ]
+"values": [ 1.0, 0.0 ]
 }
 
+[sub_resource type="ParticlesMaterial" id=7]
+resource_local_to_scene = true
+flag_disable_z = true
+spread = 60.0
+gravity = Vector3( -4000, 0, 0 )
+initial_velocity = 1000.0
+angular_velocity = 9.80909e-045
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 720.0
+angle_random = 1.0
+scale = 0.4
+scale_random = 0.5
+
 [node name="Enemy" type="KinematicBody2D" groups=[
+"projectile_collisions",
 "screen_shakers",
 "screen_freezers",
-"projectile_collisions",
 ]]
 scale = Vector2( 0.3, 0.3 )
 collision_layer = 2
@@ -359,9 +389,11 @@ position = Vector2( 0, -17.1475 )
 shape = SubResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/hurt = SubResource( 5 )
+anims/die = SubResource( 8 )
+anims/hurt = SubResource( 6 )
 
 [node name="LifeBar" type="HBoxContainer" parent="."]
+editor/display_folded = true
 margin_left = -190.504
 margin_top = -342.129
 margin_right = 9.49615
@@ -375,3 +407,6 @@ margin_right = 200.0
 margin_bottom = 200.0
 texture = ExtResource( 12 )
 script = ExtResource( 13 )
+
+[node name="Splash" parent="." instance=ExtResource( 14 )]
+process_material = SubResource( 7 )
