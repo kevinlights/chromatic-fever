@@ -13,6 +13,8 @@ func _ready():
 	game.connect("pigmented", self, "_on_pigmented")
 	game.connect("colourful", self, "_on_colourful")
 	game.connect("chromatic", self, "_on_chromatic")
+	game.connect("combo_broken", self, "_on_combo_broken")
+	game.connect("multiplier_set", self, "_on_multiplier_set")
 
 func create_combo_message(combo_name):
 	if message != null:
@@ -33,3 +35,13 @@ func _on_colourful():
 	
 func _on_chromatic():
 	create_combo_message("CHROMATIC")
+	
+func _on_combo_broken():
+	if message != null:
+		remove_child(message)
+		
+func _on_multiplier_set(multiplier: int):
+	if multiplier == 1:
+		$ScoreContainer/Node2D/ScoreMultiplier.set_text("")
+	else :
+		$ScoreContainer/Node2D/ScoreMultiplier.set_text("x"+str(multiplier)+"!")
