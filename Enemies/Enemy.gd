@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 class_name Enemy
 
+signal enemy_hit()
+signal enemy_died(position, score_gained)
 signal screen_freeze(duration)
 signal screen_shake(duration)
 
@@ -12,6 +14,7 @@ export var on_hit_speed : int = 200
 export var on_hit_deceleration : int = 5
 export var max_health : int = 3
 export var color : Color = Color(0,0,1)
+export var score_when_killed = 100
 
 onready var player : KinematicBody2D = get_node("/root/Game/Player")
 onready var paint_canvas : Node2D = get_node("/root/Game/Paint")
@@ -77,9 +80,11 @@ func hit(collision_normal):
 		die()
 	velocity = collision_normal.normalized()*on_hit_speed
 	hit = true
+	emit_signal("enemy_hit")
 	emit_signal("screen_freeze",1)
 	emit_signal("screen_shake",0.8)
 
 func die():
 	paint_canvas.spawn_peinture(global_position,color)
+	emit_signal("enemy_died", global_position, score_when_killed)
 	get_parent().remove_child(self)

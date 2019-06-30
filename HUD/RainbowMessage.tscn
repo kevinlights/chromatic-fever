@@ -1,0 +1,36 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://HUD/font/riffic.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://HUD/RainbowMessage.gd" type="Script" id=2]
+[ext_resource path="res://Sounds/tainted.wav" type="AudioStream" id=3]
+[ext_resource path="res://Sounds/pigmented.wav" type="AudioStream" id=4]
+[ext_resource path="res://Sounds/colourful.wav" type="AudioStream" id=5]
+[ext_resource path="res://Sounds/chromatic.wav" type="AudioStream" id=6]
+[ext_resource path="res://HUD/NULL.gd" type="Script" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 35
+font_data = ExtResource( 1 )
+
+[node name="RainbowMessage" type="Label"]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="TAINTED" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 3 )
+
+[node name="PIGMENTED" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 4 )
+
+[node name="COLOURFUL" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 5 )
+
+[node name="CHROMATIC" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 6 )
+
+[node name="NULL" type="Node" parent="Sounds"]
+script = ExtResource( 7 )

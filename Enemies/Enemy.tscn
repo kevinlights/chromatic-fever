@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Enemies/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Assets/square.png" type="Texture" id=2]
@@ -8,6 +8,9 @@
 [ext_resource path="res://Assets/monstre1/chapeau.png" type="Texture" id=6]
 [ext_resource path="res://Assets/monstre1/yeux.png" type="Texture" id=7]
 [ext_resource path="res://Enemies/EnemyHitBox.gd" type="Script" id=8]
+[ext_resource path="res://Enemies/LifeBar.gd" type="Script" id=9]
+[ext_resource path="res://HUD/Images/heart_full.png" type="Texture" id=10]
+[ext_resource path="res://Enemies/TextureRect.gd" type="Script" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 142.579, 32 )
@@ -311,3 +314,18 @@ script = ExtResource( 8 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2( 0, -108.083 )
 shape = SubResource( 2 )
+
+[node name="LifeBar" type="HBoxContainer" parent="."]
+margin_left = -132.186
+margin_top = -478.203
+margin_right = -92.1864
+margin_bottom = -438.203
+rect_scale = Vector2( 0.5, 0.5 )
+custom_constants/separation = 10
+script = ExtResource( 9 )
+
+[node name="Heart" type="TextureRect" parent="LifeBar"]
+margin_right = 200.0
+margin_bottom = 200.0
+texture = ExtResource( 10 )
+script = ExtResource( 11 )
