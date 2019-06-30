@@ -21,5 +21,5 @@ func make_connections():
 	$AnimationPlayer.play("gros")
 
 func _on_projectile_hit(area : Area2D):
-	if self != null:
+	if self != null and get_parent() != null:
 		get_parent().remove_child(self)

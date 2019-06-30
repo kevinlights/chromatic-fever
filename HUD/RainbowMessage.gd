@@ -38,13 +38,14 @@ func _process(delta):
 	hue_timer = fmod(hue_timer + delta * hue_speed, 360)
 	var h = hue_timer / 360 #h,s,v needs to be in range 0-1
 	
+	"""
 	var new_color = Color()
 	new_color.v = 1 
 	new_color.s = 1 
 	new_color.h = h
 
 	set("custom_colors/font_color", new_color)
-	
+	"""
 	#Scale
 	var scale_value = get_scale().x + delta * scale_factor
 	var position = get_position()
