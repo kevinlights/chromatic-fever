@@ -30,6 +30,9 @@ var combo_length = 0
 var combo_score = 0
 var combo = COMBO.NONE
 
+func _ready():
+	get_tree().paused = false
+
 func _process(delta):
 	var combo_changed : bool = false
 	
@@ -66,3 +69,4 @@ func _process(delta):
 func _on_Enemies_enemy_died(position, score_gained,color):
 	#Updating the score
 	score += score_gained * multiplier[combo]
+	

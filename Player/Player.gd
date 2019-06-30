@@ -219,7 +219,6 @@ func _on_kill(position, score_gained,color):
 		jauges[colormap[color]] += 1
 	
 func _on_jauge_empty_timeout():
-	print("salut")
 	for jauge in jauges.size():
 		if jauges[jauge] > 0:
 			jauges[jauge] -= 1
