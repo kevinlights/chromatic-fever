@@ -37,6 +37,7 @@ func _ready():
 	erase_timer.set_one_shot(true)
 	erase_timer.set_wait_time(erase_delay)
 	add_child(erase_timer)
+	$LesSprites/tete.modulate = color
 
 func make_connections():
 	connect("screen_shake",camera,"_camera_shake")
@@ -80,15 +81,19 @@ func hit(collision_normal):
 	if health > 0:
 		health -= 1
 		if health <= 0:
+			$AnimationPlayer.play("die")
 			die()
+		else:
+			$AnimationPlayer.play("hurt")
 		velocity = collision_normal.normalized()*on_hit_speed
 		hit = true
 		emit_signal("screen_freeze",0)
 		emit_signal("screen_shake",0.8)
 		emit_signal("enemy_hit")
-		$AnimationPlayer.play("hurt")
+
 
 func die():
+	yield($AnimationPlayer, "animation_finished")
 	paint_canvas.spawn_peinture(global_position,color)
 	emit_signal("enemy_died", get_global_transform_with_canvas().origin, score_when_killed,color)
 	get_parent().remove_child(self)
