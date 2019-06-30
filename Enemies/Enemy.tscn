@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Enemies/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://Assets/particule2.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://HUD/Images/heart_full.png" type="Texture" id=12]
 [ext_resource path="res://HUD/Heart.gd" type="Script" id=13]
 [ext_resource path="res://peintures/Splash.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Sounds/capote.wav" type="AudioStream" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 142.579, 32 )
@@ -258,7 +259,7 @@ tracks/18/keys = {
 "values": [ SubResource( 1 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=5]
 resource_name = "die"
 length = 0.5
 tracks/0/type = "value"
@@ -307,7 +308,7 @@ flag_disable_z = true
 spread = 60.0
 gravity = Vector3( -4000, 0, 0 )
 initial_velocity = 1000.0
-angular_velocity = 9.80909e-045
+angular_velocity = 0.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 720.0
@@ -317,8 +318,8 @@ scale_random = 0.5
 
 [node name="Enemy" type="KinematicBody2D" groups=[
 "projectile_collisions",
-"screen_shakers",
 "screen_freezers",
+"screen_shakers",
 ]]
 scale = Vector2( 0.3, 0.3 )
 collision_layer = 2
@@ -389,7 +390,7 @@ position = Vector2( 0, -17.1475 )
 shape = SubResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/die = SubResource( 8 )
+anims/die = SubResource( 5 )
 anims/hurt = SubResource( 6 )
 
 [node name="LifeBar" type="HBoxContainer" parent="."]
@@ -410,3 +411,9 @@ script = ExtResource( 13 )
 
 [node name="Splash" parent="." instance=ExtResource( 14 )]
 process_material = SubResource( 7 )
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="Death" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 15 )
+volume_db = 1.0

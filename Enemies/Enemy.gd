@@ -93,6 +93,7 @@ func hit(collision_normal):
 
 
 func die():
+	$Sounds/Death.play()
 	yield($AnimationPlayer, "animation_finished")
 	paint_canvas.spawn_peinture(global_position,color)
 	emit_signal("enemy_died", get_global_transform_with_canvas().origin, score_when_killed,color)
