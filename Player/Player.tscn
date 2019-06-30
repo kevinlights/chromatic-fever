@@ -190,6 +190,7 @@ z_index = 2
 shape = SubResource( 11 )
 
 [node name="LesSprites" type="Node2D" parent="."]
+editor/display_folded = true
 position = Vector2( 8.42105, -2.45031 )
 
 [node name="heros_couleur" type="Sprite" parent="LesSprites"]
@@ -202,3 +203,6 @@ texture = ExtResource( 11 )
 [node name="heros_face" type="Sprite" parent="LesSprites"]
 position = Vector2( -21.3132, -145.732 )
 texture = ExtResource( 12 )
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 41.696, 220.834 )

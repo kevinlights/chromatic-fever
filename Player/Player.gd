@@ -7,6 +7,9 @@ onready var projectiles : Node2D = get_node("/root/Game/Projectiles")
 
 onready var projectile_ressource : Resource = load("res://Player/Projectile.tscn")
 onready var peintures : Sprite = get_node("/root/Game/Paint/Sprite")
+onready var effacements : Viewport = get_node("/root/Game/Paint/Viewport_effacements")
+
+onready var global = get_node("/root/Global")
 
 # Movement parameters
 export var acceleration : int = 1200
@@ -34,6 +37,7 @@ var invincible : bool = false
 # Timers
 var projectile_timer : Timer = Timer.new()
 var invincibility_timer : Timer = Timer.new()
+var color_change_timer : Timer = Timer.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -46,7 +50,7 @@ func _ready():
 	invincibility_timer.set_wait_time(invincibility_duration)
 	invincibility_timer.connect("timeout",self,"_on_invincibility_timeout")
 	add_child(invincibility_timer)
-	
+
 func _process(delta):
 	var img = peintures.get_texture().get_data()
 	img.lock()
@@ -60,6 +64,12 @@ func _process(delta):
 		$LesSprites/heros_couleur.modulate = Color(0.0,0.0,1.0)
 	else:
 		$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)
+	#color_change_timer.set_one_shot(true)
+	color_change_timer.set_wait_time(0.5)
+	color_change_timer.connect("timeout",self,"_on_color_change")
+	add_child(color_change_timer)
+	color_change_timer.start()
+	$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)
 	
 func _physics_process(delta):
 	accel_direction = Vector2()
@@ -128,3 +138,21 @@ func hit(collision_normal : Vector2):
 func die():
 	get_parent().remove_child(self)
 	emit_signal("player_die")
+	
+func _on_color_change():
+	var img = peintures.get_texture().get_data()
+	img.lock()
+	var c = img.get_pixel(position.x+41*0.3,position.y+220*0.3)
+	img.unlock()
+	img = effacements.get_texture().get_data()
+	img.lock()
+	var e = img.get_pixel(position.x+41*0.3,position.y+220*0.3)
+	img.unlock()
+	if(c.r>0.6 and c.a>0.1 and e.r<0.8):
+		$LesSprites/heros_couleur.modulate = global.rouge
+	elif(c.g>0.6 and c.a>0.1 and e.r<0.8):
+		$LesSprites/heros_couleur.modulate = global.vert
+	elif(c.b>0.6 and c.a>0.1 and e.r<0.8):
+		$LesSprites/heros_couleur.modulate = global.bleu
+	else:
+		$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)
