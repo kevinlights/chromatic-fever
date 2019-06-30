@@ -24,7 +24,7 @@ export var max_jauge : int = 10
 
 # Attributes vars
 export var max_health : int = 3
-export var firing_rate : float = 0.25
+var firing_rate : float = 0.75
 export var invincibility_duration : float = 1.5
 
 var jauges : Array = [0,0,0]
@@ -34,6 +34,8 @@ var colormap : Dictionary
 var accel_direction : Vector2
 var decel_direction : Vector2
 var velocity : Vector2 = Vector2()
+
+var combo_map : Dictionary
 
 # Attributes vars
 var health : int = max_health
@@ -51,6 +53,13 @@ var jauge_empty_timer : Timer = Timer.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	combo_map = {game.COMBO.NONE : 0.45,
+				game.COMBO.TAINTED : 0.4,
+				game.COMBO.PIGMENTED : 0.35,
+				game.COMBO.COLOURFUL : 0.3,
+				game.COMBO.CHROMATIC : 0.2}
+				
+	firing_rate =combo_map[game.COMBO.NONE]
 	projectile_timer.set_one_shot(true)
 	projectile_timer.set_wait_time(firing_rate)
 	projectile_timer.connect("timeout",self,"_on_firing_rate_timeout")
@@ -75,13 +84,6 @@ func _ready():
 	enemies.connect("enemy_died",self,"_on_kill")
 	$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)
 	colormap = {global.colors[0] : 0, global.colors[1] : 1,global.colors[2] : 2}
-	
-func _process(d):
-	#print(Engine.get_frames_per_second())
-	if(game.combo == game.COMBO.NONE):
-		firing_rate = 0.6
-	elif (game.combo == game.COMBO.TAINTED):
-		firing_rate = 0.25
 
 func _physics_process(delta):
 	accel_direction = Vector2()
@@ -118,6 +120,8 @@ func _physics_process(delta):
 	# Shoot Inputs
 	if Input.is_action_pressed("ui_shoot") and can_shoot:
 		shoot()
+		
+	firing_rate = combo_map[game.combo]
 
 func shoot():
 	var projectile : Projectile = projectile_ressource.instance()

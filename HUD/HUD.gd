@@ -36,7 +36,7 @@ func play_music(sound_object):
 	tween_out.start()
 	current_music = sound_object
 	sound_object.play()
-		
+
 func _on_Tween_tween_completed(object, key):
 	object.stop()
 	

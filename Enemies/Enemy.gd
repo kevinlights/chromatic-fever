@@ -16,6 +16,7 @@ export var max_health : int = 3
 export var color : Color = Color(0,0,1)
 export var score_when_killed = 100
 
+onready var global = get_node("/root/Global")
 onready var player : KinematicBody2D = get_node("/root/Game/Player")
 onready var paint_canvas : Node2D = get_node("/root/Game/Paint")
 onready var camera : Camera2D = get_node("/root/Game/Player/Camera2D")
@@ -79,6 +80,9 @@ func _on_erase_delay_timeout():
 
 func hit(collision_normal):
 	if health > 0:
+		if player.on_color != -1 and global.colors[player.on_color] == color:
+			health = 0
+		
 		health -= 1
 		if health <= 0:
 			$AnimationPlayer.play("die")
@@ -90,7 +94,6 @@ func hit(collision_normal):
 		emit_signal("screen_freeze",0)
 		emit_signal("screen_shake",0.8)
 		emit_signal("enemy_hit")
-
 
 func die():
 	$Sounds/Death.play()

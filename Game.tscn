@@ -21,7 +21,6 @@ top_speed = 400
 jauge_empty_delay = 10
 max_jauge = 10
 max_health = 3
-firing_rate = 0.25
 invincibility_duration = 1.5
 
 [node name="Enemies" type="Node2D" parent="."]

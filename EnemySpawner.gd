@@ -8,7 +8,7 @@ onready var player : KinematicBody2D = get_node("/root/Game/Player")
 onready var global = get_node("/root/Global")
 onready var enemy_resource : Resource = load("res://Enemies/Enemy.tscn")
 
-export var player_safe_range : int = 50
+export var player_safe_range : int = 200
 export var max_concurent_enemies : int = 20
 export var min_concurent_enemies : int = 4
 export var wave_step : int = 5
