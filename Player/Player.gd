@@ -104,6 +104,17 @@ func shoot():
 	projectile.make_connections()
 	can_shoot = false
 	projectile_timer.start()
+	
+	var soundToPlay = randi()%4+1
+
+	match soundToPlay:
+		1:
+			$Sounds/shot1.play()
+		2:
+			$Sounds/shot2.play()
+		3:
+			$Sounds/shot3.play()
+			
 	$Hand.shoot()
 
 
@@ -122,6 +133,7 @@ func hit(collision_normal : Vector2):
 		velocity = collision_normal.normalized()*on_hit_speed
 		invincible = true
 		invincibility_timer.start()
+		$Sounds/oof.play()
 		emit_signal("player_hit")
 	
 func die():

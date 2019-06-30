@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://HUD/HUD.gd" type="Script" id=1]
 [ext_resource path="res://HUD/font/riffic.otf" type="DynamicFontData" id=2]
@@ -9,12 +9,16 @@
 [ext_resource path="res://HUD/font/score_font.tres" type="DynamicFont" id=7]
 [ext_resource path="res://HUD/Score.gd" type="Script" id=8]
 [ext_resource path="res://HUD/combo_wave.shader" type="Shader" id=9]
+[ext_resource path="res://Sounds/music_sources/tainted_world.wav" type="AudioStream" id=10]
+[ext_resource path="res://Sounds/music_sources/pigmented_world.wav" type="AudioStream" id=11]
+[ext_resource path="res://Sounds/music_sources/colourful_world.wav" type="AudioStream" id=12]
+[ext_resource path="res://Sounds/music_sources/chromatic_world.wav" type="AudioStream" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
 font_data = ExtResource( 2 )
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 9 )
 shader_param/wave_scale = Vector2( 0.005, 0.002 )
 shader_param/wave_speed = 10.0
@@ -82,10 +86,24 @@ font_min_size = 40
 font_max_size = 60
 
 [node name="ScoreMultiplier" type="Label" parent="ScoreContainer/Node2D"]
-material = SubResource( 4 )
+material = SubResource( 2 )
 margin_left = -43.7129
 margin_top = -30.566
 margin_right = -43.7129
 margin_bottom = 2.43396
 rect_rotation = -45.0
 custom_fonts/font = SubResource( 3 )
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="tainted_world" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 10 )
+
+[node name="pigmented_world" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 11 )
+
+[node name="colourful_world" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 12 )
+
+[node name="chromatic_world" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 13 )

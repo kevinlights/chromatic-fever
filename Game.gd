@@ -11,9 +11,9 @@ export var last_combo_time = 0
 export var time_to_break_combo = 5000
 
 export var tainted_threshold = 200
-export var pigmented_threshold = 500
-export var colourful_threshold = 1000
-export var chromatic_threshold = 1500
+export var pigmented_threshold = 1000
+export var colourful_threshold = 2000
+export var chromatic_threshold = 4000
 
 enum COMBO {
 	NONE,

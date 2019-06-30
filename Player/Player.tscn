@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/particule2.png" type="Texture" id=2]
@@ -12,6 +12,10 @@
 [ext_resource path="res://Assets/heros_couleur.png" type="Texture" id=10]
 [ext_resource path="res://Assets/heros_corps.png" type="Texture" id=11]
 [ext_resource path="res://Assets/heros_face.png" type="Texture" id=12]
+[ext_resource path="res://Sounds/oof.wav" type="AudioStream" id=13]
+[ext_resource path="res://Sounds/claquement.wav" type="AudioStream" id=14]
+[ext_resource path="res://Sounds/claquement2.wav" type="AudioStream" id=15]
+[ext_resource path="res://Sounds/claquement3.wav" type="AudioStream" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
@@ -201,3 +205,20 @@ texture = ExtResource( 11 )
 [node name="heros_face" type="Sprite" parent="LesSprites"]
 position = Vector2( -21.3132, -145.732 )
 texture = ExtResource( 12 )
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="oof" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 13 )
+
+[node name="shot1" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 14 )
+volume_db = -5.0
+
+[node name="shot2" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 15 )
+volume_db = -5.0
+
+[node name="shot3" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 16 )
+volume_db = -5.0
