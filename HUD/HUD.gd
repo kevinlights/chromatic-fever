@@ -32,8 +32,9 @@ func create_combo_message(combo_name):
 	add_child(message)
 	
 func play_music(sound_object):
-	tween_out.interpolate_property(current_music, "volume_db", 0, -80, transition_duration, transition_type, Tween.EASE_IN, 0)
-	tween_out.start()
+	#tween_out.interpolate_property(current_music, "volume_db", 0, -80, transition_duration, transition_type, Tween.EASE_IN, 0)
+	#tween_out.start()
+	current_music.stop()
 	current_music = sound_object
 	sound_object.play()
 		
