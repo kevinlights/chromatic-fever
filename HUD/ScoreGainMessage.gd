@@ -2,7 +2,7 @@ extends Label
 
 signal goal_reached()
 
-export var speed : int = 1250
+export var speed : int = 500
 export var font_min_size : int = 10
 export var font_max_size : int = 30
 export var font_scale_speed : int = 80
