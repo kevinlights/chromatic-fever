@@ -165,7 +165,8 @@ func hit(collision_normal : Vector2):
 		$AnimationPlayer.play("hurt")
 	
 func die():
-	get_parent().remove_child(self)
+	get_tree().paused = true
+	hide()
 	emit_signal("player_die")
 	
 func _on_color_change():

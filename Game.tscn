@@ -29,4 +29,5 @@ script = ExtResource( 5 )
 [node name="Projectiles" type="Node2D" parent="."]
 
 [node name="HUD" parent="." instance=ExtResource( 6 )]
+pause_mode = 2
 [connection signal="enemy_died" from="Enemies" to="." method="_on_Enemies_enemy_died"]
