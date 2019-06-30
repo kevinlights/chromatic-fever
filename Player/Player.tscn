@@ -128,7 +128,6 @@ zoom = Vector2( 1.5, 1.5 )
 script = ExtResource( 4 )
 
 [node name="Hand" type="Node2D" parent="."]
-editor/display_folded = true
 script = ExtResource( 5 )
 
 [node name="Explosion" type="Node2D" parent="Hand"]

@@ -286,9 +286,9 @@ tracks/1/keys = {
 }
 
 [node name="Enemy" type="KinematicBody2D" groups=[
-"projectile_collisions",
 "screen_shakers",
 "screen_freezers",
+"projectile_collisions",
 ]]
 scale = Vector2( 0.3, 0.3 )
 collision_layer = 2
