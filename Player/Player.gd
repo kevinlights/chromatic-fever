@@ -82,7 +82,7 @@ func _ready():
 	color_change_timer.start()
 	
 	enemies.connect("enemy_died",self,"_on_kill")
-	$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)
+	#$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)
 	colormap = {global.colors[0] : 0, global.colors[1] : 1,global.colors[2] : 2}
 
 func _physics_process(delta):
@@ -187,9 +187,9 @@ func _on_color_change():
 	elif(c.b>0.6 and c.a>0.1 and e.r<0.8):
 		on_color = 2
 		$LesSprites/heros_couleur.modulate = global.colors[2]
-	else:
-		on_color = -1
-		$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)
+	#else:
+	#	on_color = -1
+	#	$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)
 
 func _on_kill(position, score_gained,color):
 	if color != null and jauges[colormap[color]] < max_jauge:
