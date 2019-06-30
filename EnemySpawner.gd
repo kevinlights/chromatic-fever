@@ -31,9 +31,11 @@ func spawn():
 	new_enemy.color = colors[randi()%3]
 	
 	new_enemy.global_position = pos
-	new_enemy.connect("enemy_died", self, "_on_enemy_died")
 	add_child(new_enemy)
 	
+	new_enemy.make_connections()
+	new_enemy.connect("enemy_died", self, "_on_enemy_died")
+
 func _on_enemy_died(position, score_gained):
 	emit_signal("enemy_died", position, score_gained)
 
