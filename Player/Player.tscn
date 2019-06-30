@@ -132,7 +132,15 @@ tracks/0/keys = {
 [node name="Player" type="KinematicBody2D"]
 scale = Vector2( 0.3, 0.3 )
 script = ExtResource( 1 )
+acceleration = null
+deceleration = null
+top_speed = null
 on_hit_speed = 3000
+jauge_empty_delay = null
+max_jauge = null
+max_health = null
+firing_rate = null
+invincibility_duration = null
 
 [node name="particule2" type="Sprite" parent="."]
 modulate = Color( 0, 0, 0, 0.196078 )

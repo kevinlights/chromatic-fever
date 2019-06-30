@@ -66,13 +66,13 @@ func _ready():
 	jauge_empty_timer.connect("timeout",self,"_on_jauge_empty_timeout")
 	add_child(jauge_empty_timer)
 	jauge_empty_timer.start()
-
+	
 	color_change_timer.set_wait_time(0.5)
 	color_change_timer.connect("timeout",self,"_on_color_change")
 	add_child(color_change_timer)
 	color_change_timer.start()
-
-    enemies.connect("enemy_died",self,"_on_kill")
+	
+	enemies.connect("enemy_died",self,"_on_kill")
 	$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)
 	colormap = {global.colors[0] : 0, global.colors[1] : 1,global.colors[2] : 2}
 	

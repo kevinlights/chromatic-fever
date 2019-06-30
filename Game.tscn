@@ -15,6 +15,14 @@ script = ExtResource( 1 )
 [node name="Paint" parent="." instance=ExtResource( 3 )]
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
+acceleration = 1200
+deceleration = 1200
+top_speed = 400
+jauge_empty_delay = 10
+max_jauge = 10
+max_health = 3
+firing_rate = 0.25
+invincibility_duration = 1.5
 
 [node name="Enemies" type="Node2D" parent="."]
 script = ExtResource( 5 )
