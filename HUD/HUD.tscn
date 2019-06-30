@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://HUD/HUD.gd" type="Script" id=1]
 [ext_resource path="res://HUD/font/riffic.otf" type="DynamicFontData" id=2]
@@ -9,10 +9,11 @@
 [ext_resource path="res://HUD/font/score_font.tres" type="DynamicFont" id=7]
 [ext_resource path="res://HUD/Score.gd" type="Script" id=8]
 [ext_resource path="res://HUD/combo_wave.shader" type="Shader" id=9]
-[ext_resource path="res://Sounds/music_sources/tainted_world.wav" type="AudioStream" id=10]
-[ext_resource path="res://Sounds/music_sources/pigmented_world.wav" type="AudioStream" id=11]
-[ext_resource path="res://Sounds/music_sources/colourful_world.wav" type="AudioStream" id=12]
-[ext_resource path="res://Sounds/music_sources/chromatic_world.wav" type="AudioStream" id=13]
+[ext_resource path="res://Sounds/music_sources/colorless_world.wav" type="AudioStream" id=10]
+[ext_resource path="res://Sounds/music_sources/tainted_world.wav" type="AudioStream" id=11]
+[ext_resource path="res://Sounds/music_sources/pigmented_world.wav" type="AudioStream" id=12]
+[ext_resource path="res://Sounds/music_sources/colourful_world.wav" type="AudioStream" id=13]
+[ext_resource path="res://Sounds/music_sources/chromatic_world.wav" type="AudioStream" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -96,14 +97,25 @@ custom_fonts/font = SubResource( 3 )
 
 [node name="Sounds" type="Node" parent="."]
 
-[node name="tainted_world" type="AudioStreamPlayer" parent="Sounds"]
+[node name="Tween" type="Tween" parent="Sounds"]
+
+[node name="colorless_world" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 10 )
+volume_db = -15.0
+
+[node name="tainted_world" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 11 )
+volume_db = -10.0
 
 [node name="pigmented_world" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 11 )
+stream = ExtResource( 12 )
+volume_db = -10.0
 
 [node name="colourful_world" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 12 )
+stream = ExtResource( 13 )
+volume_db = -10.0
 
 [node name="chromatic_world" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 13 )
+stream = ExtResource( 14 )
+volume_db = -10.0
+[connection signal="tween_completed" from="Sounds/Tween" to="." method="_on_Tween_tween_completed"]
