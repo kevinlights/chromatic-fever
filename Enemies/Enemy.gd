@@ -83,7 +83,7 @@ func hit(collision_normal):
 			die()
 		velocity = collision_normal.normalized()*on_hit_speed
 		hit = true
-		emit_signal("screen_freeze",0.3)
+		emit_signal("screen_freeze",0)
 		emit_signal("screen_shake",0.8)
 		emit_signal("enemy_hit")
 		$AnimationPlayer.play("hurt")
