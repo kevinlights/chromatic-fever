@@ -58,7 +58,7 @@ func _ready():
 	$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)
 	
 #func _process(d):
-#	print(Engine.get_frames_per_second())
+	#print(Engine.get_frames_per_second())
 
 func _physics_process(delta):
 	accel_direction = Vector2()

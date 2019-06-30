@@ -66,5 +66,3 @@ func _on_multiplier_set(multiplier: int):
 		$ScoreContainer/Node2D/ScoreMultiplier.set_text("")
 	else :
 		$ScoreContainer/Node2D/ScoreMultiplier.set_text("x"+str(multiplier)+"!")
-
-
