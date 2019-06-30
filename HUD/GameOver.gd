@@ -10,7 +10,7 @@ func _ready():
 	player.connect("player_die", self, "_on_player_die")
 	
 func _process(delta):
-		if is_game_over && Input.is_action_pressed("ui_shoot"):
+		if is_game_over && Input.is_action_pressed("ui_restart"):
 			get_tree().reload_current_scene()
 			
 func _on_player_die():

@@ -9,10 +9,10 @@ signal multiplier_set(multiplier)
 
 onready var player = get_node("/root/Game/Player")
 
-export var tainted_threshold = 2
-export var pigmented_threshold = 4
+export var tainted_threshold = 1
+export var pigmented_threshold = 3
 export var colourful_threshold = 6
-export var chromatic_threshold = 10
+export var chromatic_threshold = 8
 
 enum COMBO {
 	NONE,

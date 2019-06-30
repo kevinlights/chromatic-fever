@@ -13,25 +13,26 @@ export var max_concurent_enemies : int = 20
 export var min_concurent_enemies : int = 4
 export var wave_step : int = 5
 
-
+var speed_mod : int = 5
 
 func _ready():
 	randomize()
 	
 	for i in global.colors.size():
 		for j in max_concurent_enemies/global.colors.size():
-			spawn(global.colors[i])
+			spawn(global.colors[i],0)
 
 func _process(delta):
 	var child_count : int = get_child_count()
 	if get_child_count() <= min_concurent_enemies:
 		for i in global.colors.size():
 			for j in (max_concurent_enemies-min_concurent_enemies)/global.colors.size():
-				spawn(global.colors[i])
+				spawn(global.colors[i],speed_mod)
+		speed_mod += 5
 		max_concurent_enemies += wave_step
 		min_concurent_enemies += wave_step
 
-func spawn(color : Color):
+func spawn(color : Color, speed_mod : int):
 	var pos : Vector2 = Vector2()
 	var new_enemy = enemy_resource.instance()
 	pos.x = rand_range(0,terrain.texture.get_size().x*terrain.scale.x)
@@ -46,6 +47,7 @@ func spawn(color : Color):
 	new_enemy.global_position = pos
 	add_child(new_enemy)
 	
+	new_enemy.top_speed += speed_mod
 	new_enemy.make_connections()
 	new_enemy.connect("enemy_died", self, "_on_enemy_died")
 

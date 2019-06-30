@@ -141,7 +141,7 @@ margin_right = 367.0
 margin_bottom = 127.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-text = "Appuyez sur espace pour rejouer"
+text = "Press R to restart"
 align = 1
 
 [node name="LifeBar" type="HBoxContainer" parent="."]
