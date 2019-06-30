@@ -11,6 +11,7 @@ onready var effacements : Viewport = get_node("/root/Game/Paint/Viewport_effacem
 onready var enemies = get_node("/root/Game/Enemies")
 
 
+onready var game = get_node("..")
 onready var global = get_node("/root/Global")
 
 # Movement parameters
@@ -70,13 +71,17 @@ func _ready():
 	color_change_timer.connect("timeout",self,"_on_color_change")
 	add_child(color_change_timer)
 	color_change_timer.start()
-	
-	enemies.connect("enemy_died",self,"_on_kill")
+
+    enemies.connect("enemy_died",self,"_on_kill")
 	$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)
 	colormap = {global.colors[0] : 0, global.colors[1] : 1,global.colors[2] : 2}
 	
-#func _process(d):
+func _process(d):
 	#print(Engine.get_frames_per_second())
+	if(game.combo == game.COMBO.NONE):
+		firing_rate = 0.6
+	elif (game.combo == game.COMBO.TAINTED):
+		firing_rate = 0.25
 
 func _physics_process(delta):
 	accel_direction = Vector2()
@@ -191,3 +196,4 @@ func _on_jauge_empty_timeout():
 		if jauges[jauge] > 0:
 			jauges[jauge] -= 1
 	jauge_empty_timer.start()
+
