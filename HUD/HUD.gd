@@ -42,6 +42,6 @@ func _on_combo_broken():
 		
 func _on_multiplier_set(multiplier: int):
 	if multiplier == 1:
-		$ScoreContainer/Node2D/ScoreMultiplier.set_text("")
-	else :
-		$ScoreContainer/Node2D/ScoreMultiplier.set_text("x"+str(multiplier)+"!")
+		$ScoreContainer/HBox/ScoreMultiplier.set_text("")
+	else :          
+		$ScoreContainer/HBox/ScoreMultiplier.set_text("x"+str(multiplier)+"!")
