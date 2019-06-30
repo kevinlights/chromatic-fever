@@ -41,7 +41,7 @@ script = ExtResource( 1 )
 
 [node name="LesCadres" type="Node2D" parent="."]
 position = Vector2( 509.11, 298.533 )
-scale = Vector2( 0.584834, 0.63247 )
+scale = Vector2( 0.664834, 0.703184 )
 script = ExtResource( 2 )
 
 [node name="Cadre" type="Sprite" parent="LesCadres"]
@@ -103,12 +103,11 @@ nine_patch_stretch = true
 script = ExtResource( 7 )
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-editor/display_folded = true
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="DefeatMessage" type="Label" parent="CenterContainer"]
+visible = false
 margin_left = 395.0
 margin_top = 268.0
 margin_right = 629.0
