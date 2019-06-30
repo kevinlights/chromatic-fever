@@ -318,8 +318,8 @@ scale_random = 0.5
 
 [node name="Enemy" type="KinematicBody2D" groups=[
 "projectile_collisions",
-"screen_freezers",
 "screen_shakers",
+"screen_freezers",
 ]]
 scale = Vector2( 0.3, 0.3 )
 collision_layer = 2

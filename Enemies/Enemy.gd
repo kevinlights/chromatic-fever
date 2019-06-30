@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 class_name Enemy
 
-signal enemy_hit()
+signal enemy_hit(dmg)
 signal enemy_died(position, score_gained, color)
 signal screen_freeze(duration)
 signal screen_shake(duration)
@@ -73,7 +73,10 @@ func _physics_process(delta):
 	move_and_slide(velocity,Vector2.UP)
 
 func movement_oracle() -> Vector2:
-	return (player.global_position - global_position).normalized()
+	if player != null :
+		return (player.global_position - global_position).normalized()
+	else :
+		return Vector2.ZERO
 
 func _on_erase_delay_timeout():
 	can_erase = true
@@ -84,6 +87,7 @@ func hit(collision_normal):
 			health = 0
 		
 		health -= 1
+		emit_signal("enemy_hit",max_health - health)
 		if health <= 0:
 			$AnimationPlayer.play("die")
 			die()
@@ -93,7 +97,6 @@ func hit(collision_normal):
 		hit = true
 		emit_signal("screen_freeze",0)
 		emit_signal("screen_shake",0.8)
-		emit_signal("enemy_hit")
 
 func die():
 	$Sounds/Death.play()

@@ -165,9 +165,9 @@ func hit(collision_normal : Vector2):
 		$AnimationPlayer.play("hurt")
 	
 func die():
-	get_tree().paused = true
 	hide()
 	emit_signal("player_die")
+	get_tree().paused = true
 	
 func _on_color_change():
 	var img = peintures.get_texture().get_data()

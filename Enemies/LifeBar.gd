@@ -23,7 +23,9 @@ func find_last_full_heart():
 	if i > 0:
 		return heart_array[i]
 		
-func _on_enemy_hit():
-	var heart = find_last_full_heart()
-	if heart:
-		heart.set_empty()
+func _on_enemy_hit(dmg):
+	var heart
+	for i in dmg:
+		heart = find_last_full_heart()
+		if heart:
+			heart.set_empty()
