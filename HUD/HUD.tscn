@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://HUD/HUD.gd" type="Script" id=1]
 [ext_resource path="res://HUD/LesCadres.gd" type="Script" id=2]
@@ -8,21 +8,19 @@
 [ext_resource path="res://HUD/LifeBar.gd" type="Script" id=6]
 [ext_resource path="res://HUD/Images/heart_full.png" type="Texture" id=7]
 [ext_resource path="res://HUD/Heart.gd" type="Script" id=8]
-[ext_resource path="res://HUD/font/score_font.tres" type="DynamicFont" id=9]
-[ext_resource path="res://HUD/Score.gd" type="Script" id=10]
-[ext_resource path="res://HUD/combo_wave.shader" type="Shader" id=11]
-[ext_resource path="res://Sounds/music_sources/tainted_world.wav" type="AudioStream" id=12]
-[ext_resource path="res://Sounds/music_sources/pigmented_world.wav" type="AudioStream" id=13]
-[ext_resource path="res://Sounds/music_sources/colourful_world.wav" type="AudioStream" id=14]
-[ext_resource path="res://Sounds/music_sources/chromatic_world.wav" type="AudioStream" id=15]
-
+[ext_resource path="res://HUD/combo_wave.shader" type="Shader" id=9]
+[ext_resource path="res://Sounds/music_sources/colorless_world.wav" type="AudioStream" id=10]
+[ext_resource path="res://Sounds/music_sources/tainted_world.wav" type="AudioStream" id=11]
+[ext_resource path="res://Sounds/music_sources/pigmented_world.wav" type="AudioStream" id=12]
+[ext_resource path="res://Sounds/music_sources/colourful_world.wav" type="AudioStream" id=13]
+[ext_resource path="res://Sounds/music_sources/chromatic_world.wav" type="AudioStream" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
 font_data = ExtResource( 4 )
 
 [sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 11 )
+shader = ExtResource( 9 )
 shader_param/wave_scale = Vector2( 0.005, 0.002 )
 shader_param/wave_speed = 10.0
 shader_param/rainbow_scale = Vector3( 1, 1, 1 )
@@ -92,19 +90,6 @@ use_top_left = true
 
 [node name="Node2D" type="Node2D" parent="ScoreContainer"]
 
-[node name="Score" type="Label" parent="ScoreContainer/HBox"]
-margin_left = -32.0
-margin_right = 11.0
-margin_bottom = 64.0
-custom_fonts/font = ExtResource( 9 )
-
-custom_colors/font_color = Color( 1, 0.921569, 0.0980392, 1 )
-text = "0"
-align = 1
-valign = 1
-script = ExtResource( 10 )
-
-
 [node name="ScoreMultiplier" type="Label" parent="ScoreContainer/Node2D"]
 material = SubResource( 2 )
 margin_left = -43.7129
@@ -116,14 +101,24 @@ custom_fonts/font = SubResource( 3 )
 
 [node name="Sounds" type="Node" parent="."]
 
+[node name="Tween" type="Tween" parent="Sounds"]
+
+[node name="colorless_world" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 10 )
+volume_db = -10.0
+
 [node name="tainted_world" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 12 )
+stream = ExtResource( 11 )
+volume_db = -10.0
 
 [node name="pigmented_world" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 13 )
+stream = ExtResource( 12 )
+volume_db = -10.0
 
 [node name="colourful_world" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 14 )
+stream = ExtResource( 13 )
+volume_db = -10.0
 
 [node name="chromatic_world" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 15 )
+stream = ExtResource( 14 )
+volume_db = -10.0
