@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://HUD/HUD.gd" type="Script" id=1]
 [ext_resource path="res://HUD/LesCadres.gd" type="Script" id=2]
@@ -6,38 +6,39 @@
 [ext_resource path="res://Assets/rectangle.png" type="Texture" id=4]
 [ext_resource path="res://Assets/rect.png" type="Texture" id=5]
 [ext_resource path="res://HUD/Jauge.gd" type="Script" id=6]
-[ext_resource path="res://HUD/GameOver.gd" type="Script" id=7]
-[ext_resource path="res://HUD/font/riffic.otf" type="DynamicFontData" id=8]
-[ext_resource path="res://HUD/LifeBar.gd" type="Script" id=9]
-[ext_resource path="res://HUD/Images/heart_full.png" type="Texture" id=10]
-[ext_resource path="res://HUD/Heart.gd" type="Script" id=11]
-[ext_resource path="res://HUD/font/score_font.tres" type="DynamicFont" id=12]
-[ext_resource path="res://HUD/Score.gd" type="Script" id=13]
-[ext_resource path="res://HUD/combo_wave.shader" type="Shader" id=14]
-[ext_resource path="res://Sounds/music_sources/colorless_world.wav" type="AudioStream" id=15]
-[ext_resource path="res://Sounds/music_sources/tainted_world.wav" type="AudioStream" id=16]
-[ext_resource path="res://Sounds/music_sources/pigmented_world.wav" type="AudioStream" id=17]
-[ext_resource path="res://Sounds/music_sources/colourful_world.wav" type="AudioStream" id=18]
-[ext_resource path="res://Sounds/music_sources/chromatic_world.wav" type="AudioStream" id=19]
+[ext_resource path="res://Assets/ligne_pointille.png" type="Texture" id=7]
+[ext_resource path="res://HUD/GameOver.gd" type="Script" id=8]
+[ext_resource path="res://HUD/font/riffic.otf" type="DynamicFontData" id=9]
+[ext_resource path="res://HUD/LifeBar.gd" type="Script" id=10]
+[ext_resource path="res://HUD/Images/heart_full.png" type="Texture" id=11]
+[ext_resource path="res://HUD/Heart.gd" type="Script" id=12]
+[ext_resource path="res://HUD/font/score_font.tres" type="DynamicFont" id=13]
+[ext_resource path="res://HUD/Score.gd" type="Script" id=14]
+[ext_resource path="res://HUD/combo_wave.shader" type="Shader" id=15]
+[ext_resource path="res://Sounds/music_sources/colorless_world.wav" type="AudioStream" id=16]
+[ext_resource path="res://Sounds/music_sources/tainted_world.wav" type="AudioStream" id=17]
+[ext_resource path="res://Sounds/music_sources/pigmented_world.wav" type="AudioStream" id=18]
+[ext_resource path="res://Sounds/music_sources/colourful_world.wav" type="AudioStream" id=19]
+[ext_resource path="res://Sounds/music_sources/chromatic_world.wav" type="AudioStream" id=20]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
-font_data = ExtResource( 8 )
+font_data = ExtResource( 9 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 30
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 8 )
+font_data = ExtResource( 9 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 20
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 8 )
+font_data = ExtResource( 9 )
 
 [sub_resource type="ShaderMaterial" id=4]
-shader = ExtResource( 14 )
+shader = ExtResource( 15 )
 shader_param/wave_scale = Vector2( 0.005, 0.002 )
 shader_param/wave_speed = 10.0
 shader_param/rainbow_scale = Vector3( 1, 1, 1 )
@@ -45,7 +46,7 @@ shader_param/rainbow_speed = 5.0
 
 [sub_resource type="DynamicFont" id=5]
 size = 30
-font_data = ExtResource( 8 )
+font_data = ExtResource( 9 )
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -107,6 +108,44 @@ fill_mode = 3
 script = ExtResource( 6 )
 jauge_number = 2
 
+[node name="ligne_pointille" type="Sprite" parent="Jauges"]
+visible = false
+position = Vector2( 110.244, 156.519 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 7 )
+
+[node name="ligne_pointille2" type="Sprite" parent="Jauges"]
+visible = false
+position = Vector2( 110.244, 202.361 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 7 )
+
+[node name="ligne_pointille4" type="Sprite" parent="Jauges"]
+position = Vector2( 110.244, 226.744 )
+scale = Vector2( 0.58, 0.5 )
+texture = ExtResource( 7 )
+
+[node name="ligne_pointille5" type="Sprite" parent="Jauges"]
+position = Vector2( 110.244, 190.782 )
+scale = Vector2( 0.58, 0.5 )
+texture = ExtResource( 7 )
+
+[node name="ligne_pointille6" type="Sprite" parent="Jauges"]
+position = Vector2( 110.244, 139.172 )
+scale = Vector2( 0.58, 0.5 )
+texture = ExtResource( 7 )
+
+[node name="ligne_pointille7" type="Sprite" parent="Jauges"]
+position = Vector2( 110.244, 104.339 )
+scale = Vector2( 0.58, 0.5 )
+texture = ExtResource( 7 )
+
+[node name="ligne_pointille3" type="Sprite" parent="Jauges"]
+visible = false
+position = Vector2( 110.244, 112.141 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 7 )
+
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -116,7 +155,7 @@ margin_left = 328.0
 margin_top = 236.0
 margin_right = 695.0
 margin_bottom = 363.0
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 
 [node name="DefeatMessage" type="Label" parent="CenterContainer/GameOver"]
 margin_right = 367.0
@@ -152,13 +191,13 @@ margin_right = 215.0
 margin_bottom = 215.0
 rect_scale = Vector2( 0.2, 0.2 )
 custom_constants/separation = 20
-script = ExtResource( 9 )
+script = ExtResource( 10 )
 
 [node name="Heart" type="TextureRect" parent="LifeBar"]
 margin_right = 200.0
 margin_bottom = 200.0
-texture = ExtResource( 10 )
-script = ExtResource( 11 )
+texture = ExtResource( 11 )
+script = ExtResource( 12 )
 
 [node name="ScoreContainer" type="CenterContainer" parent="."]
 margin_left = 512.0
@@ -174,12 +213,12 @@ margin_left = -22.0
 margin_top = -32.0
 margin_right = 21.0
 margin_bottom = 32.0
-custom_fonts/font = ExtResource( 12 )
+custom_fonts/font = ExtResource( 13 )
 custom_colors/font_color = Color( 1, 0.921569, 0.0980392, 1 )
 text = "0"
 align = 1
 valign = 1
-script = ExtResource( 13 )
+script = ExtResource( 14 )
 font_max_size = 60
 
 [node name="ScoreMultiplier" type="Label" parent="ScoreContainer/Node2D"]
@@ -197,22 +236,22 @@ editor/display_folded = true
 [node name="Tween" type="Tween" parent="Sounds"]
 
 [node name="colorless_world" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 15 )
+stream = ExtResource( 16 )
 volume_db = -15.0
 
 [node name="tainted_world" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 16 )
-volume_db = -10.0
-
-[node name="pigmented_world" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 17 )
 volume_db = -10.0
 
-[node name="colourful_world" type="AudioStreamPlayer" parent="Sounds"]
+[node name="pigmented_world" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 18 )
 volume_db = -10.0
 
-[node name="chromatic_world" type="AudioStreamPlayer" parent="Sounds"]
+[node name="colourful_world" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 19 )
+volume_db = -10.0
+
+[node name="chromatic_world" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 20 )
 volume_db = -10.0
 [connection signal="tween_completed" from="Sounds/Tween" to="." method="_on_Tween_tween_completed"]
