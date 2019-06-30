@@ -1,5 +1,7 @@
 extends Node2D
 
+signal enemy_died(position, score_gained)
+
 onready var camera : Camera2D = get_node("/root/Game/Player/Camera2D") 
 onready var terrain : Node2D = get_node("/root/Game/Terrain/Feuille")
 onready var player : KinematicBody2D = get_node("/root/Game/Player")
@@ -29,4 +31,9 @@ func spawn():
 	new_enemy.color = colors[randi()%3]
 	
 	new_enemy.global_position = pos
+	new_enemy.connect("enemy_died", self, "_on_enemy_died")
 	add_child(new_enemy)
+	
+func _on_enemy_died(position, score_gained):
+	emit_signal("enemy_died", position, score_gained)
+

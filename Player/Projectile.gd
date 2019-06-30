@@ -14,7 +14,7 @@ func _physics_process(delta):
 	veloctity = direction*speed
 	global_position += veloctity*delta
 
-func _ready():
+func make_connections():
 	for body in get_tree().get_nodes_in_group("projectile_collisions"):
 		connect("area_entered",body.get_node("HitBox"),"_on_projectile_hit")
 	connect("area_entered",self,"_on_projectile_hit")

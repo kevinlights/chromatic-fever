@@ -11,18 +11,18 @@
 [ext_resource path="res://Assets/monstre1/yeux.png" type="Texture" id=9]
 [ext_resource path="res://Enemies/EnemyHitBox.gd" type="Script" id=10]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 142.579, 32 )
 
-[sub_resource type="ShaderMaterial" id=8]
+[sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
 shader = ExtResource( 4 )
 shader_param/f = 0.0
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 101.858, 111.6 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 length = 2.0
 loop = true
 tracks/0/type = "value"
@@ -227,7 +227,7 @@ tracks/16/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 4 ) ]
+"values": [ SubResource( 3 ) ]
 }
 tracks/17/type = "value"
 tracks/17/path = NodePath("../HitBox/CollisionShape2D:position")
@@ -251,10 +251,10 @@ tracks/18/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 3 ) ]
+"values": [ SubResource( 1 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=5]
 resource_name = "hurt"
 length = 0.5
 tracks/0/type = "value"
@@ -283,9 +283,9 @@ tracks/1/keys = {
 }
 
 [node name="Enemy" type="KinematicBody2D" groups=[
-"projectile_collisions",
-"screen_freezers",
 "screen_shakers",
+"screen_freezers",
+"projectile_collisions",
 ]]
 scale = Vector2( 0.3, 0.3 )
 collision_layer = 2
@@ -300,7 +300,7 @@ texture = ExtResource( 2 )
 
 [node name="BoundingBox" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 94.7369 )
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="BoundingBox"]
 visible = false
@@ -309,7 +309,7 @@ texture = ExtResource( 3 )
 
 [node name="LesSprites" type="Node2D" parent="."]
 editor/display_folded = true
-material = SubResource( 8 )
+material = SubResource( 2 )
 
 [node name="jambes" type="Sprite" parent="LesSprites"]
 use_parent_material = true
@@ -345,7 +345,7 @@ texture = ExtResource( 9 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="LesSprites"]
 playback_speed = 3.0
-anims/marche = SubResource( 5 )
+anims/marche = SubResource( 4 )
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_layer = 2
@@ -353,7 +353,7 @@ script = ExtResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2( 0, -17.1475 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/hurt = SubResource( 7 )
+anims/hurt = SubResource( 5 )
