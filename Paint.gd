@@ -42,5 +42,4 @@ func spawn_effacement(position):
 	i2.modulate = Color(1,1,1)
 	i2.set_position(position)
 	i2.z_index=1
-	vp_e.update_worlds()
 	vp_e.set_update_mode(Viewport.UPDATE_ONCE)

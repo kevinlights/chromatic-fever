@@ -6,6 +6,7 @@ signal player_die()
 onready var projectiles : Node2D = get_node("/root/Game/Projectiles")
 
 onready var projectile_ressource : Resource = load("res://Player/Projectile.tscn")
+onready var peintures= get_node("/root/Game/Paint/Viewport_couleurs")
 
 # Movement parameters
 export var acceleration : int = 1200
@@ -46,7 +47,12 @@ func _ready():
 	invincibility_timer.connect("timeout",self,"_on_invincibility_timeout")
 	add_child(invincibility_timer)
 	
-
+#func _process(delta):
+	#var c = peintures.get_texture().get_data().get_pixel(10,10)
+	#if(c.r>0.7):
+	#	print("red")
+	#print(c)
+	
 func _physics_process(delta):
 	accel_direction = Vector2()
 	decel_direction = Vector2()
@@ -85,14 +91,17 @@ func _physics_process(delta):
 
 func shoot():
 	var projectile : Projectile = projectile_ressource.instance()
-	projectile.position = $ProjectilesSpawnPosition.get_global_position()
+	projectile.position = $Hand/ProjectilesSpawnPosition.get_global_position()
 	projectile.direction = (get_global_mouse_position() - global_position).normalized()
 	projectiles.add_child(projectile)
 	can_shoot = false
 	projectile_timer.start()
+	$Hand.shoot()
+
 
 func _on_firing_rate_timeout():
 	can_shoot = true
+
 
 func _on_invincibility_timeout():
 	invincible = false

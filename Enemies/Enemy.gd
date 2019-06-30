@@ -77,8 +77,9 @@ func hit(collision_normal):
 		die()
 	velocity = collision_normal.normalized()*on_hit_speed
 	hit = true
-	emit_signal("screen_freeze",1)
+	emit_signal("screen_freeze",0.3)
 	emit_signal("screen_shake",0.8)
+	$AnimationPlayer.play("hurt")
 
 func die():
 	paint_canvas.spawn_peinture(global_position,color)

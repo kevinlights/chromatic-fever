@@ -1,4 +1,4 @@
-extends Sprite
+extends Node2D
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -14,12 +14,21 @@ func _process(delta):
 	if(r<0):
 		r+=360
 	if(r>180):
-		z_index = 0
+		$HandSprite.z_index = 0
 	else:
-		z_index = 2
+		$HandSprite.z_index = 2
 	if(r>270 or r < 90):
-		flip_v = false
+		$HandSprite.flip_v = false
 	else:
-		flip_v = true
-	print(r)
-#	pass
+		$HandSprite.flip_v = true
+
+
+func shoot():
+	$Explosion.play()
+	var r = int(rad2deg(rotation))%360
+	if(r<0):
+		r+=360
+	if(r>270 or r < 90):
+		$AnimationPlayer.play("shoot")
+	else:
+		$AnimationPlayer.play("shoot_rev")
