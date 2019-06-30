@@ -16,6 +16,7 @@
 [ext_resource path="res://Sounds/music_sources/colourful_world.wav" type="AudioStream" id=14]
 [ext_resource path="res://Sounds/music_sources/chromatic_world.wav" type="AudioStream" id=15]
 
+
 [sub_resource type="DynamicFont" id=1]
 size = 60
 font_data = ExtResource( 4 )
@@ -84,31 +85,33 @@ script = ExtResource( 8 )
 
 [node name="ScoreContainer" type="CenterContainer" parent="."]
 margin_left = 512.0
-margin_top = 32.0
+margin_top = 64.0
 margin_right = 512.0
-margin_bottom = 32.0
+margin_bottom = 64.0
 use_top_left = true
 
-[node name="HBox" type="Control" parent="ScoreContainer"]
+[node name="Node2D" type="Node2D" parent="ScoreContainer"]
 
 [node name="Score" type="Label" parent="ScoreContainer/HBox"]
 margin_left = -32.0
 margin_right = 11.0
 margin_bottom = 64.0
 custom_fonts/font = ExtResource( 9 )
+
 custom_colors/font_color = Color( 1, 0.921569, 0.0980392, 1 )
 text = "0"
 align = 1
 valign = 1
 script = ExtResource( 10 )
 
-[node name="ScoreMultiplier" type="Label" parent="ScoreContainer/HBox"]
+
+[node name="ScoreMultiplier" type="Label" parent="ScoreContainer/Node2D"]
 material = SubResource( 2 )
-margin_left = -59.14
-margin_top = -10.339
-margin_right = -59.14
-margin_bottom = 22.661
-rect_rotation = -37.8029
+margin_left = -43.7129
+margin_top = -30.566
+margin_right = -43.7129
+margin_bottom = 2.43396
+rect_rotation = -45.0
 custom_fonts/font = SubResource( 3 )
 
 [node name="Sounds" type="Node" parent="."]
