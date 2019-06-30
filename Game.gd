@@ -1,29 +1,36 @@
 extends Node2D
 
-var score = 0
-
 signal tainted()
 signal pigmented()
 signal colourful()
 signal chromatic()
 signal combo_broken()
 
-
-
-var combo_length = 0
-var combo_score = 0
-
 export var last_combo_time = 0
 export var time_to_break_combo = 5000
 
 export var tainted_threshold = 200
-export var pigmented_threshold = 300
-export var colourful_threshold = 400
-export var chromatic_threshold = 500
+export var pigmented_threshold = 500
+export var colourful_threshold = 1000
+export var chromatic_threshold = 1500
+
+enum COMBO {
+	NONE,
+	TAINTED,
+	PIGMENTED,
+	COLOURFUL,
+	CHROMATIC
+}
+
+var score = 0
+var combo_length = 0
+var combo_score = 0
+var combo = COMBO.NONE
+
 func _process(delta):
 	pass
 
-func _on_Enemies_enemy_died(position, score_gained):
+func _on_Enemies_enemy_died(position, score_gained,color):
 	#Updating the score
 	score += score_gained
 	
@@ -39,16 +46,25 @@ func _on_Enemies_enemy_died(position, score_gained):
 	else :
 		combo_length = 0
 		combo_score = 0
+		combo = COMBO.NONE
 		emit_signal("combo_broken")
 	
 	last_combo_time = current_time
 	
 	# The combo level increases
-	if combo_score >= chromatic_threshold:
-		emit_signal("chromatic")
+	if combo_score >= chromatic_threshold :
+		if combo != COMBO.CHROMATIC:
+			combo = COMBO.CHROMATIC
+			emit_signal("chromatic")
 	elif combo_score >= colourful_threshold:
-		emit_signal("colourful")
+		if combo != COMBO.COLOURFUL:
+			combo = COMBO.COLOURFUL
+			emit_signal("colourful")
 	elif combo_score >= pigmented_threshold:
-		emit_signal("pigmented")
+		if combo != COMBO.PIGMENTED:
+			combo = COMBO.PIGMENTED
+			emit_signal("pigmented")
 	elif combo_score >= tainted_threshold:
-		emit_signal("tainted")
+		if combo != COMBO.TAINTED:
+			combo = COMBO.TAINTED
+			emit_signal("tainted")

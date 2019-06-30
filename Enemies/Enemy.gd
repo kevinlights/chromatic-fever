@@ -3,7 +3,7 @@ extends KinematicBody2D
 class_name Enemy
 
 signal enemy_hit()
-signal enemy_died(position, score_gained)
+signal enemy_died(position, score_gained, color)
 signal screen_freeze(duration)
 signal screen_shake(duration)
 
@@ -77,17 +77,18 @@ func _on_erase_delay_timeout():
 	can_erase = true
 
 func hit(collision_normal):
-	health -= 1
-	if health <= 0:
-		die()
-	velocity = collision_normal.normalized()*on_hit_speed
-	hit = true
-	emit_signal("screen_freeze",0.3)
-	emit_signal("screen_shake",0.8)
-	emit_signal("enemy_hit")
-	$AnimationPlayer.play("hurt")
+	if health > 0:
+		health -= 1
+		if health <= 0:
+			die()
+		velocity = collision_normal.normalized()*on_hit_speed
+		hit = true
+		emit_signal("screen_freeze",0.3)
+		emit_signal("screen_shake",0.8)
+		emit_signal("enemy_hit")
+		$AnimationPlayer.play("hurt")
 
 func die():
 	paint_canvas.spawn_peinture(global_position,color)
-	emit_signal("enemy_died", global_position, score_when_killed)
+	emit_signal("enemy_died", get_global_transform_with_canvas().origin, score_when_killed,color)
 	get_parent().remove_child(self)

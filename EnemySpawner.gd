@@ -1,6 +1,6 @@
 extends Node2D
 
-signal enemy_died(position, score_gained)
+signal enemy_died(position, score_gained,color)
 
 onready var camera : Camera2D = get_node("/root/Game/Player/Camera2D") 
 onready var terrain : Node2D = get_node("/root/Game/Terrain/Feuille")
@@ -15,7 +15,7 @@ var colors : Array = [Color(1,0,0),Color(0,1,0),Color(0,0,1)]
 func _ready():
 	randomize()
 	
-	for i in 5:
+	for i in 20:
 		spawn()
 
 func spawn():
@@ -36,6 +36,6 @@ func spawn():
 	new_enemy.make_connections()
 	new_enemy.connect("enemy_died", self, "_on_enemy_died")
 
-func _on_enemy_died(position, score_gained):
-	emit_signal("enemy_died", position, score_gained)
+func _on_enemy_died(position, score_gained,color):
+	emit_signal("enemy_died", position, score_gained,color)
 

@@ -60,7 +60,6 @@ func _process(delta):
 		$LesSprites/heros_couleur.modulate = Color(0.0,0.0,1.0)
 	else:
 		$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)
-	print(c)
 	
 func _physics_process(delta):
 	accel_direction = Vector2()
@@ -117,7 +116,7 @@ func _on_invincibility_timeout():
 	invincible = false
 
 func hit(collision_normal : Vector2):
-	if not invincible:
+	if not invincible and health > 0:
 		health -= 1
 		if health <= 0:
 			die()

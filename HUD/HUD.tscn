@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://HUD/HUD.gd" type="Script" id=1]
 [ext_resource path="res://HUD/font/riffic.otf" type="DynamicFontData" id=2]
@@ -6,13 +6,11 @@
 [ext_resource path="res://HUD/LifeBar.gd" type="Script" id=4]
 [ext_resource path="res://HUD/Images/heart_full.png" type="Texture" id=5]
 [ext_resource path="res://HUD/Heart.gd" type="Script" id=6]
+[ext_resource path="res://HUD/font/score_font.tres" type="DynamicFont" id=7]
+[ext_resource path="res://HUD/Score.gd" type="Script" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 30
 font_data = ExtResource( 2 )
 
 [node name="HUD" type="CanvasLayer"]
@@ -36,8 +34,8 @@ script = ExtResource( 3 )
 [node name="LifeBar" type="HBoxContainer" parent="."]
 margin_left = 15.0
 margin_top = 15.0
-margin_right = 178.0
-margin_bottom = 40.0
+margin_right = 215.0
+margin_bottom = 215.0
 rect_scale = Vector2( 0.2, 0.2 )
 custom_constants/separation = 20
 script = ExtResource( 4 )
@@ -51,10 +49,11 @@ script = ExtResource( 6 )
 [node name="Score" type="Label" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -80.8112
-margin_top = 25.0
-margin_right = -58.8112
-margin_bottom = 53.0
-custom_fonts/font = SubResource( 2 )
+margin_left = -512.0
+margin_top = 21.0
+margin_right = -490.0
+margin_bottom = 54.0
+custom_fonts/font = ExtResource( 7 )
 custom_colors/font_color = Color( 0.054902, 0.0980392, 0.341176, 1 )
 text = "0"
+script = ExtResource( 8 )
