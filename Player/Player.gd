@@ -8,6 +8,8 @@ onready var projectiles : Node2D = get_node("/root/Game/Projectiles")
 onready var projectile_ressource : Resource = load("res://Player/Projectile.tscn")
 onready var peintures : Sprite = get_node("/root/Game/Paint/Sprite")
 onready var effacements : Viewport = get_node("/root/Game/Paint/Viewport_effacements")
+onready var enemies = get_node("/root/Game/Enemies")
+
 
 onready var global = get_node("/root/Global")
 
@@ -16,15 +18,16 @@ export var acceleration : int = 1200
 export var deceleration : int = 1200
 export var top_speed : int = 400
 export var on_hit_speed : int = 800
-export var jauge_fill_speed : float = 1
-export var jauge_empty_speed : float = 0.05
+export var jauge_empty_delay : float = 10
+export var max_jauge : int = 10
 
 # Attributes vars
 export var max_health : int = 3
 export var firing_rate : float = 0.25
 export var invincibility_duration : float = 1.5
 
-var jauges : Array = [0.0,0.0,0.0]
+var jauges : Array = [0,0,0]
+var colormap : Dictionary
 
 # Movement vars
 var accel_direction : Vector2
@@ -43,6 +46,7 @@ var invincible : bool = false
 var projectile_timer : Timer = Timer.new()
 var invincibility_timer : Timer = Timer.new()
 var color_change_timer : Timer = Timer.new()
+var jauge_empty_timer : Timer = Timer.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -55,12 +59,21 @@ func _ready():
 	invincibility_timer.set_wait_time(invincibility_duration)
 	invincibility_timer.connect("timeout",self,"_on_invincibility_timeout")
 	add_child(invincibility_timer)
+	
+	jauge_empty_timer.set_one_shot(true)
+	jauge_empty_timer.set_wait_time(jauge_empty_delay)
+	jauge_empty_timer.connect("timeout",self,"_on_jauge_empty_timeout")
+	add_child(jauge_empty_timer)
+	jauge_empty_timer.start()
 
 	color_change_timer.set_wait_time(0.5)
 	color_change_timer.connect("timeout",self,"_on_color_change")
 	add_child(color_change_timer)
 	color_change_timer.start()
+	
+	enemies.connect("enemy_died",self,"_on_kill")
 	$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)
+	colormap = {global.colors[0] : 0, global.colors[1] : 1,global.colors[2] : 2}
 	
 #func _process(d):
 	#print(Engine.get_frames_per_second())
@@ -100,14 +113,6 @@ func _physics_process(delta):
 	# Shoot Inputs
 	if Input.is_action_pressed("ui_shoot") and can_shoot:
 		shoot()
-		
-	# Fill gaujes
-	if on_color != -1:
-		jauges[on_color] += jauge_fill_speed*delta
-	for i in jauges.size():
-		if i != on_color:
-			jauges[i] -= jauge_empty_speed*delta
-		jauges[i] = clamp(jauges[i],0,1)
 
 func shoot():
 	var projectile : Projectile = projectile_ressource.instance()
@@ -175,3 +180,14 @@ func _on_color_change():
 	else:
 		on_color = -1
 		$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)
+
+func _on_kill(position, score_gained,color):
+	if color != null and jauges[colormap[color]] < max_jauge:
+		jauges[colormap[color]] += 1
+	
+func _on_jauge_empty_timeout():
+	print("salut")
+	for jauge in jauges.size():
+		if jauges[jauge] > 0:
+			jauges[jauge] -= 1
+	jauge_empty_timer.start()

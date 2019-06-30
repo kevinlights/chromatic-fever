@@ -11,7 +11,7 @@ var message = null
 var current_music = null
 
 export var transition_duration = 2.00
-export var transition_type = 1 
+export var transition_type = 1
 
 func _ready():
 	game.connect("tainted", self, "_on_tainted")

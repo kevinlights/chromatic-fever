@@ -9,10 +9,10 @@ signal multiplier_set(multiplier)
 
 onready var player = get_node("/root/Game/Player")
 
-export var tainted_threshold = 0.1
-export var pigmented_threshold = 0.25
-export var colourful_threshold = 0.50
-export var chromatic_threshold = 0.60
+export var tainted_threshold = 2
+export var pigmented_threshold = 4
+export var colourful_threshold = 6
+export var chromatic_threshold = 10
 
 enum COMBO {
 	NONE,
@@ -46,16 +46,16 @@ func _process(delta):
 		combo = COMBO.NONE
 		combo_changed = true
 
-	if player.jauges.min() > tainted_threshold and combo == COMBO.NONE:
+	if player.jauges.min() >= tainted_threshold and combo == COMBO.NONE:
 		combo = COMBO.TAINTED
 		combo_changed = true
-	if player.jauges.min() > pigmented_threshold and combo == COMBO.TAINTED:
+	if player.jauges.min() >= pigmented_threshold and combo == COMBO.TAINTED:
 		combo = COMBO.PIGMENTED
 		combo_changed = true
-	if player.jauges.min() > colourful_threshold and combo == COMBO.PIGMENTED:
+	if player.jauges.min() >= colourful_threshold and combo == COMBO.PIGMENTED:
 		combo = COMBO.COLOURFUL
 		combo_changed = true
-	if player.jauges.min() > chromatic_threshold and combo == COMBO.COLOURFUL:
+	if player.jauges.min() >= chromatic_threshold and combo == COMBO.COLOURFUL:
 		combo = COMBO.CHROMATIC
 		combo_changed = true
 	
