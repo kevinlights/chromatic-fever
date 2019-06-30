@@ -8,7 +8,7 @@ onready var projectiles : Node2D = get_node("/root/Game/Projectiles")
 onready var projectile_ressource : Resource = load("res://Player/Projectile.tscn")
 onready var peintures : Sprite = get_node("/root/Game/Paint/Sprite")
 onready var effacements : Viewport = get_node("/root/Game/Paint/Viewport_effacements")
-
+onready var game = get_node("..")
 onready var global = get_node("/root/Global")
 
 # Movement parameters
@@ -60,10 +60,14 @@ func _ready():
 	color_change_timer.connect("timeout",self,"_on_color_change")
 	add_child(color_change_timer)
 	color_change_timer.start()
-	$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)
+	#$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)
 	
-#func _process(d):
+func _process(d):
 	#print(Engine.get_frames_per_second())
+	if(game.combo == game.COMBO.NONE):
+		firing_rate = 0.6
+	elif (game.combo == game.COMBO.TAINTED):
+		firing_rate = 0.25
 
 func _physics_process(delta):
 	accel_direction = Vector2()
@@ -172,6 +176,6 @@ func _on_color_change():
 	elif(c.b>0.6 and c.a>0.1 and e.r<0.8):
 		on_color = 2
 		$LesSprites/heros_couleur.modulate = global.colors[2]
-	else:
-		on_color = -1
-		$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)
+	#else:
+	#	on_color = -1
+	#	$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)
