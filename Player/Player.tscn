@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/particule2.png" type="Texture" id=2]
@@ -12,11 +12,13 @@
 [ext_resource path="res://Enemies/blanc.shader" type="Shader" id=10]
 [ext_resource path="res://Assets/heros_couleur.png" type="Texture" id=11]
 [ext_resource path="res://Assets/heros_corps.png" type="Texture" id=12]
-[ext_resource path="res://Assets/heros_face.png" type="Texture" id=13]
-[ext_resource path="res://Sounds/oof.wav" type="AudioStream" id=14]
-[ext_resource path="res://Sounds/claquement.wav" type="AudioStream" id=15]
-[ext_resource path="res://Sounds/claquement2.wav" type="AudioStream" id=16]
-[ext_resource path="res://Sounds/claquement3.wav" type="AudioStream" id=17]
+[ext_resource path="res://Assets/heros_face2.png" type="Texture" id=13]
+[ext_resource path="res://Assets/heros_face3.png" type="Texture" id=14]
+[ext_resource path="res://Assets/heros_face.png" type="Texture" id=15]
+[ext_resource path="res://Sounds/oof.wav" type="AudioStream" id=16]
+[ext_resource path="res://Sounds/claquement.wav" type="AudioStream" id=17]
+[ext_resource path="res://Sounds/claquement2.wav" type="AudioStream" id=18]
+[ext_resource path="res://Sounds/claquement3.wav" type="AudioStream" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
@@ -129,18 +131,38 @@ tracks/0/keys = {
 "values": [ 1.0, 0.0 ]
 }
 
+[sub_resource type="Animation" id=14]
+resource_name = "idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("LesSprites:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 8.42105, -2.45031 ), Vector2( 8.42105, -2.45031 ), Vector2( 8.42105, -2.45031 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LesSprites:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.25389, 1.05389 ), Vector2( 1, 1 ) ]
+}
+
 [node name="Player" type="KinematicBody2D"]
 scale = Vector2( 0.3, 0.3 )
 script = ExtResource( 1 )
-acceleration = null
-deceleration = null
-top_speed = null
 on_hit_speed = 3000
-jauge_empty_delay = null
-max_jauge = null
-max_health = null
-firing_rate = null
-invincibility_duration = null
 
 [node name="particule2" type="Sprite" parent="."]
 modulate = Color( 0, 0, 0, 0.196078 )
@@ -224,9 +246,9 @@ z_index = 2
 shape = SubResource( 11 )
 
 [node name="LesSprites" type="Node2D" parent="."]
-editor/display_folded = true
 material = SubResource( 12 )
 position = Vector2( 8.42105, -2.45031 )
+scale = Vector2( 1.16471, 1.03496 )
 
 [node name="heros_couleur" type="Sprite" parent="LesSprites"]
 use_parent_material = true
@@ -237,28 +259,41 @@ texture = ExtResource( 11 )
 use_parent_material = true
 texture = ExtResource( 12 )
 
+[node name="heros_face2" type="Sprite" parent="LesSprites"]
+visible = false
+position = Vector2( -25.5274, -147.064 )
+texture = ExtResource( 13 )
+flip_h = true
+
+[node name="heros_face3" type="Sprite" parent="LesSprites"]
+visible = false
+position = Vector2( -27.3276, -153.697 )
+texture = ExtResource( 14 )
+flip_h = true
+
 [node name="heros_face" type="Sprite" parent="LesSprites"]
 use_parent_material = true
 position = Vector2( -21.3132, -145.732 )
-texture = ExtResource( 13 )
+texture = ExtResource( 15 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/hurt = SubResource( 13 )
+anims/idle = SubResource( 14 )
 
 [node name="Sounds" type="Node" parent="."]
 editor/display_folded = true
 
 [node name="oof" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 14 )
+stream = ExtResource( 16 )
 
 [node name="shot1" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 15 )
+stream = ExtResource( 17 )
 volume_db = -5.0
 
 [node name="shot2" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 16 )
+stream = ExtResource( 18 )
 volume_db = -5.0
 
 [node name="shot3" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 17 )
+stream = ExtResource( 19 )
 volume_db = -5.0

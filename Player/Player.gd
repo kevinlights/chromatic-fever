@@ -51,6 +51,9 @@ var invincibility_timer : Timer = Timer.new()
 var color_change_timer : Timer = Timer.new()
 var jauge_empty_timer : Timer = Timer.new()
 
+var time_surprise = 0
+var i_surprise = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	combo_map = {game.COMBO.NONE : 0.45,
@@ -84,6 +87,26 @@ func _ready():
 	enemies.connect("enemy_died",self,"_on_kill")
 	#$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)
 	colormap = {global.colors[0] : 0, global.colors[1] : 1,global.colors[2] : 2}
+	$AnimationPlayer.play("idle")
+
+func _process(delta):
+	if(OS.get_ticks_msec ( ) - time_surprise > 10000):
+		$LesSprites/heros_face.visible = false
+		$LesSprites/heros_face2.visible = false
+		$LesSprites/heros_face3.visible = false
+		i_surprise = i_surprise + 1
+		if(i_surprise>2):
+			i_surprise = 0
+		if(i_surprise==0):
+			$LesSprites/heros_face.visible = true
+		elif(i_surprise==1):
+			$LesSprites/heros_face2.visible = true
+		elif(i_surprise==2):
+			$LesSprites/heros_face3.visible = true
+		time_surprise = OS.get_ticks_msec ( )
+		print(i_surprise)
+	if(!$AnimationPlayer.is_playing()):
+			$AnimationPlayer.play("idle")
 
 func _physics_process(delta):
 	accel_direction = Vector2()
