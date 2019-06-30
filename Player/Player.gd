@@ -51,20 +51,6 @@ func _ready():
 	invincibility_timer.connect("timeout",self,"_on_invincibility_timeout")
 	add_child(invincibility_timer)
 
-func _process(delta):
-	var img = peintures.get_texture().get_data()
-	img.lock()
-	var c = img.get_pixel(position.x,position.y)
-	img.unlock()
-	if(c.r>0.6 and c.a>0.1):
-		$LesSprites/heros_couleur.modulate = Color(1.0,0.0,0.0)
-	elif(c.g>0.6 and c.a>0.1):
-		$LesSprites/heros_couleur.modulate = Color(0.0,1.0,0.0)
-	elif(c.b>0.6 and c.a>0.1):
-		$LesSprites/heros_couleur.modulate = Color(0.0,0.0,1.0)
-	else:
-		$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)
-	#color_change_timer.set_one_shot(true)
 	color_change_timer.set_wait_time(0.5)
 	color_change_timer.connect("timeout",self,"_on_color_change")
 	add_child(color_change_timer)
