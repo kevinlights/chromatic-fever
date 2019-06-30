@@ -16,19 +16,24 @@ export var acceleration : int = 1200
 export var deceleration : int = 1200
 export var top_speed : int = 400
 export var on_hit_speed : int = 800
+export var jauge_fill_speed : float = 1
+export var jauge_empty_speed : float = 0.05
 
 # Attributes vars
 export var max_health : int = 3
 export var firing_rate : float = 0.25
 export var invincibility_duration : float = 1.5
 
+var jauges : Array = [0.0,0.0,0.0]
+
 # Movement vars
-var accel_direction : Vector2 
+var accel_direction : Vector2
 var decel_direction : Vector2
 var velocity : Vector2 = Vector2()
 
 # Attributes vars
 var health : int = max_health
+var on_color : int = -1
 
 # State vars
 var can_shoot : bool = true
@@ -95,6 +100,14 @@ func _physics_process(delta):
 	# Shoot Inputs
 	if Input.is_action_pressed("ui_shoot") and can_shoot:
 		shoot()
+		
+	# Fill gaujes
+	if on_color != -1:
+		jauges[on_color] += jauge_fill_speed*delta
+	for i in jauges.size():
+		if i != on_color:
+			jauges[i] -= jauge_empty_speed*delta
+		jauges[i] = clamp(jauges[i],0,1)
 
 func shoot():
 	var projectile : Projectile = projectile_ressource.instance()
@@ -151,10 +164,14 @@ func _on_color_change():
 	var e = img.get_pixel(position.x+41*0.3,position.y+220*0.3)
 	img.unlock()
 	if(c.r>0.6 and c.a>0.1 and e.r<0.8):
+		on_color = 0
 		$LesSprites/heros_couleur.modulate = global.colors[0]
 	elif(c.g>0.6 and c.a>0.1 and e.r<0.8):
+		on_color = 1
 		$LesSprites/heros_couleur.modulate = global.colors[1]
 	elif(c.b>0.6 and c.a>0.1 and e.r<0.8):
+		on_color = 2
 		$LesSprites/heros_couleur.modulate = global.colors[2]
 	else:
+		on_color = -1
 		$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)
