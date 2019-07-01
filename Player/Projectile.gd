@@ -15,11 +15,12 @@ func _physics_process(delta):
 	global_position += veloctity*delta
 
 func make_connections():
-	for body in get_tree().get_nodes_in_group("projectile_collisions"):
-		connect("area_entered",body.get_node("HitBox"),"_on_projectile_hit")
+	for hb in get_tree().get_nodes_in_group("projectile_collisions"):
+			connect("area_entered",hb,"_on_projectile_hit_e")
 	connect("area_entered",self,"_on_projectile_hit")
 	$AnimationPlayer.play("gros")
 
 func _on_projectile_hit(area : Area2D):
 	if self != null and get_parent() != null:
-		get_parent().remove_child(self)
+		#get_parent().remove_child(self)
+		self.queue_free()

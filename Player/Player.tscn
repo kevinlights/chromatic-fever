@@ -236,7 +236,6 @@ texture = ExtResource( 8 )
 flip_h = true
 
 [node name="HitBox" type="Area2D" parent="."]
-editor/display_folded = true
 collision_mask = 2
 script = ExtResource( 9 )
 
@@ -246,6 +245,7 @@ z_index = 2
 shape = SubResource( 11 )
 
 [node name="LesSprites" type="Node2D" parent="."]
+editor/display_folded = true
 material = SubResource( 12 )
 position = Vector2( 8.42105, -2.45031 )
 scale = Vector2( 1.16471, 1.03496 )
@@ -281,7 +281,6 @@ anims/hurt = SubResource( 13 )
 anims/idle = SubResource( 14 )
 
 [node name="Sounds" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="oof" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 16 )

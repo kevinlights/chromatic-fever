@@ -25,7 +25,7 @@ func _ready():
 
 func create_combo_message(combo_name):
 	if message != null:
-		remove_child(message)
+		message.queue_free()
 	message = rainbow_message_scene.instance()
 	message.set_sound_object(combo_name)
 	message.write_message(combo_name)

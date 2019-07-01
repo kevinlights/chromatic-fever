@@ -1,11 +1,13 @@
 extends Area2D
 
+class_name EnemyHitBox
+
 onready var player = get_node("/root/Game/Player/HitBox")
 
 func make_connections():
 	connect("area_entered",player,"_on_enemy_hit")
 	
-func _on_projectile_hit(area : Area2D):
+func _on_projectile_hit_e(area : Area2D):
 	if self != null and get_parent() != null:
 		if area == self:
 			var collision_normal : Vector2 = Vector2()
