@@ -24,8 +24,10 @@ export var max_jauge : int = 10
 
 # Attributes vars
 export var max_health : int = 3
-var firing_rate : float = 0.75
+var firing_rate : float = 0
+export var color_change_delay : float = 0.5
 export var invincibility_duration : float = 1.5
+export var double_fire_rate : float = 0.05
 
 var jauges : Array = [0,0,0]
 var colormap : Dictionary
@@ -40,50 +42,29 @@ var combo_map : Dictionary
 # Attributes vars
 var health : int = max_health
 var on_color : int = -1
+var double_fire : bool = false
 
 # State vars
-var can_shoot : bool = true
 var invincible : bool = false
 
 # Timers
-var projectile_timer : Timer = Timer.new()
-var invincibility_timer : Timer = Timer.new()
-var color_change_timer : Timer = Timer.new()
-var jauge_empty_timer : Timer = Timer.new()
+var firing_rate_timer : float = 0
+var invincibility_timer : float = 0
+var color_change_timer : float = 0
+var jauge_empty_timer : float = 0
 
 var time_surprise = 0
 var i_surprise = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	combo_map = {game.COMBO.NONE : 0.45,
-				game.COMBO.TAINTED : 0.4,
-				game.COMBO.PIGMENTED : 0.35,
-				game.COMBO.COLOURFUL : 0.3,
-				game.COMBO.CHROMATIC : 0.2}
-				
+	combo_map = {game.COMBO.NONE : 0.4,
+				game.COMBO.TAINTED : 0.25,
+				game.COMBO.PIGMENTED : 0.5,
+				game.COMBO.COLOURFUL : 0.1,
+				game.COMBO.CHROMATIC : 0.4}
 	firing_rate =combo_map[game.COMBO.NONE]
-	projectile_timer.set_one_shot(true)
-	projectile_timer.set_wait_time(firing_rate)
-	projectile_timer.connect("timeout",self,"_on_firing_rate_timeout")
-	add_child(projectile_timer)
-	
-	invincibility_timer.set_one_shot(true)
-	invincibility_timer.set_wait_time(invincibility_duration)
-	invincibility_timer.connect("timeout",self,"_on_invincibility_timeout")
-	add_child(invincibility_timer)
-	
-	jauge_empty_timer.set_one_shot(true)
-	jauge_empty_timer.set_wait_time(jauge_empty_delay)
-	jauge_empty_timer.connect("timeout",self,"_on_jauge_empty_timeout")
-	add_child(jauge_empty_timer)
-	jauge_empty_timer.start()
-	
-	color_change_timer.set_wait_time(0.5)
-	color_change_timer.connect("timeout",self,"_on_color_change")
-	add_child(color_change_timer)
-	color_change_timer.start()
-	
+	double_fire = true if game.combo == game.COMBO.PIGMENTED else false
 	enemies.connect("enemy_died",self,"_on_kill")
 	#$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)
 	colormap = {global.colors[0] : 0, global.colors[1] : 1,global.colors[2] : 2}
@@ -103,8 +84,7 @@ func _process(delta):
 			$LesSprites/heros_face2.visible = true
 		elif(i_surprise==2):
 			$LesSprites/heros_face3.visible = true
-		time_surprise = OS.get_ticks_msec ( )
-		print(i_surprise)
+		time_surprise = OS.get_ticks_msec()
 	if(!$AnimationPlayer.is_playing()):
 			$AnimationPlayer.play("idle")
 
@@ -141,22 +121,40 @@ func _physics_process(delta):
 	$Hand.look_at(get_global_mouse_position())
 	
 	# Shoot Inputs
-	if Input.is_action_pressed("ui_shoot") and can_shoot:
+	firing_rate_timer += delta
+	if Input.is_action_pressed("ui_shoot") and firing_rate_timer >= firing_rate:
 		shoot()
+		firing_rate = double_fire_rate if double_fire and firing_rate != double_fire_rate else combo_map[game.combo]
+		firing_rate_timer = 0
+	
+	double_fire = true if game.combo == game.COMBO.PIGMENTED else false
+	
+	# update color
+	color_change_timer += delta
+	if color_change_timer >= color_change_delay:
+		color_update()
+		color_change_timer = 0
 		
-	firing_rate = combo_map[game.combo]
+	# invicibility timer
+	if invincible:
+		invincibility_timer += delta
+		if invincibility_timer >= invincibility_duration:
+			invincible = false
+	
+	# jauges  timer
+	jauge_empty_timer += delta
+	if jauge_empty_timer >= jauge_empty_delay:
+		jauge_empty_timeout()
+		jauge_empty_timer = 0
 
 func shoot():
 	var projectile : Projectile = projectile_ressource.instance()
 	projectile.position = $Hand/ProjectilesSpawnPosition.get_global_position()
 	projectile.direction = (get_global_mouse_position() - global_position).normalized()
+	projectile.explosive = game.combo == game.COMBO.CHROMATIC
 	projectiles.add_child(projectile)
 	projectile.make_connections()
-	can_shoot = false
-	projectile_timer.start()
-	
 	var soundToPlay = randi()%4+1
-
 	match soundToPlay:
 		1:
 			$Sounds/shot1.play()
@@ -164,16 +162,7 @@ func shoot():
 			$Sounds/shot2.play()
 		3:
 			$Sounds/shot3.play()
-			
 	$Hand.shoot()
-
-
-func _on_firing_rate_timeout():
-	can_shoot = true
-
-
-func _on_invincibility_timeout():
-	invincible = false
 
 func hit(collision_normal : Vector2):
 	if not invincible and health > 0:
@@ -182,7 +171,7 @@ func hit(collision_normal : Vector2):
 			die()
 		velocity = collision_normal.normalized()*on_hit_speed
 		invincible = true
-		invincibility_timer.start()
+		invincibility_timer = 0
 		$Sounds/oof.play()
 		emit_signal("player_hit")
 		$AnimationPlayer.play("hurt")
@@ -192,7 +181,7 @@ func die():
 	emit_signal("player_die")
 	get_tree().paused = true
 	
-func _on_color_change():
+func color_update():
 	var img = peintures.get_texture().get_data()
 	img.lock()
 	var c = img.get_pixel(position.x+41*0.3,position.y+220*0.3)
@@ -218,9 +207,7 @@ func _on_kill(position, score_gained,color):
 	if color != null and jauges[colormap[color]] < max_jauge:
 		jauges[colormap[color]] += 1
 	
-func _on_jauge_empty_timeout():
+func jauge_empty_timeout():
 	for jauge in jauges.size():
 		if jauges[jauge] > 0:
 			jauges[jauge] -= 1
-	jauge_empty_timer.start()
-

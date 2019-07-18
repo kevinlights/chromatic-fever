@@ -6,6 +6,9 @@ onready var enemies : Node2D = get_node("/root/Game/Enemies")
 onready var terrain = get_node("/root/Game/Terrain/Feuille")
 
 export var speed : int = 1500
+export var explosive_extents : Vector2 = Vector2(4,4)
+
+var explosive : bool = false
 
 var direction : Vector2
 var veloctity : Vector2
@@ -20,7 +23,13 @@ func make_connections():
 	connect("area_entered",self,"_on_projectile_hit")
 	$AnimationPlayer.play("gros")
 
+func explode():
+	$CollisionShape2D.scale = explosive_extents
+	explosive = false
+
 func _on_projectile_hit(area : Area2D):
 	if self != null and get_parent() != null:
-		#get_parent().remove_child(self)
+		if explosive:
+			explode()
+			yield()
 		self.queue_free()
