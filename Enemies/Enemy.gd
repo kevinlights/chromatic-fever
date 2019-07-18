@@ -22,7 +22,7 @@ onready var paint_canvas : Node2D = get_node("/root/Game/Paint")
 onready var camera : Camera2D = get_node("/root/Game/Player/Camera2D")
 
 #Movement
-var direction : Vector2 
+var direction : Vector2
 var velocity : Vector2 = Vector2()
 var hit : bool = false
 var health : int = max_health
@@ -70,7 +70,7 @@ func _physics_process(delta):
 		can_erase = false
 		erase_timer.start()
 	
-	move_and_slide(velocity,Vector2.UP)
+	move_and_collide(velocity*delta)
 
 func movement_oracle() -> Vector2:
 	if player != null :
@@ -84,10 +84,12 @@ func _on_erase_delay_timeout():
 func hit(collision_normal):
 	if health > 0:
 		if player.on_color != -1 and global.colors[player.on_color] == color:
+			emit_signal("enemy_hit",health)
 			health = 0
+		else:
+			health -= 1
+			emit_signal("enemy_hit",1)
 		
-		health -= 1
-		emit_signal("enemy_hit",max_health - health)
 		if health <= 0:
 			$AnimationPlayer.play("die")
 			die()

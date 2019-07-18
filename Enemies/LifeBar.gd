@@ -16,13 +16,12 @@ func _ready():
 
 func find_last_full_heart():
 	var i = heart_array.size()-1
-	var heart = heart_array[i]
 	while i < 0 || !heart_array[i].is_full :
 		i -= 1
-
-	if i > 0:
+	
+	if i >= 0:
 		return heart_array[i]
-		
+
 func _on_enemy_hit(dmg):
 	var heart
 	for i in dmg:
