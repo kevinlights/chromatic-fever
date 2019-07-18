@@ -181,6 +181,9 @@ texture = ExtResource( 3 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 1.5, 1.5 )
+process_mode = 0
+smoothing_enabled = true
+editor_draw_drag_margin = true
 script = ExtResource( 4 )
 
 [node name="Hand" type="Node2D" parent="."]

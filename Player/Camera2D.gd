@@ -25,7 +25,7 @@ func _ready():
 	shake_timer.connect("timeout",self,"_on_shake_timeout")
 	add_child(shake_timer)
 
-func _process(delta):
+func _physics_process(delta):
 	if shake:
 		var damping = ease(shake_timer.time_left/shake_timer.wait_time,SHAKE_DAMP_EASING)
 		offset = Vector2(rand_range(shake_amplitude.x,-shake_amplitude.x),rand_range(shake_amplitude.y,-shake_amplitude.y))
@@ -37,7 +37,7 @@ func _on_shake_timeout():
 func _camera_shake(duration : float):
 	shake_duration = duration
 	shake_timer.wait_time = shake_duration
-	shake = true
+	shake = false
 	shake_timer.start()
 	
 func _camera_freeze(duration : float):

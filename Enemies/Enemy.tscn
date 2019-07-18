@@ -331,9 +331,9 @@ scale = Vector2( 0.51, 0.09 )
 texture = ExtResource( 2 )
 
 [node name="BoundingBox" type="CollisionShape2D" parent="."]
-editor/display_folded = true
 position = Vector2( 0, 95 )
 shape = SubResource( 1 )
+disabled = true
 
 [node name="Sprite" type="Sprite" parent="BoundingBox"]
 visible = false
