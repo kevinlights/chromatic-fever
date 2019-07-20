@@ -1,14 +1,16 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Menu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://Assets/feuille.png" type="Texture" id=2]
-[ext_resource path="res://Menu/MenuFont.tres" type="DynamicFont" id=3]
-[ext_resource path="res://HUD/font/riffic.otf" type="DynamicFontData" id=4]
+[ext_resource path="res://Assets/hand.png" type="Texture" id=3]
+[ext_resource path="res://Menu/MenuFont.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Assets/tuto_keys.png" type="Texture" id=5]
 [ext_resource path="res://Assets/tuto_mouse.png" type="Texture" id=6]
-[ext_resource path="res://Assets/heros_couleur.png" type="Texture" id=7]
-[ext_resource path="res://Assets/heros_corps.png" type="Texture" id=8]
-[ext_resource path="res://Assets/heros_face.png" type="Texture" id=9]
+[ext_resource path="res://HUD/font/riffic.otf" type="DynamicFontData" id=7]
+[ext_resource path="res://HUD/combo_wave.shader" type="Shader" id=8]
+[ext_resource path="res://Assets/heros_couleur.png" type="Texture" id=9]
+[ext_resource path="res://Assets/heros_corps.png" type="Texture" id=10]
+[ext_resource path="res://Assets/heros_face.png" type="Texture" id=11]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -19,20 +21,6 @@
 [sub_resource type="StyleBoxEmpty" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=5]
-
-[sub_resource type="StyleBoxEmpty" id=6]
-
-[sub_resource type="StyleBoxEmpty" id=7]
-
-[sub_resource type="StyleBoxEmpty" id=8]
-
-[sub_resource type="StyleBoxEmpty" id=9]
-
-[sub_resource type="StyleBoxEmpty" id=10]
-
-[sub_resource type="DynamicFont" id=11]
-size = 20
-font_data = ExtResource( 4 )
 
 [sub_resource type="StyleBoxEmpty" id=12]
 
@@ -47,11 +35,20 @@ font_data = ExtResource( 4 )
 [sub_resource type="DynamicFont" id=17]
 size = 72
 outline_size = 5
-font_data = ExtResource( 4 )
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 7 )
+
+[sub_resource type="ShaderMaterial" id=20]
+shader = ExtResource( 8 )
+shader_param/wave_scale = Vector2( 0.001, 0.001 )
+shader_param/wave_speed = 10.0
+shader_param/rainbow_scale = Vector3( 1, 1, 1 )
+shader_param/rainbow_speed = 5.0
 
 [sub_resource type="DynamicFont" id=18]
 size = 120
-font_data = ExtResource( 4 )
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 7 )
 
 [sub_resource type="Animation" id=19]
 resource_name = "texte_gros_pas_gros"
@@ -80,55 +77,54 @@ position = Vector2( 512.889, 732.526 )
 scale = Vector2( 0.676973, 0.715945 )
 texture = ExtResource( 2 )
 
+[node name="Hand" type="TextureRect" parent="."]
+margin_left = 170.0
+margin_top = 420.0
+margin_right = 329.0
+margin_bottom = 538.0
+rect_scale = Vector2( -0.5, 0.5 )
+texture = ExtResource( 3 )
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_top = 300.0
-margin_right = 1024.0
-margin_bottom = 600.0
+editor/display_folded = true
+margin_left = 196.911
+margin_top = 217.634
+margin_right = 1028.91
+margin_bottom = 592.634
+alignment = 1
 
 [node name="NewGameButton" type="Button" parent="VBoxContainer"]
-margin_right = 1024.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 0, 50 )
+margin_top = 60.0
+margin_right = 832.0
+margin_bottom = 160.0
+rect_min_size = Vector2( 0, 100 )
 custom_styles/hover = SubResource( 1 )
 custom_styles/pressed = SubResource( 2 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.113725, 0.137255, 0.32549, 1 )
 custom_colors/font_color_hover = Color( 1, 0.717647, 0, 1 )
 text = "New game"
-
-[node name="TutorialButton" type="Button" parent="VBoxContainer"]
-visible = false
-margin_top = 54.0
-margin_right = 1024.0
-margin_bottom = 76.0
-custom_styles/hover = SubResource( 6 )
-custom_styles/pressed = SubResource( 7 )
-custom_styles/focus = SubResource( 8 )
-custom_styles/disabled = SubResource( 9 )
-custom_styles/normal = SubResource( 10 )
-custom_fonts/font = SubResource( 11 )
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_hover = Color( 1, 0.717647, 0, 1 )
-text = "Turorial"
+align = 0
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
-margin_top = 54.0
-margin_right = 1024.0
-margin_bottom = 204.0
+margin_top = 164.0
+margin_right = 832.0
+margin_bottom = 314.0
 rect_min_size = Vector2( 0, 150 )
 custom_styles/hover = SubResource( 12 )
 custom_styles/pressed = SubResource( 13 )
 custom_styles/focus = SubResource( 14 )
 custom_styles/disabled = SubResource( 15 )
 custom_styles/normal = SubResource( 16 )
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.113725, 0.137255, 0.32549, 1 )
 custom_colors/font_color_hover = Color( 1, 0.717647, 0, 1 )
 custom_colors/font_color_pressed = Color( 0, 0, 0, 1 )
 text = "Quit"
+align = 0
 
 [node name="TutorialPanel" type="Control" parent="."]
 editor/display_folded = true
@@ -156,75 +152,86 @@ margin_right = 887.737
 margin_bottom = 564.737
 texture = ExtResource( 6 )
 
-[node name="Node2D2" type="Node2D" parent="."]
-position = Vector2( 248.098, 58.8075 )
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+editor/display_folded = true
+margin_left = 287.0
+margin_top = 47.0
+margin_right = 741.0
+margin_bottom = 124.0
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="Label" type="Label" parent="Node2D2"]
-margin_right = 544.0
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_right = 146.0
 margin_bottom = 77.0
 custom_fonts/font = SubResource( 17 )
 custom_colors/font_color = Color( 0, 0.647059, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 0.392157 )
 custom_constants/shadow_offset_x = 10
 custom_constants/shadow_offset_y = 10
-text = "CHRO"
+text = "CHR"
 
-[node name="Label2" type="Label" parent="Node2D2"]
-margin_left = 208.777
-margin_right = 752.777
+[node name="Label2" type="Label" parent="HBoxContainer"]
+margin_left = 150.0
+margin_right = 331.0
 margin_bottom = 77.0
 custom_fonts/font = SubResource( 17 )
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 0.392157 )
 custom_constants/shadow_offset_x = 10
 custom_constants/shadow_offset_y = 10
-text = "MAT"
+text = "OMA"
 
-[node name="Label3" type="Label" parent="Node2D2"]
-margin_left = 386.062
-margin_top = -1.16635
-margin_right = 930.062
-margin_bottom = 75.8336
+[node name="Label3" type="Label" parent="HBoxContainer"]
+margin_left = 335.0
+margin_right = 454.0
+margin_bottom = 77.0
 custom_fonts/font = SubResource( 17 )
 custom_colors/font_color = Color( 0.411765, 1, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 0.392157 )
 custom_constants/shadow_offset_x = 10
 custom_constants/shadow_offset_y = 10
-text = "IQUE"
+text = "TIC"
 
-[node name="Node2D" type="Node2D" parent="Node2D2"]
+[node name="Node2D" type="Node2D" parent="HBoxContainer"]
 position = Vector2( 503.134, 84.8302 )
 rotation = -0.307287
 scale = Vector2( 0.962342, 0.962342 )
 
-[node name="Label4" type="Label" parent="Node2D2/Node2D"]
+[node name="Label4" type="Label" parent="HBoxContainer/Node2D"]
+material = SubResource( 20 )
 margin_left = -157.636
 margin_top = -62.5525
 margin_right = 156.364
 margin_bottom = 64.4475
 rect_rotation = 1.13601
 custom_fonts/font = SubResource( 18 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Fever"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D2"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HBoxContainer"]
 autoplay = "texte_gros_pas_gros"
 anims/texte_gros_pas_gros = SubResource( 19 )
 
 [node name="Node2D" type="Node2D" parent="."]
-position = Vector2( 792.243, 301.837 )
-scale = Vector2( 0.638416, 0.638416 )
+editor/display_folded = true
+position = Vector2( 855.691, 329.388 )
+scale = Vector2( 0.795006, 0.795006 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="heros_couleur" type="Sprite" parent="Node2D"]
 modulate = Color( 0, 0.6, 1, 1 )
 position = Vector2( 0.931274, -0.0709991 )
 scale = Vector2( 1.0191, 1 )
-texture = ExtResource( 7 )
+texture = ExtResource( 9 )
 
 [node name="heros_corps" type="Sprite" parent="Node2D"]
 position = Vector2( 12.2433, 62.5772 )
-texture = ExtResource( 8 )
+texture = ExtResource( 10 )
 
 [node name="heros_face" type="Sprite" parent="Node2D"]
 position = Vector2( -9.93994, -74.156 )
-texture = ExtResource( 9 )
+texture = ExtResource( 11 )
