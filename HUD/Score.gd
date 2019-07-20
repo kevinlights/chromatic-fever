@@ -1,6 +1,6 @@
 extends Label
 
-onready var enemy : KinematicBody2D = get_node("/root/Game/Enemies")
+onready var enemy : KinematicBody2D = get_node("/root/Game/Characters/Enemies")
 onready var game : KinematicBody2D = get_node("/root/Game")
 onready var scone_gain_message_resource = load("res://HUD/ScoreGainMessage.tscn")
 

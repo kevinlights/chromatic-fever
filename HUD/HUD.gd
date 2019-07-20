@@ -1,17 +1,22 @@
 extends CanvasLayer
 
-onready var enemy : KinematicBody2D = get_node("/root/Game/Enemies")
+signal countdown_finished()
+
+onready var enemy : KinematicBody2D = get_node("/root/Game/Characters/Enemies")
 onready var game : KinematicBody2D = get_node("/root/Game")
 onready var rainbow_message_scene = preload("res://HUD/RainbowMessage.tscn")
 onready var tween_out = $Sounds/Tween
+
+export var transition_duration = 2.00
+export var transition_type = 1
 
 var score = 0
 
 var message = null
 var current_music = null
 
-export var transition_duration = 2.00
-export var transition_type = 1
+#var ca_combo_map : Dictionary = {"TAINTED":0.002,"PIGMENTED":0.003,"COLOURFUL":0.004,"CHROMATIC":0.005}
+
 
 func _ready():
 	game.connect("tainted", self, "_on_tainted")
@@ -20,6 +25,7 @@ func _ready():
 	game.connect("chromatic", self, "_on_chromatic")
 	game.connect("combo_broken", self, "_on_combo_broken")
 	game.connect("multiplier_set", self, "_on_multiplier_set")
+	#connect("countdown_finished",game,"_on_countdown_finished")
 	current_music = $Sounds/colorless_world
 	current_music.play()
 
@@ -29,7 +35,7 @@ func create_combo_message(combo_name):
 	message = rainbow_message_scene.instance()
 	message.set_sound_object(combo_name)
 	message.write_message(combo_name)
-	add_child(message)
+	add_child_below_node($LesCadres,message)
 	
 func play_music(sound_object):
 	#tween_out.interpolate_property(current_music, "volume_db", 0, -80, transition_duration, transition_type, Tween.EASE_IN, 0)
@@ -37,6 +43,20 @@ func play_music(sound_object):
 	current_music.stop()
 	current_music = sound_object
 	sound_object.play()
+
+func play_countdown():
+	$CountDown/Label.set_text("3")
+	$CountDown.show()
+	$CountDown/AnimationPlayer.play("countdown_label")
+	yield($CountDown/AnimationPlayer, "animation_finished")
+	$CountDown/Label.set_text("2")
+	$CountDown/AnimationPlayer.play("countdown_label")
+	yield($CountDown/AnimationPlayer, "animation_finished")
+	$CountDown/Label.set_text("1")
+	$CountDown/AnimationPlayer.play("countdown_label")
+	yield($CountDown/AnimationPlayer, "animation_finished")
+	$CountDown.hide()
+	emit_signal("countdown_finished")
 
 func _on_Tween_tween_completed(object, key):
 	object.stop()
@@ -60,6 +80,7 @@ func _on_chromatic():
 func _on_combo_broken():
 	if message != null:
 		remove_child(message)
+	$ChromaticAberation.material.set_shader_param("scale",0.0)
 	play_music($Sounds/colorless_world)
 		
 func _on_multiplier_set(multiplier: int):

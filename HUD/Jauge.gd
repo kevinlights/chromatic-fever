@@ -1,6 +1,6 @@
 extends TextureProgress
 
-onready var player = get_node("/root/Game/Player")
+onready var player = get_node("/root/Game/Characters/Player")
 onready var global = get_node("/root/Global")
 
 

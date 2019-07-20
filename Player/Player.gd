@@ -2,23 +2,25 @@ extends KinematicBody2D
 
 signal player_hit()
 signal player_die()
+signal screen_freeze(duration)
+signal screen_shake(duration)
 
 onready var projectiles : Node2D = get_node("/root/Game/Projectiles")
 
 onready var projectile_ressource : Resource = load("res://Player/Projectile.tscn")
 onready var peintures : Sprite = get_node("/root/Game/Paint/Sprite")
 onready var effacements : Viewport = get_node("/root/Game/Paint/Viewport_effacements")
-onready var enemies = get_node("/root/Game/Enemies")
+onready var enemies = get_node("/root/Game/Characters/Enemies")
 
 
-onready var game = get_node("..")
+onready var game = get_node("/root/Game")
 onready var global = get_node("/root/Global")
 
 # Movement parameters
 export var acceleration : int = 1200
 export var deceleration : int = 1200
 export var top_speed : int = 400
-export var on_hit_speed : int = 800
+export var on_hit_speed : int = 20000
 export var jauge_empty_delay : float = 10
 export var max_jauge : int = 10
 
@@ -66,6 +68,8 @@ func _ready():
 	firing_rate =combo_map[game.COMBO.NONE]
 	double_fire = true if game.combo == game.COMBO.PIGMENTED else false
 	enemies.connect("enemy_died",self,"_on_kill")
+	connect("screen_shake",$Camera2D,"_camera_shake")
+	connect("screen_freeze",$Camera2D,"_camera_freeze")
 	#$LesSprites/heros_couleur.modulate = Color(0.5,0.5,0.5)
 	colormap = {global.colors[0] : 0, global.colors[1] : 1,global.colors[2] : 2}
 	$AnimationPlayer.play("idle")
@@ -166,15 +170,19 @@ func shoot():
 
 func hit(collision_normal : Vector2):
 	if not invincible and health > 0:
+		#emit_signal("screen_freeze",0.8)
+		emit_signal("screen_shake",0.8)
 		health -= 1
-		if health <= 0:
-			die()
-		velocity = collision_normal.normalized()*on_hit_speed
+		velocity = collision_normal*on_hit_speed
 		invincible = true
 		invincibility_timer = 0
 		$Sounds/oof.play()
 		emit_signal("player_hit")
 		$AnimationPlayer.play("hurt")
+		if health <= 0:
+			set_physics_process(false)
+			yield(get_tree().create_timer(0.8),"timeout")
+			die()
 	
 func die():
 	hide()

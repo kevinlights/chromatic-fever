@@ -1,6 +1,6 @@
 extends HBoxContainer
 
-onready var player : KinematicBody2D = get_node("/root/Game/Player")
+onready var player : KinematicBody2D = get_node("/root/Game/Characters/Player")
 var heart_array : Array = []
 
 func _ready():

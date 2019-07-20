@@ -33,7 +33,7 @@ _global_script_class_icons={
 [application]
 
 config/name="potat0s_jam"
-run/main_scene="res://Game.tscn"
+run/main_scene="res://Menu/Menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -128,4 +128,3 @@ quality/subsurface_scattering/weight_samples=false
 quality/voxel_cone_tracing/high_quality=false
 quality/depth/hdr=false
 environment/default_environment="res://default_env.tres"
-quality/dynamic_fonts/use_oversampling=false

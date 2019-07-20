@@ -37,7 +37,7 @@ func _on_shake_timeout():
 func _camera_shake(duration : float):
 	shake_duration = duration
 	shake_timer.wait_time = shake_duration
-	shake = false
+	shake = true
 	shake_timer.start()
 	
 func _camera_freeze(duration : float):

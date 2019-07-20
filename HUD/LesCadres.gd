@@ -1,7 +1,7 @@
 extends Node2D
 
 onready var global = get_node("/root/Global")
-onready var player = get_node("/root/Game/Player/LesSprites/heros_couleur")
+onready var player = get_node("/root/Game/Characters/Player/LesSprites/heros_couleur")
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"

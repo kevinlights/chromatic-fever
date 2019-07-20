@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-onready var player : KinematicBody2D = get_node("/root/Game/Player")
+onready var player : KinematicBody2D = get_node("/root/Game/Characters/Player")
 onready var hud = get_parent().get_parent().get_parent()
 
 var is_game_over = false

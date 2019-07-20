@@ -7,7 +7,7 @@ signal chromatic()
 signal combo_broken()
 signal multiplier_set(multiplier)
 
-onready var player = get_node("/root/Game/Player")
+onready var player = get_node("/root/Game/Characters/Player")
 
 export var tainted_threshold = 1
 export var pigmented_threshold = 3
@@ -31,7 +31,11 @@ var combo_score = 0
 var combo = COMBO.NONE
 
 func _ready():
+	get_tree().paused = true
+	$HUD.play_countdown()
+	yield($HUD,"countdown_finished")
 	get_tree().paused = false
+	emit_signal("combo_broken")
 
 func _process(delta):
 	var combo_changed : bool = false

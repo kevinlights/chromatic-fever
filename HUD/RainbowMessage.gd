@@ -1,6 +1,7 @@
 extends Label
 
 onready var sound_object = $Sounds/NULL
+onready var chromatic_aberation = get_node("/root/Game/HUD/ChromaticAberation")
 
 export var store_font_size : int = 30 
 export var store_speed : int = 1250
@@ -24,6 +25,7 @@ var store : bool = false
 
 func _ready():
 	get_font("font").size = initial_font_size
+	chromatic_aberation.material.set_shader_param("scale",0.01)
 
 func set_sound_object(sound_object_name):
 	match sound_object_name:
@@ -40,7 +42,7 @@ func _process(delta):
 	
 	if store :
 		var new_direction : Vector2
-
+		
 		set_position(get_position() + store_speed*delta*store_direction)
 		
 		if get_font("font").size > store_font_size:
@@ -51,8 +53,10 @@ func _process(delta):
 		new_direction = (store_position - get_position()).normalized()
 		
 		if store_direction.x > 0 and new_direction.x <= 0 or store_direction.x < 0 and new_direction.x >= 0 or store_direction.y > 0 and new_direction.y <= 0 or store_direction.y < 0 and new_direction.y >= 0 :
+			chromatic_aberation.material.set_shader_param("scale",0.0)
 			set_process(false)
 	else:
+		
 		#Hue
 		hue_timer = fmod(hue_timer + delta * hue_speed, 360)
 		var h = hue_timer / 360 #h,s,v needs to be in range 0-1
