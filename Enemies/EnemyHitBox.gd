@@ -6,7 +6,7 @@ onready var player = get_node("/root/Game/Characters/Player/HitBox")
 
 func make_connections():
 	connect("area_entered",player,"_on_enemy_hit")
-	
+
 func _on_projectile_hit_e(area : Area2D):
 	if self != null and get_parent() != null:
 		if area == self:

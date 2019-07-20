@@ -6,7 +6,7 @@ onready var camera : Camera2D = get_node("/root/Game/Characters/Player/Camera2D"
 onready var terrain : Node2D = get_node("/root/Game/Terrain/Feuille")
 onready var player : KinematicBody2D = get_node("/root/Game/Characters/Player")
 onready var global = get_node("/root/Global")
-onready var enemy_resource : Resource = load("res://Enemies/Enemy.tscn")
+onready var enemy_resource : Resource = load("res://Enemies/EnemyCAC.tscn")
 
 export var player_safe_range : int = 200
 export var max_concurent_enemies : int = 20

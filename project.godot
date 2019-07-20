@@ -10,9 +10,9 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "KinematicBody2D",
-"class": "Enemy",
+"class": "EnemyCAC",
 "language": "GDScript",
-"path": "res://Enemies/Enemy.gd"
+"path": "res://Enemies/EnemyCAC.gd"
 }, {
 "base": "Area2D",
 "class": "EnemyHitBox",
@@ -20,13 +20,25 @@ _global_script_classes=[ {
 "path": "res://Enemies/EnemyHitBox.gd"
 }, {
 "base": "Area2D",
+"class": "EnemyProjectile",
+"language": "GDScript",
+"path": "res://Enemies/EnemyProjectile.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "EnemyRanged",
+"language": "GDScript",
+"path": "res://Enemies/EnemyRanged.gd"
+}, {
+"base": "Area2D",
 "class": "Projectile",
 "language": "GDScript",
 "path": "res://Player/Projectile.gd"
 } ]
 _global_script_class_icons={
-"Enemy": "",
+"EnemyCAC": "",
 "EnemyHitBox": "",
+"EnemyProjectile": "",
+"EnemyRanged": "",
 "Projectile": ""
 }
 

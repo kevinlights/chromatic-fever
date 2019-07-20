@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=2]
 
-[ext_resource path="res://Enemies/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://Enemies/EnemyCAC.gd" type="Script" id=1]
 [ext_resource path="res://Assets/particule2.png" type="Texture" id=2]
 [ext_resource path="res://Assets/square.png" type="Texture" id=3]
 [ext_resource path="res://Enemies/blanc.shader" type="Shader" id=4]
@@ -25,7 +25,7 @@ shader = ExtResource( 4 )
 shader_param/f = 0.0
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 120.647, 111.6 )
+extents = Vector2( 101.858, 111.6 )
 
 [sub_resource type="Animation" id=4]
 length = 2.0
@@ -308,6 +308,7 @@ flag_disable_z = true
 spread = 60.0
 gravity = Vector3( -4000, 0, 0 )
 initial_velocity = 1000.0
+angular_velocity = 9.80909e-045
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 720.0
@@ -315,7 +316,7 @@ angle_random = 1.0
 scale = 0.4
 scale_random = 0.5
 
-[node name="Enemy" type="KinematicBody2D" groups=[
+[node name="EnemyCAC" type="KinematicBody2D" groups=[
 "screen_freezers",
 "screen_shakers",
 ]]
@@ -331,6 +332,7 @@ scale = Vector2( 0.51, 0.09 )
 texture = ExtResource( 2 )
 
 [node name="BoundingBox" type="CollisionShape2D" parent="."]
+editor/display_folded = true
 visible = false
 position = Vector2( 0, 95 )
 shape = SubResource( 1 )
@@ -398,7 +400,7 @@ anims/hurt = SubResource( 6 )
 
 [node name="LifeBar" type="HBoxContainer" parent="."]
 editor/display_folded = true
-margin_left = -190.504
+margin_left = -190.0
 margin_top = -342.129
 margin_right = 9.49615
 margin_bottom = -142.129

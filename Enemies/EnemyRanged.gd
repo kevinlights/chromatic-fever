@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-class_name Enemy
+class_name EnemyRanged
 
 signal enemy_hit(dmg)
 signal enemy_died(position, score_gained, color)
@@ -19,7 +19,7 @@ export var score_when_killed = 100
 onready var global = get_node("/root/Global")
 onready var player : KinematicBody2D = get_node("/root/Game/Characters/Player")
 onready var paint_canvas : Node2D = get_node("/root/Game/Paint")
-onready var camera : Camera2D = get_node("/root/Game/Player/Camera2D")
+onready var camera : Camera2D = get_node("/root/Game/Characters/Player/Camera2D")
 
 #Movement
 var direction : Vector2

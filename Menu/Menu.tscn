@@ -42,7 +42,6 @@ font_data = ExtResource( 3 )
 [sub_resource type="StyleBoxEmpty" id=16]
 
 [node name="Menu" type="Control"]
-editor/display_folded = true
 margin_right = 1024.0
 margin_bottom = 600.0
 script = ExtResource( 1 )

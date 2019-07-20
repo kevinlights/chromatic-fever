@@ -1,6 +1,6 @@
 extends Area2D
 
-class_name Projectile
+class_name EnemyProjectile
 
 onready var enemies : Node2D = get_node("/root/Game/Characters/Enemies")
 onready var terrain = get_node("/root/Game/Terrain/Feuille")
