@@ -78,6 +78,7 @@ scale = Vector2( 0.676973, 0.715945 )
 texture = ExtResource( 2 )
 
 [node name="Hand" type="TextureRect" parent="."]
+visible = false
 margin_left = 170.0
 margin_top = 420.0
 margin_right = 329.0
