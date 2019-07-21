@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://HUD/HUD.gd" type="Script" id=1]
 [ext_resource path="res://HUD/LesCadres.gd" type="Script" id=2]
@@ -14,14 +14,15 @@
 [ext_resource path="res://HUD/Heart.gd" type="Script" id=12]
 [ext_resource path="res://HUD/font/score_font.tres" type="DynamicFont" id=13]
 [ext_resource path="res://HUD/Score.gd" type="Script" id=14]
-[ext_resource path="res://HUD/combo_wave.shader" type="Shader" id=15]
-[ext_resource path="res://Sounds/music_sources/colorless_world.wav" type="AudioStream" id=16]
-[ext_resource path="res://Sounds/music_sources/tainted_world.wav" type="AudioStream" id=17]
-[ext_resource path="res://Sounds/music_sources/pigmented_world.wav" type="AudioStream" id=18]
-[ext_resource path="res://Sounds/music_sources/colourful_world.wav" type="AudioStream" id=19]
-[ext_resource path="res://Sounds/music_sources/chromatic_world.wav" type="AudioStream" id=20]
-[ext_resource path="res://HUD/chromatic_aberation.shader" type="Shader" id=21]
-[ext_resource path="res://Assets/square.png" type="Texture" id=22]
+[ext_resource path="res://HUD/combo_wave2.shader" type="Shader" id=15]
+[ext_resource path="res://Assets/picking-colors_thumbnail.png" type="Texture" id=16]
+[ext_resource path="res://Sounds/music_sources/colorless_world.wav" type="AudioStream" id=17]
+[ext_resource path="res://Sounds/music_sources/tainted_world.wav" type="AudioStream" id=18]
+[ext_resource path="res://Sounds/music_sources/pigmented_world.wav" type="AudioStream" id=19]
+[ext_resource path="res://Sounds/music_sources/colourful_world.wav" type="AudioStream" id=20]
+[ext_resource path="res://Sounds/music_sources/chromatic_world.wav" type="AudioStream" id=21]
+[ext_resource path="res://HUD/chromatic_aberation.shader" type="Shader" id=22]
+[ext_resource path="res://Assets/square.png" type="Texture" id=23]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -41,17 +42,15 @@ font_data = ExtResource( 9 )
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 15 )
-shader_param/wave_scale = Vector2( 0.005, 0.002 )
-shader_param/wave_speed = 10.0
-shader_param/rainbow_scale = Vector3( 1, 1, 1 )
-shader_param/rainbow_speed = 5.0
+shader_param/rainbow_speed = 2.0
+shader_param/r_tex = ExtResource( 16 )
 
 [sub_resource type="DynamicFont" id=5]
 size = 30
 font_data = ExtResource( 9 )
 
 [sub_resource type="ShaderMaterial" id=6]
-shader = ExtResource( 21 )
+shader = ExtResource( 22 )
 shader_param/r_offset = Vector2( 0.003, -0.003 )
 shader_param/g_offset = Vector2( -0.003, 0.003 )
 shader_param/b_offset = Vector2( 0.003, 0.003 )
@@ -234,7 +233,6 @@ texture = ExtResource( 11 )
 script = ExtResource( 12 )
 
 [node name="ScoreContainer" type="CenterContainer" parent="."]
-editor/display_folded = true
 margin_left = 512.0
 margin_top = 64.0
 margin_right = 512.0
@@ -271,23 +269,23 @@ editor/display_folded = true
 [node name="Tween" type="Tween" parent="Sounds"]
 
 [node name="colorless_world" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 16 )
+stream = ExtResource( 17 )
 volume_db = -15.0
 
 [node name="tainted_world" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 17 )
-volume_db = -10.0
-
-[node name="pigmented_world" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 18 )
 volume_db = -10.0
 
-[node name="colourful_world" type="AudioStreamPlayer" parent="Sounds"]
+[node name="pigmented_world" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 19 )
 volume_db = -10.0
 
-[node name="chromatic_world" type="AudioStreamPlayer" parent="Sounds"]
+[node name="colourful_world" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 20 )
+volume_db = -10.0
+
+[node name="chromatic_world" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 21 )
 volume_db = -10.0
 
 [node name="ChromaticAberation" type="TextureRect" parent="."]
@@ -296,7 +294,7 @@ margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 22 )
+texture = ExtResource( 23 )
 expand = true
 
 [node name="CountDown" type="CenterContainer" parent="."]

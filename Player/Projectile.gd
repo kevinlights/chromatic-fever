@@ -4,14 +4,31 @@ class_name Projectile
 
 onready var enemies : Node2D = get_node("/root/Game/Characters/Enemies")
 onready var terrain = get_node("/root/Game/Terrain/Feuille")
+onready var player : Sprite = get_node("/root/Game/Characters/Player/LesSprites/heros_couleur")
+onready var game = get_node("/root/Game")
 
-export var speed : int = 1500
+export var speed1 : int = 1500
+export var speed2 : int = 500
 export var explosive_extents : Vector2 = Vector2(4,4)
 
 var explosive : bool = false
 
 var direction : Vector2
 var veloctity : Vector2
+var speed = 500
+
+func _ready():
+	$bullet1.modulate = player.modulate
+	speed = speed1
+	if(game.combo == game.COMBO.CHROMATIC):
+		$bullet1.visible = false
+		$bullet2.visible = true
+		$bullet2.modulate = player.modulate
+		speed = speed2
+	$Explosion/Particles2D2.process_material.color = player.modulate
+	$Explosion/Particles2D3.process_material.color = player.modulate
+	$Explosion/Particles2D4.process_material.color = player.modulate-Color(0.5,0.5,0.5,0)
+	$Explosion/Particles2D5.process_material.color = player.modulate-Color(0.5,0.5,0.5,0)
 
 func _physics_process(delta):
 	veloctity = direction*speed
@@ -24,12 +41,21 @@ func make_connections():
 	$AnimationPlayer.play("gros")
 
 func explode():
+	speed=0
 	$CollisionShape2D.scale = explosive_extents
 	explosive = false
+	var n = $Explosion
+	$Explosion/AnimationPlayer.play("explosion")
+	remove_child(n)
+	game.add_child(n)
+	n.position = position
+	
+
 
 func _on_projectile_hit(area : Area2D):
 	if self != null and get_parent() != null:
 		if explosive:
 			explode()
-			yield()
+			#yield($Explosion/AnimationPlayer,"animation_finished")
+			#yield()
 		self.queue_free()

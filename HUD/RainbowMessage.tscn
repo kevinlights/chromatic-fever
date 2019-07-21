@@ -1,24 +1,23 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://HUD/combo_wave.shader" type="Shader" id=1]
-[ext_resource path="res://HUD/font/riffic.otf" type="DynamicFontData" id=2]
-[ext_resource path="res://HUD/RainbowMessage.gd" type="Script" id=3]
-[ext_resource path="res://Sounds/tainted.wav" type="AudioStream" id=4]
-[ext_resource path="res://Sounds/pigmented.wav" type="AudioStream" id=5]
-[ext_resource path="res://Sounds/colourful.wav" type="AudioStream" id=6]
-[ext_resource path="res://Sounds/chromatic.wav" type="AudioStream" id=7]
-[ext_resource path="res://HUD/NULL.gd" type="Script" id=8]
+[ext_resource path="res://HUD/combo_wave2.shader" type="Shader" id=1]
+[ext_resource path="res://Assets/picking-colors_thumbnail.png" type="Texture" id=2]
+[ext_resource path="res://HUD/font/riffic.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://HUD/RainbowMessage.gd" type="Script" id=4]
+[ext_resource path="res://Sounds/tainted.wav" type="AudioStream" id=5]
+[ext_resource path="res://Sounds/pigmented.wav" type="AudioStream" id=6]
+[ext_resource path="res://Sounds/colourful.wav" type="AudioStream" id=7]
+[ext_resource path="res://Sounds/chromatic.wav" type="AudioStream" id=8]
+[ext_resource path="res://HUD/NULL.gd" type="Script" id=9]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
-shader_param/wave_scale = Vector2( 0.005, 0.002 )
-shader_param/wave_speed = 10.0
-shader_param/rainbow_scale = Vector3( 1, 1, 1 )
-shader_param/rainbow_speed = 5.0
+shader_param/rainbow_speed = 2.0
+shader_param/r_tex = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 35
-font_data = ExtResource( 2 )
+font_data = ExtResource( 3 )
 
 [node name="RainbowMessage" type="Label"]
 material = SubResource( 1 )
@@ -28,22 +27,22 @@ margin_right = 512.0
 margin_bottom = 338.0
 custom_fonts/font = SubResource( 2 )
 text = "BLABLA"
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 
 [node name="Sounds" type="Node" parent="."]
 editor/display_folded = true
 
 [node name="TAINTED" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 4 )
-
-[node name="PIGMENTED" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 5 )
 
-[node name="COLOURFUL" type="AudioStreamPlayer" parent="Sounds"]
+[node name="PIGMENTED" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 6 )
 
-[node name="CHROMATIC" type="AudioStreamPlayer" parent="Sounds"]
+[node name="COLOURFUL" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 7 )
 
+[node name="CHROMATIC" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 8 )
+
 [node name="NULL" type="Node" parent="Sounds"]
-script = ExtResource( 8 )
+script = ExtResource( 9 )
