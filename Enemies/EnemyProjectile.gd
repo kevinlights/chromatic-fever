@@ -1,11 +1,10 @@
 extends Area2D
 
 class_name EnemyProjectile
-
-onready var player_hitbox = get_node("root/Game/Characters/Player/HitBox")
+onready var player_hitbox = get_node("/root/Game/Characters/Player/HitBox")
 onready var terrain = get_node("/root/Game/Terrain/Feuille")
 
-export var speed : int = 1500
+export var speed : int = 250
 
 var direction : Vector2
 var veloctity : Vector2

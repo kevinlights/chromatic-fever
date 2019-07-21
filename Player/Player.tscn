@@ -253,6 +253,7 @@ z_index = 2
 shape = SubResource( 11 )
 
 [node name="LesSprites" type="Node2D" parent="."]
+editor/display_folded = true
 material = SubResource( 12 )
 position = Vector2( 8.42105, -2.45031 )
 scale = Vector2( 1.16471, 1.03496 )

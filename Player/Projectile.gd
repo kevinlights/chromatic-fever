@@ -25,10 +25,10 @@ func _ready():
 		$bullet2.visible = true
 		$bullet2.modulate = player.modulate
 		speed = speed2
-	$Explosion/Particles2D2.process_material.color = player.modulate
-	$Explosion/Particles2D3.process_material.color = player.modulate
-	$Explosion/Particles2D4.process_material.color = player.modulate-Color(0.5,0.5,0.5,0)
-	$Explosion/Particles2D5.process_material.color = player.modulate-Color(0.5,0.5,0.5,0)
+	$Explosion/SpashLittleClear.process_material.color = player.modulate
+	$Explosion/SplashLittleDark.process_material.color = player.modulate
+	$Explosion/SplashBigClear.process_material.color = player.modulate-Color(0.5,0.5,0.5,0)
+	$Explosion/SplashBigDark.process_material.color = player.modulate-Color(0.5,0.5,0.5,0)
 
 func _physics_process(delta):
 	veloctity = direction*speed
@@ -49,13 +49,11 @@ func explode():
 	remove_child(n)
 	game.add_child(n)
 	n.position = position
-	
-
 
 func _on_projectile_hit(area : Area2D):
 	if self != null and get_parent() != null:
 		if explosive:
 			explode()
-			#yield($Explosion/AnimationPlayer,"animation_finished")
-			#yield()
+			$bullet1.hide()
+			yield(get_tree().create_timer(0.5),"timeout")
 		self.queue_free()

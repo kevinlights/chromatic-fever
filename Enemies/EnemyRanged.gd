@@ -7,19 +7,28 @@ signal enemy_died(position, score_gained, color)
 signal screen_freeze(duration)
 signal screen_shake(duration)
 
-export var acceleration : int = 300
-export var deceleration : int = 300
-export var top_speed : int = 50
-export var on_hit_speed : int = 200
-export var on_hit_deceleration : int = 5
-export var max_health : int = 3
-export var color : Color = Color(0,0,1)
-export var score_when_killed = 100
 
+onready var projectile_ressource : Resource = load("res://Enemies/EnemyProjectile.tscn")
 onready var global = get_node("/root/Global")
 onready var player : KinematicBody2D = get_node("/root/Game/Characters/Player")
 onready var paint_canvas : Node2D = get_node("/root/Game/Paint")
 onready var camera : Camera2D = get_node("/root/Game/Characters/Player/Camera2D")
+onready var projectiles : Node2D = get_node("/root/Game/Projectiles")
+
+#Movement exports
+export var acceleration : int = 300
+export var deceleration : int = 300
+export var top_speed : int = 100
+export var on_hit_speed : int = 200
+export var on_hit_deceleration : int = 5
+
+#Attributes 
+export var max_health : int = 3
+export var color : Color = Color(0,0,1)
+export var score_when_killed = 100
+
+#Shooting
+export var fire_rate : float = 3
 
 #Movement
 var direction : Vector2
@@ -27,29 +36,32 @@ var velocity : Vector2 = Vector2()
 var hit : bool = false
 var health : int = max_health
 
-#Timer
+#Timers
+export var direction_change_delay : float = 1
 export var erase_delay : float = 1
-var erase_timer : Timer = Timer.new()
-var can_erase : bool = true
+
+var direction_change_timer : float = direction_change_delay
+var erase_timer : float = 0.0
+var shooting_timer : float = 0.0
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	randomize()
 	$LesSprites/AnimationPlayer.play("marche")
-	erase_timer.set_one_shot(true)
-	erase_timer.set_wait_time(erase_delay)
-	add_child(erase_timer)
 	$LesSprites/tete.modulate = color
+	shooting_timer = rand_range(-fire_rate,0.0)
 
 func make_connections():
 	connect("screen_shake",camera,"_camera_shake")
 	connect("screen_freeze",camera,"_camera_freeze")
-	erase_timer.connect("timeout",self,"_on_erase_delay_timeout")
 	$HitBox.make_connections()
 
 func _physics_process(delta):
-	direction = Vector2()
+	#direction = Vector2()
 	
-	direction = movement_oracle()
+	direction_change_timer += delta
+	direction = movement_oracle(direction)
 	
 	# Movements
 	
@@ -65,21 +77,36 @@ func _physics_process(delta):
 		velocity.x = clamp(velocity.x,-abs(top_directional_speed.x),abs(top_directional_speed.x))
 		velocity.y = clamp(velocity.y,-abs(top_directional_speed.y),abs(top_directional_speed.y))
 	
-	if can_erase :
+	erase_timer += delta
+	if erase_timer >= erase_delay :
 		paint_canvas.spawn_effacement(global_position)
-		can_erase = false
-		erase_timer.start()
+		erase_timer = 0.0
+		
+	shooting_timer += delta
+	if shooting_timer >= fire_rate and $VisibilityNotifier2D.is_on_screen():
+		shoot()
+		shooting_timer = 0.0
 	
 	move_and_collide(velocity*delta)
 
-func movement_oracle() -> Vector2:
-	if player != null :
-		return (player.global_position - global_position).normalized()
-	else :
-		return Vector2.ZERO
+func movement_oracle(direction : Vector2) -> Vector2:
+	if $VisibilityNotifier2D.is_on_screen():
+		if direction_change_timer >= direction_change_delay:
+			var angle : float = rand_range(-90,90)
+			var new_direction : Vector2 = global_position.direction_to(camera.global_position).normalized().rotated(deg2rad(angle))
+			direction_change_timer = 0.0
+			return new_direction
+		else:
+			return direction
+	else:
+		return global_position.direction_to(camera.global_position).normalized()
 
-func _on_erase_delay_timeout():
-	can_erase = true
+func shoot():
+	var projectile : Projectile = projectile_ressource.instance()
+	projectile.global_position = global_position
+	projectile.direction = global_position.direction_to(player.global_position)
+	projectiles.add_child(projectile)
+	projectile.make_connections()
 
 func hit(collision_normal):
 	if health > 0:

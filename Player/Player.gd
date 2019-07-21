@@ -47,7 +47,7 @@ var on_color : int = -1
 var double_fire : bool = false
 
 # State vars
-var invincible : bool = false
+var invincible : bool = true
 
 # Timers
 var firing_rate_timer : float = 0
