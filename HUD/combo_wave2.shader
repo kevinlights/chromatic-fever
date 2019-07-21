@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-uniform float rainbow_speed = 5.0;
+uniform float rainbow_speed = 2;
 
 uniform sampler2D r_tex;
 

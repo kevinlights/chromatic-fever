@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Menu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://Assets/feuille.png" type="Texture" id=2]
@@ -7,10 +7,11 @@
 [ext_resource path="res://Assets/tuto_keys.png" type="Texture" id=5]
 [ext_resource path="res://Assets/tuto_mouse.png" type="Texture" id=6]
 [ext_resource path="res://HUD/font/riffic.otf" type="DynamicFontData" id=7]
-[ext_resource path="res://HUD/combo_wave.shader" type="Shader" id=8]
-[ext_resource path="res://Assets/heros_couleur.png" type="Texture" id=9]
-[ext_resource path="res://Assets/heros_corps.png" type="Texture" id=10]
-[ext_resource path="res://Assets/heros_face.png" type="Texture" id=11]
+[ext_resource path="res://HUD/combo_wave2.shader" type="Shader" id=8]
+[ext_resource path="res://Assets/rainbow_texture.jpg" type="Texture" id=9]
+[ext_resource path="res://Assets/heros_couleur.png" type="Texture" id=10]
+[ext_resource path="res://Assets/heros_corps.png" type="Texture" id=11]
+[ext_resource path="res://Assets/heros_face.png" type="Texture" id=12]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -40,10 +41,8 @@ font_data = ExtResource( 7 )
 
 [sub_resource type="ShaderMaterial" id=12]
 shader = ExtResource( 8 )
-shader_param/wave_scale = Vector2( 0.001, 0.001 )
-shader_param/wave_speed = 10.0
-shader_param/rainbow_scale = Vector3( 1, 1, 1 )
-shader_param/rainbow_speed = 5.0
+shader_param/rainbow_speed = 1.0
+shader_param/r_tex = ExtResource( 9 )
 
 [sub_resource type="DynamicFont" id=13]
 size = 120
@@ -155,7 +154,6 @@ margin_bottom = 564.737
 texture = ExtResource( 6 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-editor/display_folded = true
 margin_left = 287.0
 margin_top = 47.0
 margin_right = 741.0
@@ -228,12 +226,12 @@ __meta__ = {
 modulate = Color( 0, 0.6, 1, 1 )
 position = Vector2( 0.931274, -0.0709991 )
 scale = Vector2( 1.0191, 1 )
-texture = ExtResource( 9 )
+texture = ExtResource( 10 )
 
 [node name="heros_corps" type="Sprite" parent="Node2D"]
 position = Vector2( 12.2433, 62.5772 )
-texture = ExtResource( 10 )
+texture = ExtResource( 11 )
 
 [node name="heros_face" type="Sprite" parent="Node2D"]
 position = Vector2( -9.93994, -74.156 )
-texture = ExtResource( 11 )
+texture = ExtResource( 12 )
