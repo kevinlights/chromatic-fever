@@ -20,5 +20,10 @@ extends Node2D
 
 func play():
 	$Particles2D.emitting = true
+	$Particles2D.restart()
 	$Particles2D2.emitting = true
+	$Particles2D2.restart()
 	$Particles2D3.emitting = true
+	$Particles2D3.restart()
+	$Particles2D4.emitting = true
+	$Particles2D4.restart()
