@@ -106,7 +106,7 @@ func _physics_process(delta):
 		shoot()
 		shooting_timer = 0.0
 	
-	move_and_collide(velocity*delta)
+	velocity = move_and_slide(velocity)
 
 func movement_oracle(direction : Vector2) -> Vector2:
 	if $VisibilityNotifier2D.is_on_screen():

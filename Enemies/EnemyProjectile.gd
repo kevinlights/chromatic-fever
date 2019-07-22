@@ -37,4 +37,7 @@ func make_connections():
 
 func _on_projectile_hit(area : Area2D):
 	if self != null and get_parent() != null:
+		$Pique.hide()
+		veloctity = Vector2.ZERO
+		yield(get_tree().create_timer(0.5),"timeout")
 		self.queue_free()

@@ -90,7 +90,7 @@ tracks/4/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=4]
 resource_local_to_scene = true
 emission_shape = 1
 emission_sphere_radius = 5.0
@@ -99,14 +99,13 @@ spread = 180.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 10.0
 initial_velocity_random = 0.54
-angular_velocity = 0.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle_random = 1.0
 scale = 0.08
 color = Color( 0.00392157, 0.184314, 0.376471, 1 )
 
-[sub_resource type="ParticlesMaterial" id=8]
+[sub_resource type="ParticlesMaterial" id=5]
 resource_local_to_scene = true
 emission_shape = 1
 emission_sphere_radius = 5.0
@@ -115,26 +114,24 @@ spread = 180.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 10.0
 initial_velocity_random = 0.54
-angular_velocity = 0.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle_random = 1.0
 scale = 0.08
 color = Color( 0, 0.764706, 1, 1 )
 
-[sub_resource type="ParticlesMaterial" id=4]
+[sub_resource type="ParticlesMaterial" id=6]
 resource_local_to_scene = true
 flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 30.0
-angular_velocity = 0.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.05
 color = Color( 0.741176, 0.741176, 0.741176, 1 )
 
-[sub_resource type="ParticlesMaterial" id=5]
+[sub_resource type="ParticlesMaterial" id=7]
 resource_local_to_scene = true
 flag_disable_z = true
 spread = 180.0
@@ -148,7 +145,7 @@ orbit_velocity_random = 0.0
 scale = 0.03
 color = Color( 0, 0.764706, 1, 1 )
 
-[sub_resource type="ParticlesMaterial" id=6]
+[sub_resource type="ParticlesMaterial" id=8]
 resource_local_to_scene = true
 flag_disable_z = true
 spread = 180.0
@@ -195,6 +192,7 @@ scale = Vector2( 0.163544, 0.163544 )
 texture = ExtResource( 5 )
 
 [node name="Explosion" type="Node2D" parent="."]
+editor/display_folded = true
 scale = Vector2( 5, 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Explosion"]
@@ -202,23 +200,21 @@ playback_speed = 2.0
 anims/explosion = SubResource( 3 )
 
 [node name="SplashBigDark" type="Particles2D" parent="Explosion"]
-scale = Vector2( 1, 1 )
 emitting = false
 amount = 3
 one_shot = true
 speed_scale = 2.0
 explosiveness = 1.0
-process_material = SubResource( 7 )
+process_material = SubResource( 4 )
 texture = ExtResource( 6 )
 
 [node name="SplashBigClear" type="Particles2D" parent="Explosion"]
-scale = Vector2( 1, 1 )
 emitting = false
 amount = 3
 one_shot = true
 speed_scale = 2.0
 explosiveness = 1.0
-process_material = SubResource( 8 )
+process_material = SubResource( 5 )
 texture = ExtResource( 6 )
 
 [node name="Smoke" type="Particles2D" parent="Explosion"]
@@ -228,7 +224,7 @@ amount = 15
 one_shot = true
 speed_scale = 2.0
 explosiveness = 1.0
-process_material = SubResource( 4 )
+process_material = SubResource( 6 )
 texture = ExtResource( 7 )
 
 [node name="SpashLittleClear" type="Particles2D" parent="Explosion"]
@@ -238,7 +234,7 @@ amount = 10
 one_shot = true
 speed_scale = 2.0
 explosiveness = 1.0
-process_material = SubResource( 5 )
+process_material = SubResource( 7 )
 texture = ExtResource( 6 )
 
 [node name="SplashLittleDark" type="Particles2D" parent="Explosion"]
@@ -248,5 +244,5 @@ amount = 10
 one_shot = true
 speed_scale = 2.0
 explosiveness = 1.0
-process_material = SubResource( 6 )
+process_material = SubResource( 8 )
 texture = ExtResource( 6 )

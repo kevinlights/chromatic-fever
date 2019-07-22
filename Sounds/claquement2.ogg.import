@@ -12,4 +12,4 @@ dest_files=[ "res://.import/claquement2.ogg-24a412b0ccb56ee80d9540ef69c70dba.ogg
 [params]
 
 loop=false
-loop_offset=0
+loop_offset=0.0
