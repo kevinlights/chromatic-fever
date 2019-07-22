@@ -66,8 +66,9 @@ var shooting_timer : float = 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-	$LesSprites/AnimationPlayer.play("marche")
-	$LesSprites/tete.modulate = color
+	$AnimationPlayer.play("marche")
+	$AnimationPlayer.animation_set_next("hurt","marche")
+	$LesSprites/gomme2.modulate = color
 	shooting_timer = rand_range(-fire_rate,0.0)
 
 func make_connections():
