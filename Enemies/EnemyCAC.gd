@@ -97,7 +97,7 @@ func _physics_process(delta):
 		paint_canvas.spawn_effacement(global_position)
 		erase_timer = 0.0
 	
-	move_and_collide(velocity*delta)
+	velocity = move_and_slide(velocity)
 
 func movement_oracle() -> Vector2:
 	if charge_timer >= charge_delay :

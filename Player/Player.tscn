@@ -289,6 +289,7 @@ anims/hurt = SubResource( 13 )
 anims/idle = SubResource( 14 )
 
 [node name="Sounds" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="oof" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 16 )
