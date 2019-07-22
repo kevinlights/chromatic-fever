@@ -160,8 +160,8 @@ tracks/1/keys = {
 }
 
 [node name="Player" type="KinematicBody2D" groups=[
-"screen_freezers",
 "screen_shakers",
+"screen_freezers",
 ]]
 scale = Vector2( 0.3, 0.3 )
 script = ExtResource( 1 )

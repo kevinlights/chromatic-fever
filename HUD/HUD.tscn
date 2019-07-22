@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://HUD/HUD.gd" type="Script" id=1]
 [ext_resource path="res://HUD/LesCadres.gd" type="Script" id=2]
@@ -21,8 +21,9 @@
 [ext_resource path="res://Sounds/music_sources/pigmented_world.wav" type="AudioStream" id=19]
 [ext_resource path="res://Sounds/music_sources/colourful_world.wav" type="AudioStream" id=20]
 [ext_resource path="res://Sounds/music_sources/chromatic_world.wav" type="AudioStream" id=21]
-[ext_resource path="res://HUD/chromatic_aberation.shader" type="Shader" id=22]
-[ext_resource path="res://Assets/square.png" type="Texture" id=23]
+[ext_resource path="res://Sounds/countdown.wav" type="AudioStream" id=22]
+[ext_resource path="res://HUD/chromatic_aberation.shader" type="Shader" id=23]
+[ext_resource path="res://Assets/square.png" type="Texture" id=24]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -50,7 +51,7 @@ size = 30
 font_data = ExtResource( 9 )
 
 [sub_resource type="ShaderMaterial" id=6]
-shader = ExtResource( 22 )
+shader = ExtResource( 23 )
 shader_param/r_offset = Vector2( 0.003, -0.003 )
 shader_param/g_offset = Vector2( -0.003, 0.003 )
 shader_param/b_offset = Vector2( 0.003, 0.003 )
@@ -65,6 +66,7 @@ font_data = ExtResource( 9 )
 
 [sub_resource type="Animation" id=8]
 resource_name = "countdown_label"
+length = 1.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Label:custom_fonts/font:size")
 tracks/0/interp = 1
@@ -264,7 +266,6 @@ rect_rotation = -45.0
 custom_fonts/font = SubResource( 5 )
 
 [node name="Sounds" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Tween" type="Tween" parent="Sounds"]
 
@@ -288,13 +289,16 @@ volume_db = -10.0
 stream = ExtResource( 21 )
 volume_db = -10.0
 
+[node name="countdown" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 22 )
+
 [node name="ChromaticAberation" type="TextureRect" parent="."]
 material = SubResource( 6 )
 margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 23 )
+texture = ExtResource( 24 )
 expand = true
 
 [node name="CountDown" type="CenterContainer" parent="."]
