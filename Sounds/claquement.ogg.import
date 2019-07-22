@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/claquement.ogg-9b1b491537b921d5ae959c82f2ad0b2a.oggstr"
+
+[deps]
+
+source_file="res://Sounds/claquement.ogg"
+dest_files=[ "res://.import/claquement.ogg-9b1b491537b921d5ae959c82f2ad0b2a.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

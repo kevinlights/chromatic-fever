@@ -15,10 +15,10 @@
 [ext_resource path="res://Assets/heros_face2.png" type="Texture" id=13]
 [ext_resource path="res://Assets/heros_face3.png" type="Texture" id=14]
 [ext_resource path="res://Assets/heros_face.png" type="Texture" id=15]
-[ext_resource path="res://Sounds/oof.wav" type="AudioStream" id=16]
-[ext_resource path="res://Sounds/claquement.wav" type="AudioStream" id=17]
-[ext_resource path="res://Sounds/claquement2.wav" type="AudioStream" id=18]
-[ext_resource path="res://Sounds/claquement3.wav" type="AudioStream" id=19]
+[ext_resource path="res://Sounds/oof.ogg" type="AudioStream" id=16]
+[ext_resource path="res://Sounds/claquement.ogg" type="AudioStream" id=17]
+[ext_resource path="res://Sounds/claquement2.ogg" type="AudioStream" id=18]
+[ext_resource path="res://Sounds/claquement3.ogg" type="AudioStream" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30.0016, 32 )

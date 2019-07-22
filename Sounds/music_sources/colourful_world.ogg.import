@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/colourful_world.ogg-f7488d7f9adbb9a959e169c2f8462e61.oggstr"
+
+[deps]
+
+source_file="res://Sounds/music_sources/colourful_world.ogg"
+dest_files=[ "res://.import/colourful_world.ogg-f7488d7f9adbb9a959e169c2f8462e61.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

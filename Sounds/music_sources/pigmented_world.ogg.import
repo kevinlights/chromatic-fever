@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/pigmented_world.ogg-b2bc06b9d3cbd09c0e36fe8afa7a7b47.oggstr"
+
+[deps]
+
+source_file="res://Sounds/music_sources/pigmented_world.ogg"
+dest_files=[ "res://.import/pigmented_world.ogg-b2bc06b9d3cbd09c0e36fe8afa7a7b47.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
