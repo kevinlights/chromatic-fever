@@ -14,7 +14,7 @@
 [ext_resource path="res://HUD/Images/heart_full.png" type="Texture" id=12]
 [ext_resource path="res://HUD/Heart.gd" type="Script" id=13]
 [ext_resource path="res://peintures/Splash.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Sounds/capote.wav" type="AudioStream" id=15]
+[ext_resource path="res://Sounds/capote.ogg" type="AudioStream" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 142.579, 32 )
@@ -420,7 +420,6 @@ rotation = -1.5708
 process_material = SubResource( 7 )
 
 [node name="Sounds" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Death" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 15 )
