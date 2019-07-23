@@ -52,6 +52,10 @@ config/icon="res://icon.png"
 
 Global="*res://global.gd"
 
+[debug]
+
+gdscript/warnings/enable=false
+
 [display]
 
 mouse_cursor/custom_image="res://cursor2.png"

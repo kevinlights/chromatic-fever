@@ -20,24 +20,33 @@ extends Area2D
 
 class_name EnemyProjectile
 onready var player_hitbox = get_node("/root/Game/Characters/Player/HitBox")
-onready var terrain = get_node("/root/Game/Terrain/Feuille")
+#onready var terrain = get_node("/root/Game/Terrain/Feuille")
 
 export var speed : int = 250
 
 var direction : Vector2
 var veloctity : Vector2
 
+var to_destroy : bool = false
+var destroy_timer : float = 0.0
+
 func _physics_process(delta):
-	veloctity = direction*speed
-	global_position += veloctity*delta
+	if not to_destroy :
+		veloctity = direction*speed
+		global_position += veloctity*delta
+	else :
+		destroy_timer += delta
+		if destroy_timer >= 0.5:
+			self.queue_free()
 
 func make_connections():
 	connect("area_entered",player_hitbox,"_on_enemy_hit")
 	connect("area_entered",self,"_on_projectile_hit")
 
 func _on_projectile_hit(area : Area2D):
-	if self != null and get_parent() != null:
-		$Pique.hide()
+	if self != null and get_parent() != null and not to_destroy:
+		hide()
+		$CollisionShape2D.disabled = true
 		veloctity = Vector2.ZERO
-		yield(get_tree().create_timer(0.5),"timeout")
+		to_destroy = true
 		self.queue_free()

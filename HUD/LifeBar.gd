@@ -48,4 +48,4 @@ func _on_player_hit():
 		heart.set_empty()
 
 func _on_player_die():
-	hide()
+	pass

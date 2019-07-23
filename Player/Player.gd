@@ -174,11 +174,10 @@ func shoot():
 	projectile.position = $Hand/ProjectilesSpawnPosition.get_global_position()
 	projectile.direction = (get_global_mouse_position() - global_position).normalized()
 	projectile.explosive = game.combo == game.COMBO.CHROMATIC
-	#vvvvvvvv L'OBJET DU DELIT EST ICI vvvvvvvv
 	if(projectile.explosive):
-		emit_signal("screen_shake",0.2)
+		# C'est NON
+		#emit_signal("screen_shake",0.2)
 		velocity -= projectile.direction * 200
-	#______________________
 	projectiles.add_child(projectile)
 	projectile.make_connections()
 	var soundToPlay = randi()%4+1

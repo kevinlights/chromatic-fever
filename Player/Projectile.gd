@@ -27,13 +27,16 @@ onready var game = get_node("/root/Game")
 
 export var speed1 : int = 1500
 export var speed2 : int = 500
-export var explosive_extents : Vector2 = Vector2(4,4)
+export var explosive_extents : Vector2 = Vector2(6,6)
 
 var explosive : bool = false
 
 var direction : Vector2
 var veloctity : Vector2
 var speed = 500
+var to_destroy : bool = false
+
+var destroy_timer : float = 0.0
 
 func _ready():
 	$bullet1.modulate = player.modulate
@@ -49,8 +52,15 @@ func _ready():
 	$Explosion/SplashBigDark.process_material.color = player.modulate-Color(0.5,0.5,0.5,0)
 
 func _physics_process(delta):
-	veloctity = direction*speed
-	global_position += veloctity*delta
+	if not to_destroy :
+		veloctity = direction*speed
+		global_position += veloctity*delta
+	else :
+		destroy_timer += delta
+		if destroy_timer >= 0.1:
+			for area in get_overlapping_areas():
+				area._on_projectile_hit_e(area)
+			self.queue_free()
 
 func make_connections():
 	for hb in get_tree().get_nodes_in_group("projectile_collisions"):
@@ -60,6 +70,8 @@ func make_connections():
 
 func explode():
 	speed=0
+	for hb in get_tree().get_nodes_in_group("projectile_collisions"):
+		disconnect("area_entered",hb,"_on_projectile_hit_e")
 	$CollisionShape2D.scale = explosive_extents
 	explosive = false
 	var n = $Explosion
@@ -69,9 +81,9 @@ func explode():
 	n.position = position
 
 func _on_projectile_hit(area : Area2D):
-	if self != null and get_parent() != null:
+	if self != null and get_parent() != null and not to_destroy:
 		if explosive:
 			explode()
-			$bullet1.hide()
-			yield(get_tree().create_timer(0.5),"timeout")
-		self.queue_free()
+			to_destroy = true
+		else :
+			self.queue_free()

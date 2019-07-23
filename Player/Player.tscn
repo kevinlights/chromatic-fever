@@ -201,7 +201,6 @@ script = ExtResource( 4 )
 script = ExtResource( 5 )
 
 [node name="Explosion" type="Node2D" parent="Hand"]
-editor/display_folded = true
 script = ExtResource( 6 )
 
 [node name="Particles2D4" type="Particles2D" parent="Hand/Explosion"]
@@ -305,6 +304,7 @@ anims/hurt = SubResource( 14 )
 anims/idle = SubResource( 15 )
 
 [node name="Sounds" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="oof" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 17 )

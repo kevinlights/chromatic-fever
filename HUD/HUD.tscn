@@ -181,7 +181,6 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 7 )
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
-editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -219,7 +218,6 @@ text = "Press R to restart"
 align = 1
 
 [node name="LifeBar" type="HBoxContainer" parent="."]
-editor/display_folded = true
 margin_left = 15.0
 margin_top = 15.0
 margin_right = 215.0
@@ -239,29 +237,27 @@ margin_left = 512.0
 margin_top = 64.0
 margin_right = 512.0
 margin_bottom = 64.0
-use_top_left = true
 
 [node name="Node2D" type="Control" parent="ScoreContainer"]
 
 [node name="Score" type="Label" parent="ScoreContainer/Node2D"]
-margin_left = -22.0
-margin_top = -32.0
-margin_right = 21.0
-margin_bottom = 32.0
+margin_left = -36.4044
+margin_top = -29.7839
+margin_right = 35.5956
+margin_bottom = 76.2161
 custom_fonts/font = ExtResource( 13 )
 custom_colors/font_color = Color( 1, 0.921569, 0.0980392, 1 )
 text = "0"
-align = 1
+align = 3
 valign = 1
 script = ExtResource( 14 )
-font_max_size = 60
 
 [node name="ScoreMultiplier" type="Label" parent="ScoreContainer/Node2D"]
 material = SubResource( 4 )
-margin_left = -43.7129
-margin_top = -30.566
-margin_right = -43.7129
-margin_bottom = 2.43396
+margin_left = -76.8951
+margin_top = -7.06998
+margin_right = -71.8951
+margin_bottom = 25.93
 rect_rotation = -45.0
 custom_fonts/font = SubResource( 5 )
 

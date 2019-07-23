@@ -23,26 +23,29 @@ onready var game : KinematicBody2D = get_node("/root/Game")
 onready var scone_gain_message_resource = load("res://HUD/ScoreGainMessage.tscn")
 
 export var font_min_size : int = 40
-export var font_max_size : int = 100
 export var font_scale_speed : int = 60
-export var font_scale_delay : int = 0.05
+export var font_scale_delay : int = 0.5
 
 var score : int = 0
 var multiplier : int = 1
 
-var font_scale_timer : Timer = Timer.new()
+var font_scale_timer : float = 0.0
+var running : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	font_scale_timer.set_one_shot(true)
-	font_scale_timer.set_wait_time(font_scale_delay)
-	font_scale_timer.connect("timeout",self,"_on_font_scale_timeout")
-	add_child(font_scale_timer)
 	
 	enemy.connect("enemy_died", self, "_on_enemy_died")
 	game.connect("multiplier_set", self, "_on_multiplier_set")
 	get_font("font").size = font_min_size
 	set_physics_process(false)
+
+func _process(delta):
+	if running:
+		font_scale_timer += delta
+		if font_scale_timer >= font_scale_delay:
+			running = false
+			set_physics_process(true)
 
 func _physics_process(delta):
 	if get_font("font").size > font_min_size:
@@ -64,12 +67,10 @@ func _on_enemy_died(position, score_gained,color):
 	
 	#Update scorelabel
 	set_text(str(score))
-	get_font("font").size = score_gained/2
+	get_font("font").size = score_gained/1.5
 	set_physics_process(false)
-	font_scale_timer.start()
+	running = true
+	font_scale_timer = 0.0
 	
 func _on_multiplier_set(multiplier):
 	self.multiplier = multiplier
-	
-func _on_font_scale_timeout():
-	set_physics_process(true)

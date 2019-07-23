@@ -308,7 +308,6 @@ flag_disable_z = true
 spread = 60.0
 gravity = Vector3( -4000, 0, 0 )
 initial_velocity = 1000.0
-angular_velocity = 1.68529e+22
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 720.0
@@ -398,17 +397,21 @@ shape = SubResource( 3 )
 anims/die = SubResource( 5 )
 anims/hurt = SubResource( 6 )
 
-[node name="LifeBar" type="HBoxContainer" parent="."]
-editor/display_folded = true
-margin_left = -190.0
-margin_top = -342.129
-margin_right = 9.49615
-margin_bottom = -142.129
+[node name="LifeBar" type="CenterContainer" parent="."]
+margin_top = -292.129
+margin_right = 200.0
+margin_bottom = -92.129
 rect_scale = Vector2( 0.5, 0.5 )
-custom_constants/separation = 20
+use_top_left = true
 script = ExtResource( 11 )
 
-[node name="Heart" type="TextureRect" parent="LifeBar"]
+[node name="HBoxContainer" type="HBoxContainer" parent="LifeBar"]
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+
+[node name="Heart" type="TextureRect" parent="LifeBar/HBoxContainer"]
 margin_right = 200.0
 margin_bottom = 200.0
 texture = ExtResource( 12 )
