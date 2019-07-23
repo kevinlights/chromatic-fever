@@ -38,8 +38,6 @@ export var min_concurent_enemies : int = 1
 export var wave_step : int = 1
 export var type_repartition : float = 0.5
 
-var speed_mod : int = 5
-
 
 
 func _ready():
@@ -50,7 +48,7 @@ func _ready():
 		for j in max_concurent_enemies/global.colors.size():
 			r = randf()
 			type = ENEMY_TYPES.CAC if r <= type_repartition else ENEMY_TYPES.RANGED
-			spawn(global.colors[i],0,type)
+			spawn(global.colors[i],type)
 
 func _process(delta):
 	var child_count : int = get_child_count()
@@ -61,11 +59,10 @@ func _process(delta):
 			for j in (max_concurent_enemies-min_concurent_enemies)/global.colors.size():
 				r = randf()
 				type = ENEMY_TYPES.CAC if r <= type_repartition else ENEMY_TYPES.RANGED
-				spawn(global.colors[i],speed_mod,type)
-		speed_mod += 5
+				spawn(global.colors[i],type)
 		max_concurent_enemies += wave_step
 
-func spawn(color : Color, speed_mod : int, type):
+func spawn(color : Color, type, scale_mod : float = 0, health_mod : int = 0):
 	var pos : Vector2 = Vector2()
 	
 	var new_enemy
@@ -86,7 +83,6 @@ func spawn(color : Color, speed_mod : int, type):
 	new_enemy.global_position = pos
 	add_child(new_enemy)
 	
-	new_enemy.top_speed += speed_mod
 	new_enemy.make_connections()
 	new_enemy.connect("enemy_died", self, "_on_enemy_died")
 
