@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/particule2.png" type="Texture" id=2]
@@ -6,30 +6,41 @@
 [ext_resource path="res://Player/Camera2D.gd" type="Script" id=4]
 [ext_resource path="res://Player/Hand.gd" type="Script" id=5]
 [ext_resource path="res://Player/Explosion.gd" type="Script" id=6]
-[ext_resource path="res://Assets/particule1.png" type="Texture" id=7]
-[ext_resource path="res://Assets/hand.png" type="Texture" id=8]
-[ext_resource path="res://Player/PlayerHitBox.gd" type="Script" id=9]
-[ext_resource path="res://Enemies/blanc.shader" type="Shader" id=10]
-[ext_resource path="res://Assets/heros_couleur.png" type="Texture" id=11]
-[ext_resource path="res://Assets/heros_corps.png" type="Texture" id=12]
-[ext_resource path="res://Assets/heros_face2.png" type="Texture" id=13]
-[ext_resource path="res://Assets/heros_face3.png" type="Texture" id=14]
-[ext_resource path="res://Assets/heros_face.png" type="Texture" id=15]
-[ext_resource path="res://Sounds/oof.ogg" type="AudioStream" id=16]
-[ext_resource path="res://Sounds/claquement.ogg" type="AudioStream" id=17]
-[ext_resource path="res://Sounds/claquement2.ogg" type="AudioStream" id=18]
-[ext_resource path="res://Sounds/claquement3.ogg" type="AudioStream" id=19]
+[ext_resource path="res://Assets/smoke.png" type="Texture" id=7]
+[ext_resource path="res://Assets/particule1.png" type="Texture" id=8]
+[ext_resource path="res://Assets/hand.png" type="Texture" id=9]
+[ext_resource path="res://Player/PlayerHitBox.gd" type="Script" id=10]
+[ext_resource path="res://Enemies/blanc.shader" type="Shader" id=11]
+[ext_resource path="res://Assets/heros_couleur.png" type="Texture" id=12]
+[ext_resource path="res://Assets/heros_corps.png" type="Texture" id=13]
+[ext_resource path="res://Assets/heros_face2.png" type="Texture" id=14]
+[ext_resource path="res://Assets/heros_face3.png" type="Texture" id=15]
+[ext_resource path="res://Assets/heros_face.png" type="Texture" id=16]
+[ext_resource path="res://Sounds/oof.ogg" type="AudioStream" id=17]
+[ext_resource path="res://Sounds/claquement.ogg" type="AudioStream" id=18]
+[ext_resource path="res://Sounds/claquement2.ogg" type="AudioStream" id=19]
+[ext_resource path="res://Sounds/claquement3.ogg" type="AudioStream" id=20]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30.0016, 32 )
 
-[sub_resource type="Gradient" id=2]
+[sub_resource type="ParticlesMaterial" id=2]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 500.0
+angular_velocity = 9.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.3
+
+[sub_resource type="Gradient" id=3]
 colors = PoolColorArray( 1, 0.539063, 0, 1, 1, 0.820313, 0, 1 )
 
-[sub_resource type="GradientTexture" id=3]
-gradient = SubResource( 2 )
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
 
-[sub_resource type="ParticlesMaterial" id=4]
+[sub_resource type="ParticlesMaterial" id=5]
 flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
@@ -39,16 +50,16 @@ orbit_velocity_random = 0.0
 angle = 720.0
 angle_random = 1.0
 scale = 0.25
-color_ramp = SubResource( 3 )
+color_ramp = SubResource( 4 )
 
-[sub_resource type="Gradient" id=5]
+[sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0, 0.956044, 1 )
 colors = PoolColorArray( 1, 0.234375, 0, 1, 1, 0.808594, 0, 1, 1, 1, 1, 1 )
 
-[sub_resource type="GradientTexture" id=6]
-gradient = SubResource( 5 )
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
 
-[sub_resource type="ParticlesMaterial" id=7]
+[sub_resource type="ParticlesMaterial" id=8]
 flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
@@ -60,9 +71,9 @@ angle = 720.0
 angle_random = 1.0
 scale = 0.07
 scale_random = 0.1
-color_ramp = SubResource( 6 )
+color_ramp = SubResource( 7 )
 
-[sub_resource type="ParticlesMaterial" id=8]
+[sub_resource type="ParticlesMaterial" id=9]
 flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 0, 0 )
@@ -76,8 +87,7 @@ scale = 0.02
 scale_random = 0.1
 color = Color( 0, 0.619608, 1, 1 )
 
-[sub_resource type="Animation" id=9]
-resource_name = "shoot"
+[sub_resource type="Animation" id=10]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("HandSprite:rotation_degrees")
@@ -92,8 +102,7 @@ tracks/0/keys = {
 "values": [ 0.0, -65.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=10]
-resource_name = "shoot_rev"
+[sub_resource type="Animation" id=11]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("HandSprite:rotation_degrees")
@@ -108,15 +117,14 @@ tracks/0/keys = {
 "values": [ 0.0, 65.0, 0.0 ]
 }
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=12]
 extents = Vector2( 32, 140.08 )
 
-[sub_resource type="ShaderMaterial" id=12]
-shader = ExtResource( 10 )
+[sub_resource type="ShaderMaterial" id=13]
+shader = ExtResource( 11 )
 shader_param/f = 0.0
 
-[sub_resource type="Animation" id=13]
-resource_name = "hurt"
+[sub_resource type="Animation" id=14]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("LesSprites:material:shader_param/f")
@@ -131,8 +139,7 @@ tracks/0/keys = {
 "values": [ 1.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=14]
-resource_name = "idle"
+[sub_resource type="Animation" id=15]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("LesSprites:position")
@@ -191,117 +198,125 @@ editor_draw_drag_margin = true
 script = ExtResource( 4 )
 
 [node name="Hand" type="Node2D" parent="."]
-editor/display_folded = true
 script = ExtResource( 5 )
 
 [node name="Explosion" type="Node2D" parent="Hand"]
 editor/display_folded = true
 script = ExtResource( 6 )
 
+[node name="Particles2D4" type="Particles2D" parent="Hand/Explosion"]
+position = Vector2( 323.439, -2.45031 )
+emitting = false
+amount = 10
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 2 )
+texture = ExtResource( 7 )
+
 [node name="Particles2D2" type="Particles2D" parent="Hand/Explosion"]
 position = Vector2( 323.439, -2.45031 )
 emitting = false
 amount = 1
-lifetime = 0.1
+lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 4 )
-texture = ExtResource( 7 )
+process_material = SubResource( 5 )
+texture = ExtResource( 8 )
 
 [node name="Particles2D" type="Particles2D" parent="Hand/Explosion"]
 position = Vector2( 323.439, -2.45031 )
 emitting = false
 amount = 4
-lifetime = 0.1
+lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 7 )
-texture = ExtResource( 7 )
+process_material = SubResource( 8 )
+texture = ExtResource( 8 )
 
 [node name="Particles2D3" type="Particles2D" parent="Hand/Explosion"]
 position = Vector2( 323.439, -2.45031 )
 emitting = false
 amount = 10
-lifetime = 0.1
+lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 8 )
-texture = ExtResource( 7 )
+process_material = SubResource( 9 )
+texture = ExtResource( 8 )
 
 [node name="ProjectilesSpawnPosition" type="Node2D" parent="Hand"]
 position = Vector2( 303.271, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Hand"]
 playback_speed = 2.5
-anims/shoot = SubResource( 9 )
-anims/shoot_rev = SubResource( 10 )
+anims/shoot = SubResource( 10 )
+anims/shoot_rev = SubResource( 11 )
 
 [node name="HandSprite" type="Sprite" parent="Hand"]
 position = Vector2( 200, 0 )
 z_index = 2
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 flip_h = true
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_mask = 2
-script = ExtResource( 9 )
+script = ExtResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2( 23.1787, 96.6576 )
 rotation = -0.226893
 z_index = 2
-shape = SubResource( 11 )
+shape = SubResource( 12 )
 
 [node name="LesSprites" type="Node2D" parent="."]
 editor/display_folded = true
-material = SubResource( 12 )
+material = SubResource( 13 )
 position = Vector2( 8.42105, -2.45031 )
 scale = Vector2( 1.16471, 1.03496 )
 
 [node name="heros_couleur" type="Sprite" parent="LesSprites"]
 use_parent_material = true
 position = Vector2( -11.9495, -62.1373 )
-texture = ExtResource( 11 )
+texture = ExtResource( 12 )
 
 [node name="heros_corps" type="Sprite" parent="LesSprites"]
 use_parent_material = true
-texture = ExtResource( 12 )
+texture = ExtResource( 13 )
 
 [node name="heros_face2" type="Sprite" parent="LesSprites"]
 visible = false
 position = Vector2( -25.5274, -147.064 )
-texture = ExtResource( 13 )
+texture = ExtResource( 14 )
 flip_h = true
 
 [node name="heros_face3" type="Sprite" parent="LesSprites"]
 visible = false
 position = Vector2( -27.3276, -153.697 )
-texture = ExtResource( 14 )
+texture = ExtResource( 15 )
 flip_h = true
 
 [node name="heros_face" type="Sprite" parent="LesSprites"]
 use_parent_material = true
 position = Vector2( -21.3132, -145.732 )
-texture = ExtResource( 15 )
+texture = ExtResource( 16 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/hurt = SubResource( 13 )
-anims/idle = SubResource( 14 )
+anims/hurt = SubResource( 14 )
+anims/idle = SubResource( 15 )
 
 [node name="Sounds" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="oof" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 16 )
+stream = ExtResource( 17 )
 
 [node name="shot1" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 17 )
-volume_db = -5.0
-
-[node name="shot2" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 18 )
 volume_db = -5.0
 
-[node name="shot3" type="AudioStreamPlayer" parent="Sounds"]
+[node name="shot2" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 19 )
+volume_db = -5.0
+
+[node name="shot3" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 20 )
 volume_db = -5.0

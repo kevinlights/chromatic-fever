@@ -41,11 +41,11 @@ func _ready():
 	if(game.combo == game.COMBO.CHROMATIC):
 		$bullet1.visible = false
 		$bullet2.visible = true
-		$bullet2.modulate = player.modulate
+		$bullet2.self_modulate = player.modulate
 		speed = speed2
 	$Explosion/SpashLittleClear.process_material.color = player.modulate
-	$Explosion/SplashLittleDark.process_material.color = player.modulate
-	$Explosion/SplashBigClear.process_material.color = player.modulate-Color(0.5,0.5,0.5,0)
+	$Explosion/SplashBigClear.process_material.color = player.modulate
+	$Explosion/SplashLittleDark.process_material.color = player.modulate-Color(0.5,0.5,0.5,0)
 	$Explosion/SplashBigDark.process_material.color = player.modulate-Color(0.5,0.5,0.5,0)
 
 func _physics_process(delta):
