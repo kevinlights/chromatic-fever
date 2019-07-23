@@ -46,6 +46,8 @@ _global_script_class_icons={
 
 config/name="potat0s_jam"
 run/main_scene="res://Menu/Menu.tscn"
+run/disable_stdout=true
+run/disable_stderr=true
 config/icon="res://icon.png"
 
 [autoload]

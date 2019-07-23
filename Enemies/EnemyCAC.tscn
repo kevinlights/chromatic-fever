@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Enemies/EnemyCAC.gd" type="Script" id=1]
 [ext_resource path="res://Assets/particule2.png" type="Texture" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://HUD/Heart.gd" type="Script" id=13]
 [ext_resource path="res://peintures/Splash.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Sounds/capote.ogg" type="AudioStream" id=15]
+[ext_resource path="res://Sounds/giga-capote.ogg" type="AudioStream" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 142.579, 32 )
@@ -426,3 +427,7 @@ process_material = SubResource( 7 )
 [node name="Death" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 15 )
 volume_db = 1.0
+
+[node name="Death_OneShot" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 16 )
+volume_db = -1.0

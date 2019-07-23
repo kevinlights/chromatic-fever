@@ -58,7 +58,7 @@ export var charge_duration : float = 3
 var direction_change_timer : float = direction_change_delay
 var erase_timer : float = 0.0
 var charge_timer : float = 0.0
-
+var one_hit_death : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -130,6 +130,7 @@ func hit(collision_normal):
 	if health > 0:
 		if player.on_color != -1 and global.colors[player.on_color] == color:
 			emit_signal("enemy_hit",health)
+			one_hit_death = true
 			health = 0
 		else:
 			health -= 1
@@ -147,7 +148,10 @@ func hit(collision_normal):
 		#emit_signal("screen_shake",0.8)
 
 func die():
-	$Sounds/Death.play()
+	if one_hit_death :
+		$Sounds/Death_OneShot.play()
+	else :
+		$Sounds/Death.play()
 	yield($AnimationPlayer, "animation_finished")
 	paint_canvas.spawn_peinture(global_position,color)
 	emit_signal("enemy_died", get_global_transform_with_canvas().origin, score_when_killed,color)
