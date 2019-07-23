@@ -47,7 +47,7 @@ export var max_health : int = 3
 var firing_rate : float = 0
 export var color_change_delay : float = 0.5
 export var invincibility_duration : float = 1.5
-export var double_fire_rate : float = 0.08
+export var double_fire_rate : float = 0.1
 
 var jauges : Array = [0,0,0]
 var colormap : Dictionary
@@ -79,12 +79,12 @@ var i_surprise = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	combo_map = {game.COMBO.NONE : 0.4,
-				game.COMBO.TAINTED : 0.25,
-				game.COMBO.PIGMENTED : 0.3,
+				game.COMBO.TAINTED : 0.4,
+				game.COMBO.PIGMENTED : 0.25,
 				game.COMBO.COLOURFUL : 0.1,
 				game.COMBO.CHROMATIC : 0.4}
 	firing_rate =combo_map[game.COMBO.NONE]
-	double_fire = true if game.combo == game.COMBO.PIGMENTED else false
+	double_fire = true if game.combo == game.COMBO.TAINTED else false
 	enemies.connect("enemy_died",self,"_on_kill")
 	connect("screen_shake",$Camera2D,"_camera_shake")
 	connect("screen_freeze",$Camera2D,"_camera_freeze")
@@ -149,7 +149,7 @@ func _physics_process(delta):
 		firing_rate = double_fire_rate if double_fire and firing_rate != double_fire_rate else combo_map[game.combo]
 		firing_rate_timer = 0
 	
-	double_fire = true if game.combo == game.COMBO.PIGMENTED else false
+	double_fire = true if game.combo == game.COMBO.TAINTED else false
 	
 	# update color
 	color_change_timer += delta
