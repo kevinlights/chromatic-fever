@@ -79,8 +79,8 @@ var i_surprise = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	combo_map = {game.COMBO.NONE : 0.4,
-				game.COMBO.TAINTED : 0.4,
-				game.COMBO.PIGMENTED : 0.25,
+				game.COMBO.TAINTED : 0.6,
+				game.COMBO.PIGMENTED : 0.2,
 				game.COMBO.COLOURFUL : 0.1,
 				game.COMBO.CHROMATIC : 0.4}
 	firing_rate =combo_map[game.COMBO.NONE]
