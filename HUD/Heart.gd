@@ -18,6 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 extends TextureRect
 
+var hf = preload("res://HUD/Images/heart_full.png")
+var he = preload("res://HUD/Images/heart_empty.png")
+
 var is_full = true
 
 func _ready():
@@ -25,8 +28,8 @@ func _ready():
 
 func set_full():
 	is_full = true
-	self.texture = load("res://HUD/Images/heart_full.png")
+	self.texture = hf
 	
 func set_empty():
 	is_full = false
-	self.texture = load("res://HUD/Images/heart_empty.png")
+	self.texture = he

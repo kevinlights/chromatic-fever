@@ -50,10 +50,11 @@ func _ready():
 func create_combo_message(combo_name):
 	if message != null:
 		message.queue_free()
-	message = rainbow_message_scene.instance()
+	var m = rainbow_message_scene.instance()
+	message = m.get_node("RainbowMessage")
 	message.set_sound_object(combo_name)
 	message.write_message(combo_name)
-	add_child_below_node($LesCadres,message)
+	add_child_below_node($LesCadres,m)
 	
 func play_music(sound_object):
 	#tween_out.interpolate_property(current_music, "volume_db", 0, -80, transition_duration, transition_type, Tween.EASE_IN, 0)

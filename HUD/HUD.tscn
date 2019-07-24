@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://HUD/HUD.gd" type="Script" id=1]
 [ext_resource path="res://HUD/LesCadres.gd" type="Script" id=2]
@@ -11,19 +11,20 @@
 [ext_resource path="res://HUD/font/riffic.otf" type="DynamicFontData" id=9]
 [ext_resource path="res://HUD/LifeBar.gd" type="Script" id=10]
 [ext_resource path="res://HUD/Images/heart_full.png" type="Texture" id=11]
-[ext_resource path="res://HUD/Heart.gd" type="Script" id=12]
-[ext_resource path="res://HUD/font/score_font.tres" type="DynamicFont" id=13]
-[ext_resource path="res://HUD/Score.gd" type="Script" id=14]
-[ext_resource path="res://HUD/combo_wave2.shader" type="Shader" id=15]
-[ext_resource path="res://Assets/rainbow_texture.jpg" type="Texture" id=16]
-[ext_resource path="res://Sounds/music_sources/colorless_world.ogg" type="AudioStream" id=17]
-[ext_resource path="res://Sounds/music_sources/tainted_world.ogg" type="AudioStream" id=18]
-[ext_resource path="res://Sounds/music_sources/pigmented_world.ogg" type="AudioStream" id=19]
-[ext_resource path="res://Sounds/music_sources/colourful_world.ogg" type="AudioStream" id=20]
-[ext_resource path="res://Sounds/music_sources/chromatic_world.ogg" type="AudioStream" id=21]
-[ext_resource path="res://Sounds/countdown.ogg" type="AudioStream" id=22]
-[ext_resource path="res://HUD/chromatic_aberation.shader" type="Shader" id=23]
-[ext_resource path="res://Assets/square.png" type="Texture" id=24]
+[ext_resource path="res://HUD/Images/heart_empty.png" type="Texture" id=12]
+[ext_resource path="res://HUD/Heart.gd" type="Script" id=13]
+[ext_resource path="res://HUD/font/score_font.tres" type="DynamicFont" id=14]
+[ext_resource path="res://HUD/Score.gd" type="Script" id=15]
+[ext_resource path="res://HUD/combo_wave2.shader" type="Shader" id=16]
+[ext_resource path="res://Assets/rainbow_texture.jpg" type="Texture" id=17]
+[ext_resource path="res://Sounds/music_sources/colorless_world.ogg" type="AudioStream" id=18]
+[ext_resource path="res://Sounds/music_sources/tainted_world.ogg" type="AudioStream" id=19]
+[ext_resource path="res://Sounds/music_sources/pigmented_world.ogg" type="AudioStream" id=20]
+[ext_resource path="res://Sounds/music_sources/colourful_world.ogg" type="AudioStream" id=21]
+[ext_resource path="res://Sounds/music_sources/chromatic_world.ogg" type="AudioStream" id=22]
+[ext_resource path="res://Sounds/countdown.ogg" type="AudioStream" id=23]
+[ext_resource path="res://HUD/chromatic_aberation.shader" type="Shader" id=24]
+[ext_resource path="res://Assets/square.png" type="Texture" id=25]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -41,34 +42,56 @@ outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 9 )
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = ExtResource( 15 )
-shader_param/rainbow_speed = 2.0
-shader_param/r_tex = ExtResource( 16 )
+[sub_resource type="AnimatedTexture" id=4]
+flags = 4
+frames = 2
+fps = 0.0
+frame_0/texture = ExtResource( 11 )
+frame_1/texture = ExtResource( 12 )
+frame_1/delay_sec = 0.0
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="Animation" id=10]
+resource_name = "gros"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Node2D:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.7, 0.7 ) ]
+}
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 16 )
+shader_param/rainbow_speed = 2.0
+shader_param/r_tex = ExtResource( 17 )
+
+[sub_resource type="DynamicFont" id=6]
 size = 30
 font_data = ExtResource( 9 )
 
-[sub_resource type="ShaderMaterial" id=6]
-shader = ExtResource( 23 )
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 24 )
 shader_param/r_offset = Vector2( 0.003, -0.003 )
 shader_param/g_offset = Vector2( -0.003, 0.003 )
 shader_param/b_offset = Vector2( 0.003, 0.003 )
 shader_param/scale = 0.0
 shader_param/speed = 2.0
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=8]
 size = 150
 outline_size = 5
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 9 )
 
-[sub_resource type="Animation" id=8]
-resource_name = "countdown_label"
+[sub_resource type="Animation" id=9]
 length = 1.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Label:custom_fonts/font:size")
+tracks/0/path = NodePath("Label:rect_scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -77,7 +100,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 16, 150 ]
+"values": [ Vector2( 0.3, 0.3 ), Vector2( 1, 1 ) ]
 }
 
 [node name="HUD" type="CanvasLayer"]
@@ -181,6 +204,7 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 7 )
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
+editor/display_folded = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -229,8 +253,8 @@ script = ExtResource( 10 )
 [node name="Heart" type="TextureRect" parent="LifeBar"]
 margin_right = 200.0
 margin_bottom = 200.0
-texture = ExtResource( 11 )
-script = ExtResource( 12 )
+texture = SubResource( 4 )
+script = ExtResource( 13 )
 
 [node name="ScoreContainer" type="CenterContainer" parent="."]
 margin_left = 512.0
@@ -238,78 +262,81 @@ margin_top = 64.0
 margin_right = 512.0
 margin_bottom = 64.0
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ScoreContainer"]
+anims/gros = SubResource( 10 )
+
 [node name="Node2D" type="Control" parent="ScoreContainer"]
 
 [node name="Score" type="Label" parent="ScoreContainer/Node2D"]
-margin_left = -36.4044
-margin_top = -29.7839
-margin_right = 35.5956
-margin_bottom = 76.2161
-custom_fonts/font = ExtResource( 13 )
+margin_left = -42.3542
+margin_top = -26.8786
+margin_right = 14.6458
+margin_bottom = 58.1214
+custom_fonts/font = ExtResource( 14 )
 custom_colors/font_color = Color( 1, 0.921569, 0.0980392, 1 )
 text = "0"
 align = 3
 valign = 1
-script = ExtResource( 14 )
+script = ExtResource( 15 )
 
 [node name="ScoreMultiplier" type="Label" parent="ScoreContainer/Node2D"]
-material = SubResource( 4 )
+material = SubResource( 5 )
 margin_left = -76.8951
 margin_top = -7.06998
 margin_right = -71.8951
 margin_bottom = 25.93
 rect_rotation = -45.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 
 [node name="Sounds" type="Node" parent="."]
 
 [node name="Tween" type="Tween" parent="Sounds"]
 
 [node name="colorless_world" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 17 )
+stream = ExtResource( 18 )
 volume_db = -15.0
 
 [node name="tainted_world" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 18 )
-volume_db = -10.0
-
-[node name="pigmented_world" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 19 )
 volume_db = -10.0
 
-[node name="colourful_world" type="AudioStreamPlayer" parent="Sounds"]
+[node name="pigmented_world" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 20 )
 volume_db = -10.0
 
-[node name="chromatic_world" type="AudioStreamPlayer" parent="Sounds"]
+[node name="colourful_world" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 21 )
 volume_db = -10.0
 
-[node name="countdown" type="AudioStreamPlayer" parent="Sounds"]
+[node name="chromatic_world" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource( 22 )
+volume_db = -10.0
+
+[node name="countdown" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource( 23 )
 
 [node name="ChromaticAberation" type="TextureRect" parent="."]
-material = SubResource( 6 )
+material = SubResource( 7 )
 margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-texture = ExtResource( 24 )
+texture = ExtResource( 25 )
 expand = true
 
 [node name="CountDown" type="CenterContainer" parent="."]
-visible = false
 margin_right = 1024.0
 margin_bottom = 600.0
 
 [node name="Label" type="Label" parent="CountDown"]
-margin_left = 394.0
+margin_left = 479.0
 margin_top = 221.0
-margin_right = 630.0
+margin_right = 545.0
 margin_bottom = 379.0
-custom_fonts/font = SubResource( 7 )
-text = "123"
+rect_pivot_offset = Vector2( 33, 79 )
+custom_fonts/font = SubResource( 8 )
+text = "1"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CountDown"]
-anims/countdown_label = SubResource( 8 )
+anims/countdown_label = SubResource( 9 )
 [connection signal="tween_completed" from="Sounds/Tween" to="." method="_on_Tween_tween_completed"]

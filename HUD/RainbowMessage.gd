@@ -20,8 +20,9 @@ extends Label
 
 onready var sound_object = $Sounds/NULL
 onready var chromatic_aberation = get_node("/root/Game/HUD/ChromaticAberation")
+onready var anim = get_node("../AnimationPlayer")
 
-export var store_font_size : int = 30 
+#export var store_font_size : int = 30 
 export var store_speed : int = 1250
 export var store_font_speed : int = 60
 
@@ -31,7 +32,7 @@ var hue_speed = 60 #degrees per second
 var store_direction : Vector2 
 var store_position : Vector2 = Vector2(1000,21)
 
-var initial_font_size =	60
+#var initial_font_size =	60
 var initial_position = 1
 #var is_scaling_up = true
 var scale_factor = 0.5
@@ -42,7 +43,7 @@ var position_factor = 100
 var store : bool = false
 
 func _ready():
-	get_font("font").size = initial_font_size
+	#get_font("font").size = initial_font_size
 	chromatic_aberation.material.set_shader_param("scale",0.01)
 
 func set_sound_object(sound_object_name):
@@ -63,11 +64,11 @@ func _process(delta):
 		
 		set_position(get_position() + store_speed*delta*store_direction)
 		
-		if get_font("font").size > store_font_size:
+		"""if get_font("font").size > store_font_size:
 			get_font("font").size -= store_font_speed*delta
 		else :
 			get_font("font").size = store_font_size
-		
+		"""
 		new_direction = (store_position - get_position()).normalized()
 		
 		if store_direction.x > 0 and new_direction.x <= 0 or store_direction.x < 0 and new_direction.x >= 0 or store_direction.y > 0 and new_direction.y <= 0 or store_direction.y < 0 and new_direction.y >= 0 :
@@ -110,6 +111,7 @@ func write_message(message):
 	self.add_child(t)
 	t.start()
 	yield(t, "timeout")
-	
+	anim.play("gros")
+	anim.seek(0)
 	store_direction = get_position().direction_to(store_position)
 	store = true

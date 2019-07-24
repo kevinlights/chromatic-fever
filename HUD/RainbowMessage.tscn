@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://HUD/combo_wave2.shader" type="Shader" id=1]
 [ext_resource path="res://Assets/rainbow_texture.jpg" type="Texture" id=2]
@@ -16,10 +16,27 @@ shader_param/rainbow_speed = 2.0
 shader_param/r_tex = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 35
+size = 60
 font_data = ExtResource( 3 )
 
-[node name="RainbowMessage" type="Label"]
+[sub_resource type="Animation" id=3]
+resource_name = "gros"
+tracks/0/type = "value"
+tracks/0/path = NodePath("RainbowMessage:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.5, 0.5 ) ]
+}
+
+[node name="NommerPourFairePlaisirALouka" type="Node2D"]
+
+[node name="RainbowMessage" type="Label" parent="."]
 material = SubResource( 1 )
 margin_left = 512.0
 margin_top = 300.0
@@ -29,19 +46,22 @@ custom_fonts/font = SubResource( 2 )
 text = "BLABLA"
 script = ExtResource( 4 )
 
-[node name="Sounds" type="Node" parent="."]
+[node name="Sounds" type="Node" parent="RainbowMessage"]
 
-[node name="TAINTED" type="AudioStreamPlayer" parent="Sounds"]
+[node name="TAINTED" type="AudioStreamPlayer" parent="RainbowMessage/Sounds"]
 stream = ExtResource( 5 )
 
-[node name="PIGMENTED" type="AudioStreamPlayer" parent="Sounds"]
+[node name="PIGMENTED" type="AudioStreamPlayer" parent="RainbowMessage/Sounds"]
 stream = ExtResource( 6 )
 
-[node name="COLOURFUL" type="AudioStreamPlayer" parent="Sounds"]
+[node name="COLOURFUL" type="AudioStreamPlayer" parent="RainbowMessage/Sounds"]
 stream = ExtResource( 7 )
 
-[node name="CHROMATIC" type="AudioStreamPlayer" parent="Sounds"]
+[node name="CHROMATIC" type="AudioStreamPlayer" parent="RainbowMessage/Sounds"]
 stream = ExtResource( 8 )
 
-[node name="NULL" type="Node" parent="Sounds"]
+[node name="NULL" type="Node" parent="RainbowMessage/Sounds"]
 script = ExtResource( 9 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/gros = SubResource( 3 )
