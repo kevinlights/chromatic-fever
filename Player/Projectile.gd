@@ -20,8 +20,8 @@ extends Area2D
 
 class_name Projectile
 
-#onready var explosion_resource : Resource = load("res://Player/Explosion.tscn")
-onready var explosion_resource : Resource = load("res://Player/Explosion_web.tscn")
+onready var explosion_resource : Resource = load("res://Player/Explosion.tscn")
+#onready var explosion_resource : Resource = load("res://Player/Explosion_web.tscn")
 onready var enemies : Node2D = get_node("/root/Game/Characters/Enemies")
 onready var terrain = get_node("/root/Game/Terrain/Feuille")
 onready var player : Sprite = get_node("/root/Game/Characters/Player/LesSprites/heros_couleur")

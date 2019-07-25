@@ -95,10 +95,8 @@ scale = Vector2( 0.217674, 0.0580724 )
 texture = ExtResource( 4 )
 
 [node name="Smoke" type="Particles2D" parent="bullet2"]
-visible = false
 show_behind_parent = true
 position = Vector2( 0, -1.52588e-05 )
-emitting = false
 amount = 20
 lifetime = 3.0
 local_coords = false
@@ -106,6 +104,7 @@ process_material = SubResource( 7 )
 texture = ExtResource( 5 )
 
 [node name="Smoke_web" type="CPUParticles2D" parent="bullet2"]
+visible = false
 position = Vector2( 0, -1.52588e-05 )
 amount = 20
 lifetime = 3.0

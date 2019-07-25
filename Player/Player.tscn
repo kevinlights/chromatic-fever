@@ -201,7 +201,7 @@ script = ExtResource( 4 )
 script = ExtResource( 5 )
 
 [node name="Explosion" type="Node2D" parent="Hand"]
-visible = false
+editor/display_folded = true
 script = ExtResource( 6 )
 
 [node name="Particles2D4" type="Particles2D" parent="Hand/Explosion"]
@@ -246,6 +246,7 @@ texture = ExtResource( 8 )
 
 [node name="Explosion_web" type="Node2D" parent="Hand"]
 editor/display_folded = true
+visible = false
 script = ExtResource( 6 )
 
 [node name="Particles2D4" type="CPUParticles2D" parent="Hand/Explosion_web"]

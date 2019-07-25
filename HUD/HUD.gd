@@ -48,7 +48,7 @@ func _ready():
 	current_music.play()
 
 func create_combo_message(combo_name):
-	if message != null and has_node(message.get_path()):
+	if message != null:
 		message.queue_free()
 	var m = rainbow_message_scene.instance()
 	message = m.get_node("RainbowMessage")
@@ -100,7 +100,7 @@ func _on_chromatic():
 func _on_combo_broken():
 	if message != null:
 		#remove_child(message)
-		message.queue_free()
+		message.hide()
 	$ChromaticAberation.material.set_shader_param("scale",0.0)
 	play_music($Sounds/colorless_world)
 		

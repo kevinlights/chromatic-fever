@@ -281,7 +281,7 @@ tracks/1/path = NodePath("Splash:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = false
+tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -293,7 +293,7 @@ tracks/2/path = NodePath("Splash2:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -433,12 +433,11 @@ texture = ExtResource( 12 )
 script = ExtResource( 13 )
 
 [node name="Splash" parent="." instance=ExtResource( 14 )]
-visible = false
 rotation = -1.5708
-emitting = true
 process_material = SubResource( 7 )
 
 [node name="Splash2" parent="." instance=ExtResource( 15 )]
+visible = false
 
 [node name="Sounds" type="Node" parent="."]
 

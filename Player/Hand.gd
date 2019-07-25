@@ -32,8 +32,8 @@ func _physics_process(delta):
 		$HandSprite.flip_v = true
 
 func shoot():
-	#$Explosion.play()
-	$Explosion_web.play()
+	$Explosion.play()
+	#$Explosion_web.play()
 	var r = int(rad2deg(rotation))%360
 	if(r<0):
 		r+=360
