@@ -16,16 +16,9 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-extends Node2D
+extends CPUParticles2D
 
-func play():
-	$AnimationPlayer.play("explosion")
-	yield($AnimationPlayer,"animation_finished")
-	self.queue_free()
-	
+onready var enemy : KinematicBody2D = get_node("..")
 
-func set_color(color : Color):
-	$SpashLittleClear.process_material.color = color
-	$SplashBigClear.process_material.color = color
-	$SplashLittleDark.process_material.color = color-Color(0.5,0.5,0.5,0)
-	$SplashBigDark.process_material.color = color-Color(0.5,0.5,0.5,0)
+func _ready():
+	color = enemy.color

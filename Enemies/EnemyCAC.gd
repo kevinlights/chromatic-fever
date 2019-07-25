@@ -70,6 +70,8 @@ func _ready():
 func make_connections():
 	connect("screen_shake",camera,"_camera_shake")
 	connect("screen_freeze",camera,"_camera_freeze")
+	for projectile in get_tree().get_nodes_in_group("player_projectiles"):
+		projectile.connect("area_entered",$HitBox,"_on_projectile_hit_e")
 	$HitBox.make_connections()
 
 func _physics_process(delta):

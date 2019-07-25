@@ -20,6 +20,8 @@ extends Area2D
 
 class_name Projectile
 
+#onready var explosion_resource : Resource = load("res://Player/Explosion.tscn")
+onready var explosion_resource : Resource = load("res://Player/Explosion_web.tscn")
 onready var enemies : Node2D = get_node("/root/Game/Characters/Enemies")
 onready var terrain = get_node("/root/Game/Terrain/Feuille")
 onready var player : Sprite = get_node("/root/Game/Characters/Player/LesSprites/heros_couleur")
@@ -38,6 +40,8 @@ var to_destroy : bool = false
 
 var destroy_timer : float = 0.0
 
+var explosion
+
 func _ready():
 	$bullet1.modulate = player.modulate
 	speed = speed1
@@ -46,10 +50,7 @@ func _ready():
 		$bullet2.visible = true
 		$bullet2.self_modulate = player.modulate
 		speed = speed2
-	$Explosion/SpashLittleClear.process_material.color = player.modulate
-	$Explosion/SplashBigClear.process_material.color = player.modulate
-	$Explosion/SplashLittleDark.process_material.color = player.modulate-Color(0.5,0.5,0.5,0)
-	$Explosion/SplashBigDark.process_material.color = player.modulate-Color(0.5,0.5,0.5,0)
+	explosion = explosion_resource.instance()
 
 func _physics_process(delta):
 	if not to_destroy :
@@ -70,15 +71,15 @@ func make_connections():
 
 func explode():
 	speed=0
+	print(get_signal_connection_list("area_entered"))
 	for hb in get_tree().get_nodes_in_group("projectile_collisions"):
 		disconnect("area_entered",hb,"_on_projectile_hit_e")
 	$CollisionShape2D.scale = explosive_extents
 	explosive = false
-	var n = $Explosion
-	$Explosion/AnimationPlayer.play("explosion")
-	remove_child(n)
-	game.add_child(n)
-	n.position = position
+	explosion.position = position
+	explosion.set_color($bullet1.modulate)
+	get_parent().add_child(explosion)
+	explosion.play()
 
 func _on_projectile_hit(area : Area2D):
 	if self != null and get_parent() != null and not to_destroy:

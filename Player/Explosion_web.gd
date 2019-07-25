@@ -19,13 +19,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 extends Node2D
 
 func play():
+	print("salut")
 	$AnimationPlayer.play("explosion")
 	yield($AnimationPlayer,"animation_finished")
 	self.queue_free()
-	
 
 func set_color(color : Color):
-	$SpashLittleClear.process_material.color = color
-	$SplashBigClear.process_material.color = color
-	$SplashLittleDark.process_material.color = color-Color(0.5,0.5,0.5,0)
-	$SplashBigDark.process_material.color = color-Color(0.5,0.5,0.5,0)
+	print("coucou")
+	$SpashLittleClear.color = color
+	$SplashBigClear.color = color
+	$SplashLittleDark.color = color-Color(0.5,0.5,0.5,0)
+	$SplashBigDark.color = color-Color(0.5,0.5,0.5,0)

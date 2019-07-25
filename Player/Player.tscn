@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/square.png" type="Texture" id=3]
 [ext_resource path="res://Player/Camera2D.gd" type="Script" id=4]
 [ext_resource path="res://Player/Hand.gd" type="Script" id=5]
-[ext_resource path="res://Player/Explosion.gd" type="Script" id=6]
+[ext_resource path="res://Player/Claquement.gd" type="Script" id=6]
 [ext_resource path="res://Assets/smoke.png" type="Texture" id=7]
 [ext_resource path="res://Assets/particule1.png" type="Texture" id=8]
 [ext_resource path="res://Assets/hand.png" type="Texture" id=9]
@@ -201,6 +201,7 @@ script = ExtResource( 4 )
 script = ExtResource( 5 )
 
 [node name="Explosion" type="Node2D" parent="Hand"]
+visible = false
 script = ExtResource( 6 )
 
 [node name="Particles2D4" type="Particles2D" parent="Hand/Explosion"]
@@ -243,6 +244,77 @@ explosiveness = 1.0
 process_material = SubResource( 9 )
 texture = ExtResource( 8 )
 
+[node name="Explosion_web" type="Node2D" parent="Hand"]
+editor/display_folded = true
+script = ExtResource( 6 )
+
+[node name="Particles2D4" type="CPUParticles2D" parent="Hand/Explosion_web"]
+position = Vector2( 323.439, -2.45031 )
+emitting = false
+amount = 10
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource( 7 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 500.0
+angular_velocity = 9.0
+scale_amount = 0.3
+
+[node name="Particles2D2" type="CPUParticles2D" parent="Hand/Explosion_web"]
+position = Vector2( 323.439, -2.45031 )
+emitting = false
+amount = 1
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource( 8 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 0.0
+angular_velocity = 1.0
+angle = 720.0
+angle_random = 1.0
+scale_amount = 0.25
+color_ramp = SubResource( 3 )
+
+[node name="Particles2D" type="CPUParticles2D" parent="Hand/Explosion_web"]
+position = Vector2( 323.439, -2.45031 )
+emitting = false
+amount = 4
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource( 8 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 50.0
+angular_velocity = 1.05
+angle = 720.0
+angle_random = 1.0
+scale_amount = 0.07
+scale_amount_random = 0.1
+color_ramp = SubResource( 6 )
+
+[node name="Particles2D3" type="CPUParticles2D" parent="Hand/Explosion_web"]
+position = Vector2( 323.439, -2.45031 )
+emitting = false
+amount = 10
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource( 8 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 1000.0
+angular_velocity = 9.0
+angle = 720.0
+angle_random = 1.0
+scale_amount = 0.02
+scale_amount_random = 0.1
+color = Color( 0, 0.619608, 1, 1 )
+
 [node name="ProjectilesSpawnPosition" type="Node2D" parent="Hand"]
 position = Vector2( 303.271, 0 )
 
@@ -258,6 +330,7 @@ texture = ExtResource( 9 )
 flip_h = true
 
 [node name="HitBox" type="Area2D" parent="."]
+editor/display_folded = true
 collision_mask = 2
 script = ExtResource( 10 )
 
@@ -268,7 +341,6 @@ z_index = 2
 shape = SubResource( 12 )
 
 [node name="LesSprites" type="Node2D" parent="."]
-editor/display_folded = true
 material = SubResource( 13 )
 position = Vector2( 8.42105, -2.45031 )
 scale = Vector2( 1.16471, 1.03496 )

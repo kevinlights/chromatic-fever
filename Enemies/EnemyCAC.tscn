@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Enemies/EnemyCAC.gd" type="Script" id=1]
 [ext_resource path="res://Assets/particule2.png" type="Texture" id=2]
@@ -14,8 +14,9 @@
 [ext_resource path="res://HUD/Images/heart_full.png" type="Texture" id=12]
 [ext_resource path="res://HUD/Heart.gd" type="Script" id=13]
 [ext_resource path="res://peintures/Splash.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Sounds/capote.ogg" type="AudioStream" id=15]
-[ext_resource path="res://Sounds/giga-capote.ogg" type="AudioStream" id=16]
+[ext_resource path="res://peintures/Splash_web.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Sounds/capote.ogg" type="AudioStream" id=16]
+[ext_resource path="res://Sounds/giga-capote.ogg" type="AudioStream" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 142.579, 32 )
@@ -280,8 +281,20 @@ tracks/1/path = NodePath("Splash:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Splash2:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
@@ -309,6 +322,7 @@ flag_disable_z = true
 spread = 60.0
 gravity = Vector3( -4000, 0, 0 )
 initial_velocity = 1000.0
+angular_velocity = 0.376471
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 720.0
@@ -419,15 +433,19 @@ texture = ExtResource( 12 )
 script = ExtResource( 13 )
 
 [node name="Splash" parent="." instance=ExtResource( 14 )]
+visible = false
 rotation = -1.5708
+emitting = true
 process_material = SubResource( 7 )
+
+[node name="Splash2" parent="." instance=ExtResource( 15 )]
 
 [node name="Sounds" type="Node" parent="."]
 
 [node name="Death" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 15 )
+stream = ExtResource( 16 )
 volume_db = 1.0
 
 [node name="Death_OneShot" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource( 16 )
+stream = ExtResource( 17 )
 volume_db = -1.0

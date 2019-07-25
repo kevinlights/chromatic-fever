@@ -1,0 +1,160 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Player/Explosion_web.gd" type="Script" id=1]
+[ext_resource path="res://Assets/explosion2.png" type="Texture" id=2]
+[ext_resource path="res://Assets/explosion1.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=1]
+tracks/0/type = "value"
+tracks/0/path = NodePath("SplashBigDark:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SplashBigClear:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Smoke:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("SpashLittleClear:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("SplashLittleDark:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[node name="Explosion_web" type="Node2D"]
+scale = Vector2( 7, 7 )
+script = ExtResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 2.0
+anims/explosion = SubResource( 1 )
+
+[node name="SplashBigDark" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 3
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+texture = ExtResource( 2 )
+emission_shape = 1
+emission_sphere_radius = 5.0
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 10.0
+initial_velocity_random = 0.54
+angle_random = 1.0
+scale_amount = 0.08
+color = Color( 0.00392157, 0.184314, 0.376471, 1 )
+
+[node name="SplashBigClear" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 3
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+texture = ExtResource( 2 )
+emission_shape = 1
+emission_sphere_radius = 5.0
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 10.0
+initial_velocity_random = 0.54
+angular_velocity = 9.80909e-45
+angle_random = 1.0
+scale_amount = 0.08
+color = Color( 0, 0.764706, 1, 1 )
+
+[node name="Smoke" type="CPUParticles2D" parent="."]
+rotation = -3.14159
+scale = Vector2( 0.518929, 0.494102 )
+emitting = false
+amount = 15
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+texture = ExtResource( 3 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 30.0
+angular_velocity = 4.46443e+30
+scale_amount = 0.05
+color = Color( 0.741176, 0.741176, 0.741176, 1 )
+
+[node name="SpashLittleClear" type="CPUParticles2D" parent="."]
+scale = Vector2( 0.52, 0.496 )
+emitting = false
+amount = 10
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+texture = ExtResource( 2 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 60.0
+initial_velocity_random = 0.54
+angular_velocity = 133.51
+angular_velocity_random = 1.0
+scale_amount = 0.03
+color = Color( 0, 0.764706, 1, 1 )
+
+[node name="SplashLittleDark" type="CPUParticles2D" parent="."]
+scale = Vector2( 0.52, 0.482375 )
+emitting = false
+amount = 10
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+texture = ExtResource( 2 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 60.0
+initial_velocity_random = 0.54
+angular_velocity = 133.51
+angular_velocity_random = 1.0
+scale_amount = 0.03
+color = Color( 0, 0.196078, 0.403922, 1 )

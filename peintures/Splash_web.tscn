@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/peinture2.png" type="Texture" id=1]
+[ext_resource path="res://peintures/Splash_web.gd" type="Script" id=2]
+
+[node name="Splash" type="CPUParticles2D"]
+rotation = -1.5708
+emitting = false
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+texture = ExtResource( 1 )
+spread = 60.0
+gravity = Vector2( -3000, 0 )
+initial_velocity = 1000.0
+angular_velocity = 9.80909e-45
+angle = 720.0
+angle_random = 1.0
+scale_amount = 0.5
+scale_amount_random = 0.5
+script = ExtResource( 2 )

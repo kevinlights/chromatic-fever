@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Player/Projectile.gd" type="Script" id=1]
 [ext_resource path="res://Assets/bullet.png" type="Texture" id=2]
@@ -6,8 +6,6 @@
 [ext_resource path="res://Assets/particule2.png" type="Texture" id=4]
 [ext_resource path="res://Assets/smoke.png" type="Texture" id=5]
 [ext_resource path="res://Assets/bullet1.png" type="Texture" id=6]
-[ext_resource path="res://Assets/explosion2.png" type="Texture" id=7]
-[ext_resource path="res://Assets/explosion1.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
@@ -39,20 +37,20 @@ tracks/1/keys = {
 "values": [ Vector2( 0.4, 0.4 ), Vector2( 0.3, 0.3 ) ]
 }
 
-[sub_resource type="Gradient" id=14]
+[sub_resource type="Gradient" id=3]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
 
-[sub_resource type="GradientTexture" id=13]
-gradient = SubResource( 14 )
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
 width = 1024
 
-[sub_resource type="Curve" id=10]
+[sub_resource type="Curve" id=5]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=11]
-curve = SubResource( 10 )
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticlesMaterial" id=7]
 emission_shape = 1
 emission_sphere_radius = 23.32
 flag_disable_z = true
@@ -62,145 +60,12 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.01
 scale_random = 0.18
-scale_curve = SubResource( 11 )
-color_ramp = SubResource( 13 )
+scale_curve = SubResource( 6 )
+color_ramp = SubResource( 4 )
 
-[sub_resource type="Animation" id=4]
-length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("Smoke:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("SpashLittleClear:emitting")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("SplashLittleDark:emitting")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("SplashBigDark:emitting")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("SplashBigClear:emitting")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-
-[sub_resource type="ParticlesMaterial" id=5]
-resource_local_to_scene = true
-emission_shape = 1
-emission_sphere_radius = 5.0
-flag_disable_z = true
-spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 10.0
-initial_velocity_random = 0.54
-angular_velocity = 0.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-angle_random = 1.0
-scale = 0.08
-color = Color( 0.00392157, 0.184314, 0.376471, 1 )
-
-[sub_resource type="ParticlesMaterial" id=6]
-resource_local_to_scene = true
-emission_shape = 1
-emission_sphere_radius = 5.0
-flag_disable_z = true
-spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 10.0
-initial_velocity_random = 0.54
-angular_velocity = 9.80909e-45
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-angle_random = 1.0
-scale = 0.08
-color = Color( 0, 0.764706, 1, 1 )
-
-[sub_resource type="ParticlesMaterial" id=7]
-resource_local_to_scene = true
-flag_disable_z = true
-spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 30.0
-angular_velocity = 4.46443e+30
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale = 0.05
-color = Color( 0.741176, 0.741176, 0.741176, 1 )
-
-[sub_resource type="ParticlesMaterial" id=8]
-resource_local_to_scene = true
-flag_disable_z = true
-spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 60.0
-initial_velocity_random = 0.54
-angular_velocity = 133.51
-angular_velocity_random = 1.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale = 0.03
-color = Color( 0, 0.764706, 1, 1 )
-
-[sub_resource type="ParticlesMaterial" id=9]
-resource_local_to_scene = true
-flag_disable_z = true
-spread = 180.0
-gravity = Vector3( 0, 0, 0 )
-initial_velocity = 60.0
-initial_velocity_random = 0.54
-angular_velocity = 133.51
-angular_velocity_random = 1.0
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-scale = 0.03
-color = Color( 0, 0.196078, 0.403922, 1 )
-
-[node name="Projectile" type="Area2D"]
+[node name="Projectile" type="Area2D" groups=[
+"player_projectiles",
+]]
 gravity_vec = Vector2( 0, 0 )
 collision_layer = 4
 collision_mask = 2
@@ -218,7 +83,6 @@ texture = ExtResource( 2 )
 anims/gros = SubResource( 2 )
 
 [node name="bullet2" type="Sprite" parent="."]
-editor/display_folded = true
 visible = false
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 3 )
@@ -230,70 +94,33 @@ position = Vector2( 0, 100 )
 scale = Vector2( 0.217674, 0.0580724 )
 texture = ExtResource( 4 )
 
-[node name="Particles2D" type="Particles2D" parent="bullet2"]
+[node name="Smoke" type="Particles2D" parent="bullet2"]
+visible = false
 show_behind_parent = true
+position = Vector2( 0, -1.52588e-05 )
+emitting = false
+amount = 20
+lifetime = 3.0
+local_coords = false
+process_material = SubResource( 7 )
+texture = ExtResource( 5 )
+
+[node name="Smoke_web" type="CPUParticles2D" parent="bullet2"]
 position = Vector2( 0, -1.52588e-05 )
 amount = 20
 lifetime = 3.0
 local_coords = false
-process_material = SubResource( 3 )
 texture = ExtResource( 5 )
+emission_shape = 1
+emission_sphere_radius = 23.32
+gravity = Vector2( 0, 0 )
+initial_velocity = 0.0
+angular_velocity = 0.173529
+scale_amount = 0.01
+scale_amount_random = 0.18
+scale_amount_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
 
 [node name="bullet1" type="Sprite" parent="."]
 scale = Vector2( 0.163544, 0.163544 )
 texture = ExtResource( 6 )
-
-[node name="Explosion" type="Node2D" parent="."]
-scale = Vector2( 7, 7 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Explosion"]
-playback_speed = 2.0
-anims/explosion = SubResource( 4 )
-
-[node name="SplashBigDark" type="Particles2D" parent="Explosion"]
-emitting = false
-amount = 3
-one_shot = true
-speed_scale = 2.0
-explosiveness = 1.0
-process_material = SubResource( 5 )
-texture = ExtResource( 7 )
-
-[node name="SplashBigClear" type="Particles2D" parent="Explosion"]
-emitting = false
-amount = 3
-one_shot = true
-speed_scale = 2.0
-explosiveness = 1.0
-process_material = SubResource( 6 )
-texture = ExtResource( 7 )
-
-[node name="Smoke" type="Particles2D" parent="Explosion"]
-scale = Vector2( -0.518929, -0.494102 )
-emitting = false
-amount = 15
-one_shot = true
-speed_scale = 2.0
-explosiveness = 1.0
-process_material = SubResource( 7 )
-texture = ExtResource( 8 )
-
-[node name="SpashLittleClear" type="Particles2D" parent="Explosion"]
-scale = Vector2( 0.52, 0.496 )
-emitting = false
-amount = 10
-one_shot = true
-speed_scale = 2.0
-explosiveness = 1.0
-process_material = SubResource( 8 )
-texture = ExtResource( 7 )
-
-[node name="SplashLittleDark" type="Particles2D" parent="Explosion"]
-scale = Vector2( 0.52, 0.482375 )
-emitting = false
-amount = 10
-one_shot = true
-speed_scale = 2.0
-explosiveness = 1.0
-process_material = SubResource( 9 )
-texture = ExtResource( 7 )

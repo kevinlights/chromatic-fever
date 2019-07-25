@@ -99,7 +99,8 @@ func _on_chromatic():
 
 func _on_combo_broken():
 	if message != null:
-		remove_child(message)
+		#remove_child(message)
+		message.queue_free()
 	$ChromaticAberation.material.set_shader_param("scale",0.0)
 	play_music($Sounds/colorless_world)
 		

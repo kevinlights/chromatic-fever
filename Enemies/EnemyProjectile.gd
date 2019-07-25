@@ -46,7 +46,6 @@ func make_connections():
 func _on_projectile_hit(area : Area2D):
 	if self != null and get_parent() != null and not to_destroy:
 		hide()
-		$CollisionShape2D.disabled = true
 		veloctity = Vector2.ZERO
 		to_destroy = true
 		self.queue_free()
