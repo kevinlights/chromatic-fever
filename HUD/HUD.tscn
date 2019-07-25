@@ -50,7 +50,7 @@ frame_0/texture = ExtResource( 11 )
 frame_1/texture = ExtResource( 12 )
 frame_1/delay_sec = 0.0
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=5]
 resource_name = "gros"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Node2D:rect_scale")
@@ -65,16 +65,16 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 0.7, 0.7 ) ]
 }
 
-[sub_resource type="ShaderMaterial" id=5]
+[sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 16 )
 shader_param/rainbow_speed = 2.0
 shader_param/r_tex = ExtResource( 17 )
 
-[sub_resource type="DynamicFont" id=6]
-size = 30
+[sub_resource type="DynamicFont" id=7]
+size = 60
 font_data = ExtResource( 9 )
 
-[sub_resource type="ShaderMaterial" id=7]
+[sub_resource type="ShaderMaterial" id=8]
 shader = ExtResource( 24 )
 shader_param/r_offset = Vector2( 0.003, -0.003 )
 shader_param/g_offset = Vector2( -0.003, 0.003 )
@@ -82,13 +82,13 @@ shader_param/b_offset = Vector2( 0.003, 0.003 )
 shader_param/scale = 0.0
 shader_param/speed = 2.0
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=9]
 size = 150
 outline_size = 5
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 9 )
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 1.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Label:rect_scale")
@@ -263,7 +263,7 @@ margin_right = 512.0
 margin_bottom = 64.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ScoreContainer"]
-anims/gros = SubResource( 10 )
+anims/gros = SubResource( 5 )
 
 [node name="Node2D" type="Control" parent="ScoreContainer"]
 
@@ -280,13 +280,13 @@ valign = 1
 script = ExtResource( 15 )
 
 [node name="ScoreMultiplier" type="Label" parent="ScoreContainer/Node2D"]
-material = SubResource( 5 )
-margin_left = -76.8951
-margin_top = -7.06998
-margin_right = -71.8951
-margin_bottom = 25.93
+material = SubResource( 6 )
+margin_left = -109.669
+margin_top = -30.8475
+margin_right = -104.669
+margin_bottom = 39.1525
 rect_rotation = -45.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 
 [node name="Sounds" type="Node" parent="."]
 
@@ -316,7 +316,7 @@ volume_db = -10.0
 stream = ExtResource( 23 )
 
 [node name="ChromaticAberation" type="TextureRect" parent="."]
-material = SubResource( 7 )
+material = SubResource( 8 )
 margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_horizontal = 2
@@ -325,6 +325,7 @@ texture = ExtResource( 25 )
 expand = true
 
 [node name="CountDown" type="CenterContainer" parent="."]
+visible = false
 margin_right = 1024.0
 margin_bottom = 600.0
 
@@ -334,9 +335,9 @@ margin_top = 221.0
 margin_right = 545.0
 margin_bottom = 379.0
 rect_pivot_offset = Vector2( 33, 79 )
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
 text = "1"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CountDown"]
-anims/countdown_label = SubResource( 9 )
+anims/countdown_label = SubResource( 10 )
 [connection signal="tween_completed" from="Sounds/Tween" to="." method="_on_Tween_tween_completed"]

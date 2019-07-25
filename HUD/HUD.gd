@@ -48,7 +48,7 @@ func _ready():
 	current_music.play()
 
 func create_combo_message(combo_name):
-	if message != null:
+	if message != null and has_node(message.get_path()):
 		message.queue_free()
 	var m = rainbow_message_scene.instance()
 	message = m.get_node("RainbowMessage")
